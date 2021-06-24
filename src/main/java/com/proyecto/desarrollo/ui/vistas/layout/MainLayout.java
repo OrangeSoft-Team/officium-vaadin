@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.ui.vistas.layout;
 
 import java.util.Optional;
 
+import com.proyecto.desarrollo.ui.vistas.empresas.Empresas_vista;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -81,7 +82,7 @@ public class MainLayout extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{ createTab("Ofertas de Trabajo", OfertasTrabajo_vista.class)};
+        return new Tab[]{createTab("Empresas", Empresas_vista.class), createTab("Ofertas de Trabajo", OfertasTrabajo_vista.class)};
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
