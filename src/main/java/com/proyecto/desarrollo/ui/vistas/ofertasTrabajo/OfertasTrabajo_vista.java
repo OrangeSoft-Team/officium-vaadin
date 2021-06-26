@@ -1,13 +1,9 @@
 package com.proyecto.desarrollo.ui.vistas.ofertasTrabajo;
 
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.OfertaLaboral;
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.valueObjects.Titulo;
-import com.proyecto.desarrollo.backend.servicios.ServicioOfertaLaboral;
-import com.vaadin.flow.component.Text;
+import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.ClasesParaVaadin.OfertaLaboralGridVaadin;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import com.proyecto.desarrollo.ui.vistas.layout.MainLayout;
@@ -17,20 +13,28 @@ import com.proyecto.desarrollo.ui.vistas.layout.MainLayout;
 public class OfertasTrabajo_vista extends Div {
 
     /*Grid de Ofertas Laborales*/
-    Grid<OfertaLaboral> grid = new Grid(OfertaLaboral.class);
-    private Button boton;
+    Grid<OfertaLaboralGridVaadin> grid = new Grid(OfertaLaboralGridVaadin.class);
+    private Button agregar;
 
 
     public OfertasTrabajo_vista() {
+        agregar = new Button("Agregar nueva oferta");
         addClassName("oferta-laboral-vista");
-
-        add(grid);
+        configurarGrid();
+        add(agregar,grid);
     }
 
     private void configurarGrid() {
         grid.addClassName("ofertas-laborales");
-        grid.removeAllColumns();
-
+        grid.removeColumnByKey("id");
+        grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion");
+        /* To do cuando se implemente los detalles de una oferta laboral
+        grid.addColumn(OfertaLaboralGridVaadin -> {
+            Button modificar = new Button("Modificar");
+            habria que colocar el listener para lanzar el modificar
+            return modificar;
+        }).setHeader("Acciones");
+        */
     }
 
 }

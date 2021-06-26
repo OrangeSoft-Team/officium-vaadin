@@ -3,11 +3,10 @@ package com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio;
 import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.valueObjects.*;
 
 public class OfertaLaboral {
-    private String id;
 
     private Titulo titulo;
 
-    private String fechaPublicacion;
+    private Descripcion descripcion;
 
     private Cargo cargo;
 
@@ -21,41 +20,22 @@ public class OfertaLaboral {
 
     private NumeroVacantes numeroVacantes;
 
-    /*Constructor utilizado cuando la oferta laboral viene desde BD*/
-    public OfertaLaboral(String id, Titulo titulo, String fechaPublicacion, Cargo cargo, Sueldo sueldo, DuracionEstimadaValor duracionEstimadaValor, DuracionEstimadaEscala duracionEstimadaEscala, TurnoTrabajo turnoTrabajo, NumeroVacantes numeroVacantes) {
-        this.id = id;
-        this.titulo = titulo;
-        this.fechaPublicacion = fechaPublicacion;
-        this.cargo = cargo;
-        this.sueldo = sueldo;
-        this.duracionEstimadaValor = duracionEstimadaValor;
-        this.duracionEstimadaEscala = duracionEstimadaEscala;
-        this.turnoTrabajo = turnoTrabajo;
-        this.numeroVacantes = numeroVacantes;
-    }
-    /*Constructor utilizado cuando se crea una nueva oferta laboral*/
+    private String idEmpresa;
 
-    public OfertaLaboral(Titulo titulo, String fechaPublicacion, Cargo cargo, Sueldo sueldo, DuracionEstimadaValor duracionEstimadaValor, DuracionEstimadaEscala duracionEstimadaEscala, TurnoTrabajo turnoTrabajo, NumeroVacantes numeroVacantes) {
-        this.titulo = titulo;
-        this.fechaPublicacion = fechaPublicacion;
-        this.cargo = cargo;
-        this.sueldo = sueldo;
-        this.duracionEstimadaValor = duracionEstimadaValor;
-        this.duracionEstimadaEscala = duracionEstimadaEscala;
-        this.turnoTrabajo = turnoTrabajo;
-        this.numeroVacantes = numeroVacantes;
-    }
-
-    public String getId() {
-        return id;
+    public OfertaLaboral(String titulo, String descripcion, String cargo, Float sueldo, int duracionEstimadaValor, String duracionEstimadaEscala, String turnoTrabajo, int numeroVacantes, String idEmpresa) {
+        this.titulo = new Titulo(titulo);
+        this.descripcion = new Descripcion(descripcion);
+        this.cargo = new Cargo(cargo);
+        this.sueldo = new Sueldo(sueldo);
+        this.duracionEstimadaValor = new DuracionEstimadaValor(duracionEstimadaValor);
+        this.duracionEstimadaEscala = new DuracionEstimadaEscala(duracionEstimadaEscala);
+        this.turnoTrabajo = new TurnoTrabajo(turnoTrabajo);
+        this.numeroVacantes = new NumeroVacantes(numeroVacantes);
+        this.idEmpresa = idEmpresa;
     }
 
     public Titulo getTitulo() {
         return titulo;
-    }
-
-    public String getFechaPublicacion() {
-        return fechaPublicacion;
     }
 
     public Cargo getCargo() {
@@ -80,5 +60,11 @@ public class OfertaLaboral {
 
     public NumeroVacantes getNumeroVacantes() {
         return numeroVacantes;
+    }
+
+    public Descripcion getDescripcion(){return descripcion;}
+
+    public String getIdEmpresa() {
+        return idEmpresa;
     }
 }

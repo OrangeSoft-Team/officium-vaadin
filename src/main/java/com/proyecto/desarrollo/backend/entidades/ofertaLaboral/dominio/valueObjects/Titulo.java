@@ -8,7 +8,7 @@ public class Titulo {
         if (esValido(titulo)){
             this.titulo = titulo;
         }
-        else this.titulo = "Titulo Invalido";
+        else this.titulo = "invalido";
     }
 
     /*Funcion que verifica la validez del titulo (mayor o igual a 4 caracteres y menor o igual a 80)*/

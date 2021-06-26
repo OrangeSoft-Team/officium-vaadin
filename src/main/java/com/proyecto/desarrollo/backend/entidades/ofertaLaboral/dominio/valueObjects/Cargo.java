@@ -7,17 +7,13 @@ public class Cargo {
     public Cargo(String cargo) {
         if (esValido(cargo))
             this.cargo = cargo;
-        else this.cargo = "Cargo Invalido";
+        else this.cargo = "invalido";
     }
 
     public boolean esValido(String cargo){
         if (cargo.length() > 4 && cargo.length() <= 40)
             return true;
         else return false;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public String getCargo() {
