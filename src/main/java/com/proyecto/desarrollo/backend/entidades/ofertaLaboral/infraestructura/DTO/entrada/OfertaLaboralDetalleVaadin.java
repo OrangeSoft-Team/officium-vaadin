@@ -1,4 +1,4 @@
-package com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.ClasesParaVaadin;
+package com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.DTO.entrada;
 
 public class OfertaLaboralDetalleVaadin {
 

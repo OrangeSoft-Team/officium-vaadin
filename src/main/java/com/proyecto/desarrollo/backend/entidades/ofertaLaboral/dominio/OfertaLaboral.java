@@ -67,4 +67,6 @@ public class OfertaLaboral {
     public String getIdEmpresa() {
         return idEmpresa;
     }
+
+
 }

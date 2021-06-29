@@ -1,0 +1,20 @@
+.agregarOferta{
+    padding-top: 10px;
+    margin-left: auto;
+    padding-right: 40px;
+    padding-bottom: 5px;
+}
+
+.grid{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.contenido{
+    background-color: #F0F0F0 ;
+}
+
+.crear{
+    background-color: royalblue;
+    color: white;
+}

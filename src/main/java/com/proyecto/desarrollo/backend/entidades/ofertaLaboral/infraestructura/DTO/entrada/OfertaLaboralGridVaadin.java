@@ -1,6 +1,4 @@
-package com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.ClasesParaVaadin;
-
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.valueObjects.*;
+package com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.DTO.entrada;
 
 public class OfertaLaboralGridVaadin {
 
