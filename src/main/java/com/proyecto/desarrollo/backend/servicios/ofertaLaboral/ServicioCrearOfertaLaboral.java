@@ -1,11 +1,15 @@
 package com.proyecto.desarrollo.backend.servicios.ofertaLaboral;
 
+import com.proyecto.desarrollo.backend.entidades.empresas.aplicacion.EmpresasMapper;
+import com.proyecto.desarrollo.backend.entidades.empresas.aplicacion.PersistenciaEmpresas;
 import com.proyecto.desarrollo.backend.entidades.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
 import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.OfertaLaboral;
+import com.proyecto.desarrollo.backend.infraestructura.persistencia.entrada.empresas.EmpresasArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,9 +17,12 @@ public class ServicioCrearOfertaLaboral {
     private ConsultarEmpresasParaCreacion[] empresas;
     private int cont;
 
-    public ConsultarEmpresasParaCreacion[] obtenerEmpresas(){
-
-        return empresas;
+    public ConsultarEmpresasParaCreacion[] obtenerEmpresas() throws ParseException {
+        EmpresasMapper mapper = new EmpresasMapper();
+        PersistenciaEmpresas adaptador = new EmpresasArchivoPersistencia();
+        String json = adaptador.getEmpresasOfertaLaboral();
+        this.empresas = mapper.jsonToEmpresasCreacion(json);
+        return this.empresas;
     }
 
     public OfertaLaboral crearOferta(String titulo, String descripcion, String cargo, float sueldo, int valor, String escala, String turno, int vacantes, String empresa){
@@ -23,6 +30,7 @@ public class ServicioCrearOfertaLaboral {
     }
 
 
+    /*Segunda capa de validacion para saber si todo cumple con las reglas, en caso negativo, mostrara un modal diciendo que falla*/
     public boolean ofertaValida(OfertaLaboral ofertaCreada) {
         Dialog modal = new Dialog();
         if (ofertaCreada.getTitulo().getTitulo() == "invalido"){
