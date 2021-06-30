@@ -16,6 +16,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import org.json.simple.parser.ParseException;
 
 
 @Route(value = "crear-ofertas-laboral", layout = MainLayout.class)
@@ -48,7 +49,7 @@ public class CrearOfertaLaboral_vista extends Div{
 
     private ServicioCrearOfertaLaboral controlador;
 
-    public CrearOfertaLaboral_vista(){
+    public CrearOfertaLaboral_vista() throws ParseException {
         controlador = new ServicioCrearOfertaLaboral();
 
         setHeightFull();
@@ -145,8 +146,13 @@ public class CrearOfertaLaboral_vista extends Div{
         vacantes.setPattern("[1-9]?[0-9]");
         vacantes.setPlaceholder("3");
 
+        empresas = new Select<>();
+        empresas.setLabel("Empresa a la que pertenece");
+        empresas.setItemLabelGenerator(ConsultarEmpresasParaCreacion::getNombre);
+        empresas.setItems(controlador.obtenerEmpresas());
+
         /*Falta el ID de la empresa*/
-        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,descripcion);
+        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,empresas,descripcion);
 
         contenido.add(crearOferta);
         contenido.setClassName("espacio");
@@ -184,7 +190,7 @@ public class CrearOfertaLaboral_vista extends Div{
 
     private void crear() {
 
-        OfertaLaboral ofertaCreada = controlador.crearOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),"1");
+        OfertaLaboral ofertaCreada = controlador.crearOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
         System.out.println(ofertaCreada.getTitulo().getTitulo());
         if(controlador.ofertaValida(ofertaCreada))
             this.submitt.getUI().ifPresent(ui ->ui.navigate(OfertasTrabajo_vista.class));

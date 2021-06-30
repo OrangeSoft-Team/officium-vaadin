@@ -1,0 +1,12 @@
+{
+  "UUID": "1",
+  "Titulo": "Se busca Conserje",
+  "FechaPublicacion": "15/10/2020",
+  "Cargo":"Conserje",
+  "Sueldo": "500",
+  "DuracionEstimadaValor": "3",
+  "DuracionEstimadaEscala":"mes",
+  "TurnoTrabajo" :"diurno",
+  "NumeroVacantes" :"5",
+  "EmpresaNombre" :"Orangesoft"
+}

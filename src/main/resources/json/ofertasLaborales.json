@@ -1,6 +1,6 @@
 [{
   "UUID": "1",
-  "Titulo": "Primer Dato",
+  "Titulo": "Se busca Conserje",
   "FechaPublicacion": "15/10/2020",
   "Cargo":"Conserje",
   "Sueldo": "500",
@@ -13,7 +13,7 @@
 
 {
   "UUID": "2",
-  "Titulo": "Segundo Dato",
+  "Titulo": "Se contrata un Vendedor",
   "FechaPublicacion": "20/10/2020",
   "Cargo":"Vendedor",
   "Sueldo": "700.16",
@@ -26,7 +26,7 @@
 
 {
   "UUID": "3",
-  "Titulo": "Tercer Dato",
+  "Titulo": "Queremos un conserje",
   "FechaPublicacion": "02/9/2016",
   "Cargo":"Conserje",
   "Sueldo": "800",

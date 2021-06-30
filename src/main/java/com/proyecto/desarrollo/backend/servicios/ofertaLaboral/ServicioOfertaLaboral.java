@@ -1,6 +1,9 @@
 package com.proyecto.desarrollo.backend.servicios.ofertaLaboral;
 
+import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.aplicacion.OfertaLaboralMapper;
+import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.aplicacion.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
+import com.proyecto.desarrollo.backend.infraestructura.persistencia.entrada.ofertaLaboral.OfertasLaboralArchivoPersistencia;
 import com.proyecto.desarrollo.ui.vistas.ofertasTrabajo.CrearOfertaLaboral_vista;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,47 +18,24 @@ public class ServicioOfertaLaboral {
 
     private OfertaLaboralGridVaadin[] ofertasLaborales;
     private int cont;
+    private OfertaLaboralMapper mapper = new OfertaLaboralMapper();
+    private PersistenciaOfertaLaboral adaptador;
 
-    public OfertaLaboralGridVaadin[] obtenerData() throws FileNotFoundException,
-            IOException, ParseException{
-
-        this.cont = 0;
-        JSONParser parser = new JSONParser();
-        /*Se busca el archivo*/
-        try (FileReader reader = new FileReader("src/main/resources/json/prueba.json")){
-            Object obj = parser.parse(reader);
-            JSONArray ofertas = (JSONArray) obj;
-            /*Se inicializa el el array de ofertas laborales*/
-            ofertasLaborales = new OfertaLaboralGridVaadin[ofertas.size()];
-            /*Se rellena el array de ofertas laborales*/
-            ofertas.forEach(ofer -> parsearOfertaLaboral((JSONObject) ofer));
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    public OfertaLaboralGridVaadin[] obtenerData() throws IOException, ParseException {
+        /*Se crear una instancia del adaptador*/
+        adaptador = new OfertasLaboralArchivoPersistencia();
+        /*Se obtiene un json del adaptador*/
+        String stringDeOfertas = adaptador.obtenerOfertasLaborales();
+        /*Se pasa el Json al mapper para crear las intancias de ofertasLaborales*/
+        this.ofertasLaborales = mapper.jsonToGrid(stringDeOfertas);
         return ofertasLaborales;
     }
 
-    private void parsearOfertaLaboral (JSONObject oferta){
-            this.ofertasLaborales[this.cont] = new OfertaLaboralGridVaadin(
-                    (String) oferta.get("UUID"),
-                    (String) oferta.get("Titulo"),
-                    (String) oferta.get("FechaPublicacion"),
-                    (String) oferta.get("Cargo"),
-                    Float.parseFloat((String) oferta.get("Sueldo")),
-                    Integer.parseInt((String) oferta.get("DuracionEstimadaValor")) ,
-                    (String) oferta.get("DuracionEstimadaEscala"),
-                    (String) oferta.get("TurnoTrabajo"),
-                    Integer.parseInt((String) oferta.get("NumeroVacantes")),
-                    (String) oferta.get("EmpresaNombre")
-            );
-            this.cont++;
-    }
 
 
     /** Esto funciona cuando es un solo objeto en el json
      * JSONParser parser = new JSONParser();
-     *         try (FileReader reader = new FileReader("src/main/resources/json/prueba.json")){
+     *         try (FileReader reader = new FileReader("src/main/resources/json/ofertasLaborales.json")){
      *             Object obj = parser.parse(reader);
      *             JSONObject ofertas = (JSONObject) obj;
      *             parsearOfertaLaboral(ofertas);
