@@ -1,9 +1,9 @@
-package com.proyecto.desarrollo.backend.servicios.ofertaLaboral;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores;
 
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.aplicacion.OfertaLaboralMapper;
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.aplicacion.PersistenciaOfertaLaboral;
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
-import com.proyecto.desarrollo.backend.infraestructura.persistencia.entrada.ofertaLaboral.OfertasLaboralArchivoPersistencia;
+import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
 

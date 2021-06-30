@@ -1,10 +1,10 @@
-package com.proyecto.desarrollo.backend.servicios.ofertaLaboral;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores;
 
-import com.proyecto.desarrollo.backend.entidades.empresas.aplicacion.EmpresasMapper;
-import com.proyecto.desarrollo.backend.entidades.empresas.aplicacion.PersistenciaEmpresas;
-import com.proyecto.desarrollo.backend.entidades.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
-import com.proyecto.desarrollo.backend.entidades.ofertaLaboral.dominio.OfertaLaboral;
-import com.proyecto.desarrollo.backend.infraestructura.persistencia.entrada.empresas.EmpresasArchivoPersistencia;
+import com.proyecto.desarrollo.empresas.aplicacion.EmpresasMapper;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaEmpresas;
+import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
+import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
+import com.proyecto.desarrollo.empresas.infraestructura.Persistencia.EmpresasArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
