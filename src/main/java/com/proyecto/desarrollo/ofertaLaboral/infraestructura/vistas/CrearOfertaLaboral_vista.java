@@ -21,7 +21,6 @@ import org.json.simple.parser.ParseException;
 
 @Route(value = "crear-ofertas-laboral", layout = MainLayout.class)
 @PageTitle("Crear Ofertas Laboral")
-
 public class CrearOfertaLaboral_vista extends Div{
 
 
@@ -74,7 +73,7 @@ public class CrearOfertaLaboral_vista extends Div{
         crearOferta.setMaxWidth("80em");
 
         titulo = new TextField();
-        titulo.setMaxLength(16);
+        titulo.setMaxLength(80);
         titulo.setHelperText("Maximo 80 caracteres");
         titulo.addValueChangeListener(e-> {
             if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
@@ -189,11 +188,11 @@ public class CrearOfertaLaboral_vista extends Div{
     }
 
     private void crear() {
-
-        OfertaLaboral ofertaCreada = controlador.crearOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
-        System.out.println(ofertaCreada.getTitulo().getTitulo());
-        if(controlador.ofertaValida(ofertaCreada))
-            this.submitt.getUI().ifPresent(ui ->ui.navigate(OfertasTrabajo_vista.class));
+        OfertaLaboral ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
+        if(controlador.ofertaValida(ofertaCreada)) {
+            controlador.crearOferta(ofertaCreada);
+            this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+        }
     }
 
     private boolean listoParaEnviar(){

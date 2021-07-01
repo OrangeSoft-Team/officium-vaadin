@@ -1,10 +1,13 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores;
 
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.empresas.aplicacion.EmpresasMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaEmpresas;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
+import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.empresas.infraestructura.Persistencia.EmpresasArchivoPersistencia;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -14,18 +17,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioCrearOfertaLaboral {
+
+    /*Empresas en el sistema*/
     private ConsultarEmpresasParaCreacion[] empresas;
+    /*Mapper para empresas*/
+    private EmpresasMapper mapper = new EmpresasMapper();
+    /*Mapper para ofertas laborales*/
+    private OfertaLaboralMapper mapperOferta;
+    /*Adaptador para Empresas*/
+    private PersistenciaEmpresas adaptador;
+    /*Adaptador para creacion oferta*/
+    private PersistenciaOfertaLaboral ofertaAdapter;
+    /*Helper*/
     private int cont;
 
     public ConsultarEmpresasParaCreacion[] obtenerEmpresas() throws ParseException {
-        EmpresasMapper mapper = new EmpresasMapper();
-        PersistenciaEmpresas adaptador = new EmpresasArchivoPersistencia();
+        this.adaptador = new EmpresasArchivoPersistencia();
         String json = adaptador.getEmpresasOfertaLaboral();
-        this.empresas = mapper.jsonToEmpresasCreacion(json);
+        this.empresas = this.mapper.jsonToEmpresasCreacion(json);
         return this.empresas;
     }
 
-    public OfertaLaboral crearOferta(String titulo, String descripcion, String cargo, float sueldo, int valor, String escala, String turno, int vacantes, String empresa){
+    public OfertaLaboral generarOferta(String titulo, String descripcion, String cargo, float sueldo, int valor, String escala, String turno, int vacantes, String empresa){
         return new OfertaLaboral(titulo,descripcion,cargo,sueldo,valor,escala,turno,vacantes,empresa);
     }
 
@@ -83,5 +96,13 @@ public class ServicioCrearOfertaLaboral {
         }
 
         return true;
+    }
+
+    public void crearOferta(OfertaLaboral ofertaCreada) {
+        this.ofertaAdapter = new OfertasLaboralArchivoPersistencia();
+        this.mapperOferta = new OfertaLaboralMapper();
+        if(ofertaAdapter.crearOferta(this.mapperOferta.ofertaLaboralToDTOCreacion(ofertaCreada))){
+
+        }
     }
 }
