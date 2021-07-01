@@ -1,0 +1,39 @@
+[{
+  "UUID": "1",
+  "Titulo": "Se busca Conserje",
+  "FechaPublicacion": "15/10/2020",
+  "Cargo":"Conserje",
+  "Sueldo": "500",
+  "DuracionEstimadaValor": "3",
+  "DuracionEstimadaEscala":"mes",
+  "TurnoTrabajo" :"diurno",
+  "NumeroVacantes" :"5",
+  "EmpresaNombre" :"Orangesoft"
+},
+
+{
+  "UUID": "2",
+  "Titulo": "Se contrata un Vendedor",
+  "FechaPublicacion": "20/10/2020",
+  "Cargo":"Vendedor",
+  "Sueldo": "700.16",
+  "DuracionEstimadaValor": "4",
+  "DuracionEstimadaEscala":"dia",
+  "TurnoTrabajo" :"diurno",
+  "NumeroVacantes" :"8",
+  "EmpresaNombre" :"Orangesoft"
+},
+
+{
+  "UUID": "3",
+  "Titulo": "Queremos un conserje",
+  "FechaPublicacion": "02/9/2016",
+  "Cargo":"Conserje",
+  "Sueldo": "800",
+  "DuracionEstimadaValor": "1",
+  "DuracionEstimadaEscala":"hora",
+  "TurnoTrabajo" :"diurno",
+  "NumeroVacantes" :"10",
+  "EmpresaNombre" :"Orangesoft"
+}
+  ]
