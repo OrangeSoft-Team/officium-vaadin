@@ -1,8 +1,10 @@
 package com.proyecto.desarrollo.ofertaLaboral.aplicacion;
 
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleVaadin;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
+import elemental.json.Json;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -48,10 +50,31 @@ public class OfertaLaboralMapper {
     }
 
     /*Metodo utilizado para convertir un DTO de detalle de oferta laboral en un detalle para mostrar en vaadin*/
-    /*public OfertaLaboralDetalleVaadin dtoDetalleToDetalleVaadin(OfertaLaboralDetalleDTO ofertaDetalleDTO){
-        return new OfertaLaboralDetalleVaadin(ofertaDetalleDTO.get);
+    public OfertaLaboralDetalleVaadin jsonToDetalle(String contenido) throws ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(contenido);
+        JSONObject detalle = (JSONObject) obj;
+        return convertirDetalle(detalle);
        }
-    */
+
+    public OfertaLaboralDetalleVaadin convertirDetalle(JSONObject detalle){
+        return new OfertaLaboralDetalleVaadin(
+                (String) detalle.get("UUID"),
+                (String) detalle.get("Titulo"),
+                (String) detalle.get("FechaPublicacion"),
+                (String) detalle.get("FechaModificacion"),
+                (String) detalle.get("Cargo"),
+                (float) Float.parseFloat((String)detalle.get("Sueldo")),
+                (int) Integer.parseInt((String) detalle.get("DuracionEstimadaValor")),
+                (String) detalle.get("DuracionEstimadaEscala"),
+                (String) detalle.get("Descripcion"),
+                (String) detalle.get("TurnoTrabajo"),
+                (int) Integer.parseInt((String) detalle.get("NumeroVacantes")),
+                (String) detalle.get("UUIDEmpresa"),
+                (String) detalle.get("EmpresaNombre"),
+                (String) detalle.get("DireccionEmpresa")
+        );
+    }
    }
 
 

@@ -1,6 +1,5 @@
 @import url('./main-layout.css');
-@import url('./views/hello-world-view.css');
-@import url('./views/about-view.css');
 @import url('./views/crear-oferta-laboral.css');
 @import url('./views/ofertas-trabajo.css');
+@import url('./views/detalles-oferta-laboral.css');
 @import url('lumo-css-framework/all-classes.css');

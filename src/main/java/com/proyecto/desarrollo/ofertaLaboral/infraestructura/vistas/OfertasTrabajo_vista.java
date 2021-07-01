@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioOfertaLaboral;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -13,7 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-@Route(value = "ofertas-laborales", layout = MainLayout.class)
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Ofertas Laboral")
 public class OfertasTrabajo_vista extends Div {
 
@@ -54,16 +55,15 @@ public class OfertasTrabajo_vista extends Div {
         grid.addClassName("ofertas-laborales");
         grid.removeColumnByKey("id");
         grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion");
-        /* To do cuando se implemente los detalles de una oferta laboral
-        grid.addColumn(OfertaLaboralGridVaadin -> {
-            Button modificar = new Button("Modificar");
-            habria que colocar el listener para lanzar el modificar
-            return modificar;
-        }).setHeader("Acciones");
-        */
+        grid.addComponentColumn(item ->crearBotonDetalle()).setHeader("Acciones");
     }
 
-    private void redirectCreation(){
-
+    private Button crearBotonDetalle() {
+        Button boton = new Button("Detalle",buttonClickEvent -> {
+            /*todo colocar el id de la oferta detalle por parametro */
+            getUI().ifPresent(ui -> ui.navigate(DetallesOfertaLaboral.class));
+        });
+        return boton;
     }
+
 }
