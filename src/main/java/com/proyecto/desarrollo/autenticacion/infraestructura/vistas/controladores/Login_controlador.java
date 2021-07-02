@@ -18,6 +18,7 @@ public class Login_controlador {
         boolean autenticado_exitosamente = autenticar_servicio.autenticar(nombreusuario_string , contrasena_string);
         if (autenticado_exitosamente){
             ConfigurarRutas configurar_rutas = new ConfigurarRutas();
+            configurar_rutas.habilitar_rutas();
         }
     }
 

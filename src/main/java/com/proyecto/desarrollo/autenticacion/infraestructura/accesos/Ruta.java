@@ -8,7 +8,7 @@ public class Ruta {
     private String nombre;
     private Class<? extends Component> vista;
 
-    public Ruta(String ruta, String nombre, Class<? extends HorizontalLayout> vista) {
+    public Ruta(String ruta, String nombre, Class<? extends Component> vista) {
         this.ruta = ruta;
         this.nombre = nombre;
         this.vista = vista;
