@@ -44,14 +44,12 @@ public class CrearOfertaLaboral_vista extends Div{
 
     private Button cancelar;
 
-    private ServicioCrearOfertaLaboral controlador;
+    private ServicioCrearOfertaLaboral controlador = new ServicioCrearOfertaLaboral();;
 
     /*Se guarda para test ya que no se ha implementado los eventos*/
     private OfertaLaboral ofertaCreada;
 
     public CrearOfertaLaboral_vista() throws ParseException {
-        controlador = new ServicioCrearOfertaLaboral();
-
         setHeightFull();
         addClassName("contenido");
 
@@ -77,7 +75,10 @@ public class CrearOfertaLaboral_vista extends Div{
         titulo.setMaxLength(80);
         titulo.setHelperText("Maximo 80 caracteres");
         titulo.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         titulo.setLabel("Titulo");
         titulo.setPlaceholder("Se busca Conserje");
@@ -86,7 +87,10 @@ public class CrearOfertaLaboral_vista extends Div{
         descripcion.setMaxLength(512);
         descripcion.setHelperText("Maximo 512 caracteres");
         descripcion.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         descripcion.setLabel("Descripción");
         descripcion.setPlaceholder("Se solicita personal de limpieza para la empresa Orangesoft");
@@ -95,7 +99,10 @@ public class CrearOfertaLaboral_vista extends Div{
         cargo.setMaxLength(40);
         cargo.setHelperText("Maximo 40 caracteres");
         cargo.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         cargo.setLabel("Cargo");
         cargo.setPlaceholder("Conserje");
@@ -106,8 +113,11 @@ public class CrearOfertaLaboral_vista extends Div{
         sueldo.setMaxLength(9);
         sueldo.setHelperText("Maximo 2 decimales y 1000000.   Ej: 5012.00");
         sueldo.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
-            System.out.println(!sueldo.isInvalid());
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
+
         });
         sueldo.setLabel("Sueldo($)");
         sueldo.setPlaceholder("800");
@@ -116,7 +126,10 @@ public class CrearOfertaLaboral_vista extends Div{
         duracion.setMaxLength(2);
         duracion.setHelperText("Maximo 99");
         duracion.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         duracion.setPattern("[1-9]?[0-9]");
         duracion.setLabel("Duracion");
@@ -124,13 +137,19 @@ public class CrearOfertaLaboral_vista extends Div{
 
         escala = new Select<>();
         escala.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         escala.setItems("hora","dia","mes","año");
 
         turno = new Select<>();
         turno.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         turno.setItems("diurno","nocturno","mixto");
         turno.setLabel("Turno de trabajo");
@@ -140,7 +159,10 @@ public class CrearOfertaLaboral_vista extends Div{
         vacantes.setMaxLength(2);
         vacantes.setHelperText("Maximo 99");
         vacantes.addValueChangeListener(e-> {
-            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) submitt.setEnabled(true);
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
         });
         vacantes.setLabel("Cantidad de puestos disponibles");
         vacantes.setPattern("[1-9]?[0-9]");
@@ -152,7 +174,7 @@ public class CrearOfertaLaboral_vista extends Div{
         empresas.setItems(controlador.obtenerEmpresas());
 
         /*Falta el ID de la empresa*/
-        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,empresas,descripcion);
+        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,descripcion,empresas);
 
         contenido.add(crearOferta);
         contenido.setClassName("espacio");

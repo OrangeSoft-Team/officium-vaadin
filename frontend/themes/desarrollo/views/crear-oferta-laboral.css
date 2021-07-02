@@ -24,14 +24,27 @@ h3,.form, .enviar{
 }
 
 .cancelar{
-    background-color: red;
+    background-color: #E65F5C;
     margin-right: 5px ;
     color: white;
+}
+
+.cancelar:hover{
+    background-color: red;
 }
 
 .btonEnviar{
     background-color: cornflowerblue;
     color: white;
+}
+
+.btonEnviar-active{
+    background-color: #00B592;
+    color: white;
+}
+
+.btonEnviar-active:hover{
+    background-color: #00B592;
 }
 
 .btonEnviarDeshabilitado{
@@ -43,6 +56,4 @@ h3,.form, .enviar{
     margin-left:30px
 }
 
-.btonEnviar:hover{
-    background-color: blue;
-}
+

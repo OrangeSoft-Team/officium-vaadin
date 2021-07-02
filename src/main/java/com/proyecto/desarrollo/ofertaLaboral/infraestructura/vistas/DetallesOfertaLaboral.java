@@ -177,7 +177,7 @@ public class DetallesOfertaLaboral extends Div {
         inner.setWidth("250px");
         inner.setClassName("botonera");
         cancelar = new Button("Cancelar");
-        cancelar.setClassName("cancelar");
+        cancelar.setClassName("cancelar-detalle");
         /*Esto es para volver a la vista incial*/
         RouterLink volver = new RouterLink("",OfertasTrabajo_vista.class);
         volver.getElement().appendChild(cancelar.getElement());

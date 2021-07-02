@@ -23,8 +23,8 @@
     padding: 10px;
 }
 
-.cancelar{
-    background-color: red;
+.cancelar-detalle{
+    background-color: #E65F5C;
     margin-right: 5px ;
     color: white;
     margin-left: 30%;
