@@ -6,11 +6,8 @@ import com.proyecto.desarrollo.autenticacion.dominio.excepciones.AutenticacionIn
 import com.proyecto.desarrollo.autenticacion.dominio.valueObjects.NombreUsuario;
 import com.proyecto.desarrollo.autenticacion.infraestructura.accesos.ConfigurarRutas;
 import com.proyecto.desarrollo.autenticacion.infraestructura.persistencia.StaffArchivoPersistencia;
-import com.vaadin.flow.component.notification.Notification;
-import org.json.simple.parser.ParseException;
-import org.springframework.stereotype.Service;
 
-@Service
+
 public class Autenticar_servicio {
 
     private PersistenciaStaff repositorioStaff;
@@ -33,10 +30,6 @@ public class Autenticar_servicio {
         catch (Exception e){
             throw new AutenticacionInvalidaExcepcion();
         }
-
-
-
-
 
     }
 
