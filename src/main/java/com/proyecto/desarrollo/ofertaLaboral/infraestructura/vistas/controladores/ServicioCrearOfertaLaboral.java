@@ -30,6 +30,8 @@ public class ServicioCrearOfertaLaboral {
     private PersistenciaOfertaLaboral ofertaAdapter;
     /*Helper*/
     private int cont;
+    /*Creacion exitosa*/
+    private boolean exito = false;
 
     public ConsultarEmpresasParaCreacionDTO[] obtenerEmpresas() throws ParseException {
         this.adaptador = new EmpresasArchivoPersistencia();
@@ -102,7 +104,11 @@ public class ServicioCrearOfertaLaboral {
         this.ofertaAdapter = new OfertasLaboralArchivoPersistencia();
         this.mapperOferta = new OfertaLaboralMapper();
         if(ofertaAdapter.crearOferta(this.mapperOferta.ofertaLaboralToDTOCreacion(ofertaCreada))){
-
+            exito = true;
         }
+    }
+
+    public boolean isExito() {
+        return exito;
     }
 }
