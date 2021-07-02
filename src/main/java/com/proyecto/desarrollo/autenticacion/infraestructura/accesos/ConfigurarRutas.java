@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.autenticacion.infraestructura.accesos;
 
+import com.proyecto.desarrollo.autenticacion.infraestructura.vistas.Logout_vista;
 import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.CrearOfertaLaboral_vista;
@@ -33,6 +34,7 @@ public class ConfigurarRutas {
 
     public void generar_rutas_menu(){
         this.rutas.add(new Ruta("ofertas_trabajo" , "Ofertas de Trabajo" , OfertasTrabajo_vista.class));
+        this.rutas.add(new Ruta("logout" , "Cerrar Sesión" , Logout_vista.class));
     }
 
     public ArrayList<Ruta> getRutas() {

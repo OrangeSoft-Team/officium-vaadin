@@ -12,31 +12,35 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.RouteAlias;
 
 
 @Route("login")
-@PageTitle("Login | Vaadin CRM")
+@RouteAlias(value = "")
+@PageTitle("Login | Officium")
 
 public class Login_vista extends Div {
 
 
     public Login_vista(Login_controlador login_controlador) {
         setId("login-vista");
+        var titulo = new H1("Bienvenid@!");
         var username = new TextField("Username");
         var password = new PasswordField("Password");
+        var boton = new Button("Login" , event -> {
+            try{
+                login_controlador.autenticar(username.getValue() , password.getValue());
+                UI.getCurrent().navigate("ofertas_trabajo");
+            }
+            catch (AutenticacionInvalidaExcepcion e){
+                Notification.show(e.getMessage());
+            }
+        });
         add(
-                new H1("Welcome"),
+                titulo,
                 username,
                 password,
-                new Button("Login" , event -> {
-                    try{
-                        login_controlador.autenticar(username.getValue() , password.getValue());
-                        UI.getCurrent().navigate("empresas");
-                    }
-                    catch (AutenticacionInvalidaExcepcion e){
-                        Notification.show(e.getMessage());
-                    }
-                })
+                boton
         );
     }
 

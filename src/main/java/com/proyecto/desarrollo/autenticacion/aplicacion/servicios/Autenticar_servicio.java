@@ -16,12 +16,12 @@ public class Autenticar_servicio {
         this.repositorioStaff = new StaffArchivoPersistencia();
     }
 
-    public boolean autenticar(String nombreusuario_string , String contrasena_string) throws AutenticacionInvalidaExcepcion {
+    public Staff autenticar(String nombreusuario_string , String contrasena_string) throws AutenticacionInvalidaExcepcion {
         NombreUsuario nombreusuario = new NombreUsuario(nombreusuario_string);
         try {
             Staff staff = repositorioStaff.obtenerStaffPorNombreUsuario(nombreusuario);
             if (staff != null && staff.validar_contrasena(contrasena_string)){
-                return true;
+                return staff;
             }
             else{
                 throw new AutenticacionInvalidaExcepcion();
