@@ -2,7 +2,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada;
 
 import java.util.StringTokenizer;
 
-public class OfertaLaboralDetalleVaadin {
+public class OfertaLaboralDetalleDTO {
 
     private String id;
 
@@ -32,7 +32,7 @@ public class OfertaLaboralDetalleVaadin {
 
     private String direccionEmpresa;
 
-    public OfertaLaboralDetalleVaadin(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, int duracionValor, String duracionEscala, String descripcion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa) {
+    public OfertaLaboralDetalleDTO(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, int duracionValor, String duracionEscala, String descripcion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa) {
         this.id = id;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;

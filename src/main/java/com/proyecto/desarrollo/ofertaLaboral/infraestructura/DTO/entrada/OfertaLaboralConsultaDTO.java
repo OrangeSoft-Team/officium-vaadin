@@ -1,6 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada;
 
-public class OfertaLaboralGridVaadin {
+public class OfertaLaboralConsultaDTO {
 
     private String id;
 
@@ -21,7 +21,7 @@ public class OfertaLaboralGridVaadin {
 
     private String nombreEmpresa;
 
-    public OfertaLaboralGridVaadin(String id, String titulo, String fechaPublicacion, String cargo, float sueldo, int valor ,String escala, String turnoTrabajo, int numeroVacantes, String nombreEmpresa) {
+    public OfertaLaboralConsultaDTO(String id, String titulo, String fechaPublicacion, String cargo, float sueldo, int valor , String escala, String turnoTrabajo, int numeroVacantes, String nombreEmpresa) {
         this.id = id;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
