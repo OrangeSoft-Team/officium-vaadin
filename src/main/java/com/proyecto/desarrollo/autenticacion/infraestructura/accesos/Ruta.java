@@ -6,7 +6,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class Ruta {
     private String ruta;
     private String nombre;
-    private Class<? extends HorizontalLayout> vista;
+    private Class<? extends Component> vista;
 
     public Ruta(String ruta, String nombre, Class<? extends HorizontalLayout> vista) {
         this.ruta = ruta;
