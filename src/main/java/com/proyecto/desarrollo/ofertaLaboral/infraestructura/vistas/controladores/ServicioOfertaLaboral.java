@@ -2,7 +2,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controlador
 
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
@@ -12,12 +12,12 @@ import java.io.*;
 @Service
 public class ServicioOfertaLaboral {
 
-    private OfertaLaboralGridVaadin[] ofertasLaborales;
+    private OfertaLaboralConsultaDTO[] ofertasLaborales;
     private int cont;
     private OfertaLaboralMapper mapper = new OfertaLaboralMapper();
     private PersistenciaOfertaLaboral adaptador;
 
-    public OfertaLaboralGridVaadin[] obtenerData() throws IOException, ParseException {
+    public OfertaLaboralConsultaDTO[] obtenerData() throws IOException, ParseException {
         /*Se crear una instancia del adaptador*/
         adaptador = new OfertasLaboralArchivoPersistencia();
         /*Se obtiene un json del adaptador*/

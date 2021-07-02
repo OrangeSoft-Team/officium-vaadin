@@ -1,9 +1,7 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 
-import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
-import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleVaadin;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioCrearOfertaLaboral;
+import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioDetalleOfertaLaboral;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -14,7 +12,6 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
@@ -40,7 +37,7 @@ public class DetallesOfertaLaboral extends Div {
 
     private TextField empresasActual;
 
-    private Select<ConsultarEmpresasParaCreacion> empresasDisponibles;
+    private Select<ConsultarEmpresasParaCreacionDTO> empresasDisponibles;
 
     private TextField fechaPublicacion;
 
@@ -54,7 +51,7 @@ public class DetallesOfertaLaboral extends Div {
 
     private ServicioDetalleOfertaLaboral controlador;
 
-    private OfertaLaboralDetalleVaadin ofertaDetallada;
+    private OfertaLaboralDetalleDTO ofertaDetallada;
 
     public DetallesOfertaLaboral() throws ParseException {
         controlador = new ServicioDetalleOfertaLaboral();

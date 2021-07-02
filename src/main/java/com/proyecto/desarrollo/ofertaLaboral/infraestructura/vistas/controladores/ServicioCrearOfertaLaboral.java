@@ -3,7 +3,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controlador
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.empresas.aplicacion.EmpresasMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaEmpresas;
-import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
+import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.empresas.infraestructura.Persistencia.EmpresasArchivoPersistencia;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class ServicioCrearOfertaLaboral {
 
     /*Empresas en el sistema*/
-    private ConsultarEmpresasParaCreacion[] empresas;
+    private ConsultarEmpresasParaCreacionDTO[] empresas;
     /*Mapper para empresas*/
     private EmpresasMapper mapper = new EmpresasMapper();
     /*Mapper para ofertas laborales*/
@@ -31,7 +31,7 @@ public class ServicioCrearOfertaLaboral {
     /*Helper*/
     private int cont;
 
-    public ConsultarEmpresasParaCreacion[] obtenerEmpresas() throws ParseException {
+    public ConsultarEmpresasParaCreacionDTO[] obtenerEmpresas() throws ParseException {
         this.adaptador = new EmpresasArchivoPersistencia();
         String json = adaptador.getEmpresasOfertaLaboral();
         this.empresas = this.mapper.jsonToEmpresasCreacion(json);

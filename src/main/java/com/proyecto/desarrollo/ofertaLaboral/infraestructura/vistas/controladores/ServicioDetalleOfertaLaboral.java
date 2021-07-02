@@ -2,15 +2,15 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controlador
 
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleVaadin;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import org.json.simple.parser.ParseException;
 
 public class ServicioDetalleOfertaLaboral {
 
-    private OfertaLaboralDetalleVaadin oferta;
+    private OfertaLaboralDetalleDTO oferta;
 
-    public OfertaLaboralDetalleVaadin obtenerOferta() throws ParseException {
+    public OfertaLaboralDetalleDTO obtenerOferta() throws ParseException {
         PersistenciaOfertaLaboral adaptador = new OfertasLaboralArchivoPersistencia();
         OfertaLaboralMapper mapper = new OfertaLaboralMapper();
         this.oferta = mapper.jsonToDetalle(adaptador.obtenerDetalles());

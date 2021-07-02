@@ -1,14 +1,11 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioOfertaLaboral;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
-import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
@@ -19,7 +16,7 @@ import java.io.IOException;
 public class OfertasTrabajo_vista extends Div {
 
     /*Grid de Ofertas Laborales*/
-    Grid<OfertaLaboralGridVaadin> grid = new Grid(OfertaLaboralGridVaadin.class);
+    Grid<OfertaLaboralConsultaDTO> grid = new Grid(OfertaLaboralConsultaDTO.class);
     private ServicioOfertaLaboral controlador;
 
 

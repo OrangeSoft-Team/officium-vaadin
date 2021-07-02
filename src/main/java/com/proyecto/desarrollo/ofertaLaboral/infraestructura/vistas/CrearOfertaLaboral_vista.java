@@ -1,9 +1,8 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 
-import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacion;
+import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioCrearOfertaLaboral;
-import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -14,7 +13,6 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
@@ -40,13 +38,16 @@ public class CrearOfertaLaboral_vista extends Div{
 
     private TextField vacantes;
 
-    private Select<ConsultarEmpresasParaCreacion> empresas;
+    private Select<ConsultarEmpresasParaCreacionDTO> empresas;
 
     private Button submitt;
 
     private Button cancelar;
 
     private ServicioCrearOfertaLaboral controlador;
+
+    /*Se guarda para test ya que no se ha implementado los eventos*/
+    private OfertaLaboral ofertaCreada;
 
     public CrearOfertaLaboral_vista() throws ParseException {
         controlador = new ServicioCrearOfertaLaboral();
@@ -147,7 +148,7 @@ public class CrearOfertaLaboral_vista extends Div{
 
         empresas = new Select<>();
         empresas.setLabel("Empresa a la que pertenece");
-        empresas.setItemLabelGenerator(ConsultarEmpresasParaCreacion::getNombre);
+        empresas.setItemLabelGenerator(ConsultarEmpresasParaCreacionDTO::getNombre);
         empresas.setItems(controlador.obtenerEmpresas());
 
         /*Falta el ID de la empresa*/
@@ -187,8 +188,31 @@ public class CrearOfertaLaboral_vista extends Div{
         add(contenedor);
     }
 
+    public CrearOfertaLaboral_vista(OfertaLaboral oferta) {
+        this.titulo = new TextField();
+        this.titulo.setValue(oferta.getTitulo().getTitulo());
+        this.descripcion = new TextArea();
+        this.descripcion.setValue(oferta.getDescripcion().getDescripcion());
+        this.cargo = new TextField();
+        this.cargo.setValue(oferta.getCargo().getCargo());
+        this.sueldo = new TextField();
+        this.sueldo.setValue(Float.toString(oferta.getSueldo().getSueldo()));
+        this.duracion = new TextField();
+        this.duracion.setValue(Integer.toString(oferta.getDuracionEstimadaValor().getValor()));
+        this.escala = new Select<>();
+        this.escala.setValue(oferta.getDuracionEstimadaEscala().getEscala());
+        this.turno = new Select<>();
+        this.turno.setValue(oferta.getTurnoTrabajo().getTurno());
+        this.vacantes = new TextField();
+        this.vacantes.setValue(Integer.toString(oferta.getNumeroVacantes().getVacantes()));
+        this.empresas = new Select<>();
+        this.empresas.setValue(new ConsultarEmpresasParaCreacionDTO(oferta.getIdEmpresa(), " "));
+        this.submitt = new Button();
+        this.submitt.addClickListener(e -> crear());
+    }
+
     private void crear() {
-        OfertaLaboral ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
+        ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
         if(controlador.ofertaValida(ofertaCreada)) {
             controlador.crearOferta(ofertaCreada);
             this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
@@ -201,5 +225,55 @@ public class CrearOfertaLaboral_vista extends Div{
         return true;
     }
 
+    public TextField getTitulo() {
+        return titulo;
+    }
 
+    public TextArea getDescripcion() {
+        return descripcion;
+    }
+
+    public TextField getCargo() {
+        return cargo;
+    }
+
+    public TextField getSueldo() {
+        return sueldo;
+    }
+
+    public TextField getDuracion() {
+        return duracion;
+    }
+
+    public Select<String> getEscala() {
+        return escala;
+    }
+
+    public Select<String> getTurno() {
+        return turno;
+    }
+
+    public TextField getVacantes() {
+        return vacantes;
+    }
+
+    public Select<ConsultarEmpresasParaCreacionDTO> getEmpresas() {
+        return empresas;
+    }
+
+    public Button getSubmitt() {
+        return submitt;
+    }
+
+    public Button getCancelar() {
+        return cancelar;
+    }
+
+    public ServicioCrearOfertaLaboral getControlador() {
+        return controlador;
+    }
+
+    public OfertaLaboral getOfertaCreada() {
+        return ofertaCreada;
+    }
 }
