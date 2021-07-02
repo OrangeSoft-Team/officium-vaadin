@@ -18,7 +18,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
-@Route(value = "detalle-oferta", layout = MainLayout.class)
+//@Route(value = "detalle-oferta", layout = MainLayout.class)
 @PageTitle("Detalles de Oferta Laboral")
 public class DetallesOfertaLaboral extends Div {
 

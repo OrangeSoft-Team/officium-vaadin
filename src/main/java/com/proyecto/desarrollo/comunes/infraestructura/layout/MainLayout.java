@@ -81,7 +81,10 @@ public class MainLayout extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{/*createTab("Empresas", Empresas_vista.class),*/ createTab("Ofertas Laborales", OfertasTrabajo_vista.class)};
+        return new Tab[]{
+//                createTab("Empresas", Empresas_vista.class),
+//                createTab("Ofertas Laborales", OfertasTrabajo_vista.class)
+        };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {

@@ -14,7 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
-@Route(value = "", layout = MainLayout.class)
+//@Route(value = "ofertas_trabajo", layout = MainLayout.class)
 @PageTitle("Ofertas Laboral")
 public class OfertasTrabajo_vista extends Div {
 

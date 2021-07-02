@@ -19,7 +19,7 @@ import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
 
-@Route(value = "crear-ofertas-laboral", layout = MainLayout.class)
+//@Route(value = "crear-ofertas-laboral", layout = MainLayout.class)
 @PageTitle("Crear Ofertas Laboral")
 public class CrearOfertaLaboral_vista extends Div{
 
