@@ -3,6 +3,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioCrearOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.eventos.CreacionOferta;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -143,6 +144,7 @@ public class CrearOfertaLaboral_vista extends Div{
             }
         });
         escala.setItems("hora","dia","mes","año");
+        escala.setValue("hora");
 
         turno = new Select<>();
         turno.addValueChangeListener(e-> {
@@ -152,6 +154,7 @@ public class CrearOfertaLaboral_vista extends Div{
             }
         });
         turno.setItems("diurno","nocturno","mixto");
+        turno.setValue("diurno");
         turno.setLabel("Turno de trabajo");
         turno.setWidth("3em");
 
@@ -172,6 +175,12 @@ public class CrearOfertaLaboral_vista extends Div{
         empresas.setLabel("Empresa a la que pertenece");
         empresas.setItemLabelGenerator(ConsultarEmpresasParaCreacionDTO::getNombre);
         empresas.setItems(controlador.obtenerEmpresas());
+        empresas.addValueChangeListener(e-> {
+            if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()) {
+                submitt.setEnabled(true);
+                submitt.setClassName("btonEnviar-active");
+            }
+        });
 
         /*Falta el ID de la empresa*/
         crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,descripcion,empresas);
@@ -182,18 +191,15 @@ public class CrearOfertaLaboral_vista extends Div{
 
         Div enviar = new Div();
         enviar.setWidthFull();
+
         Div inner = new Div();
         inner.setWidth("250px");
         inner.setClassName("enviar");
-        submitt = new Button("Crear");
-        submitt.setClassName("btonEnviar");
-        submitt.addClickListener(e -> crear());
-        submitt.setEnabled(false);
-        cancelar = new Button("Cancelar");
 
-        cancelar.setClassName("cancelar buttonsSpace");
+        configurarBotones();
         RouterLink routerLink = new RouterLink("",OfertasTrabajo_vista.class);
         routerLink.getElement().appendChild(cancelar.getElement());
+
         inner.add(routerLink,submitt);
         enviar.add(inner);
 
@@ -208,6 +214,8 @@ public class CrearOfertaLaboral_vista extends Div{
         );
 
         add(contenedor);
+        /*Agregar un listener a la vista para el evento de creacion*/
+        addListener(CreacionOferta.class,this::crearOfertaPersistencia);
     }
 
     public CrearOfertaLaboral_vista(OfertaLaboral oferta) {
@@ -230,19 +238,38 @@ public class CrearOfertaLaboral_vista extends Div{
         this.empresas = new Select<>();
         this.empresas.setValue(new ConsultarEmpresasParaCreacionDTO(oferta.getIdEmpresa(), " "));
         this.submitt = new Button();
-        this.submitt.addClickListener(e -> crear());
+        this.submitt.addClickListener(e -> verificar());
+        /*Agregar un listener a la vista para el evento de creacion*/
+        addListener(CreacionOferta.class,this::crearOfertaPersistencia);
     }
 
-    private void crear() {
-        ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
-        if(controlador.ofertaValida(ofertaCreada)) {
-            controlador.crearOferta(ofertaCreada);
-            this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+
+    /*Inicialmente se verifica si la oferta laboral cumple con los parametros, en caso afirmativo se genera un evento*/
+    private void verificar() {
+        if(controlador.ofertaValida(controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID()))) {
+            ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
+            fireEvent(new CreacionOferta(this,ofertaCreada));
         }
     }
 
+    /*Se atrapa el evento de creacion y se crea la nueva oferta*/
+    private void crearOfertaPersistencia(CreacionOferta evento){
+        controlador.crearOferta(evento.getContenido());
+        this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+    }
+
+    private void configurarBotones(){
+        submitt = new Button("Crear");
+        submitt.setClassName("btonEnviar");
+        submitt.addClickListener(e -> verificar());
+        submitt.setEnabled(false);
+        cancelar = new Button("Cancelar");
+
+        cancelar.setClassName("cancelar buttonsSpace");
+    }
+
     private boolean listoParaEnviar(){
-        if (this.titulo.isEmpty() || this.descripcion.isEmpty() || this.cargo.isEmpty() || this.sueldo.isEmpty() || this.duracion.isEmpty() || this.escala.isEmpty() || this.turno.isEmpty() || this.vacantes.isEmpty())
+        if (this.titulo.isEmpty() || this.descripcion.isEmpty() || this.cargo.isEmpty() || this.sueldo.isEmpty() || this.duracion.isEmpty() || this.escala.isEmpty() || this.turno.isEmpty() || this.vacantes.isEmpty() || this.empresas.isEmpty())
             return false;
         return true;
     }
