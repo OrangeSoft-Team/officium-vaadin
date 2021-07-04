@@ -93,19 +93,19 @@ Esta aplicación consta de tres tipos de pruebas automatizables ejecutables, las
 
 - Todas las pruebas (unitarias, integración, aceptación):
 
-  `Por definir`
+  `mvn test`
 
 - Pruebas unitarias:
 
-  `Por definir`
+  `mvn -Dtest=CrearOfertaLaboral_vistaTest#crearOferta test`
 
 - Pruebas de integración:
 
-  `Por definir`
+  `mvn -Dtest=OfertasLaboralArchivoPersistenciaTest#guardarOferta test`
 
 - Pruebas de aceptación:
 
-  `Por definir`
+  `mvn -Dtest=CrearOfertaLaboral_vistaTest#ofertaLaboralGenerada test`
 
 ### :mag_right: Referencias
 
