@@ -1,6 +1,8 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada;
 
-public class OfertaLaboralDetalleVaadin {
+import java.util.StringTokenizer;
+
+public class OfertaLaboralDetalleDTO {
 
     private String id;
 
@@ -16,8 +18,9 @@ public class OfertaLaboralDetalleVaadin {
 
     private String descripcion;
 
-    /*La duracion es la combinacion de la escala y el valor de la duracion, ejm 2 dias, 6 meses, etc*/
-    private String duracion;
+    private int duracionValor;
+
+    private String duracionEscala;
 
     private String turnoTrabajo;
 
@@ -29,7 +32,7 @@ public class OfertaLaboralDetalleVaadin {
 
     private String direccionEmpresa;
 
-    public OfertaLaboralDetalleVaadin(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, String descripcion, String duracion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa) {
+    public OfertaLaboralDetalleDTO(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, int duracionValor, String duracionEscala, String descripcion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa) {
         this.id = id;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
@@ -37,7 +40,8 @@ public class OfertaLaboralDetalleVaadin {
         this.cargo = cargo;
         this.sueldo = sueldo;
         this.descripcion = descripcion;
-        this.duracion = duracion;
+        this.duracionValor = duracionValor;
+        this.duracionEscala =  duracionEscala;
         this.turnoTrabajo = turnoTrabajo;
         this.numeroVacantes = numeroVacantes;
         this.idEmpresa = idEmpresa;
@@ -73,8 +77,12 @@ public class OfertaLaboralDetalleVaadin {
         return descripcion;
     }
 
-    public String getDuracion() {
-        return duracion;
+    public int getDuracionValor() {
+        return duracionValor;
+    }
+
+    public String getDuracionEscala() {
+        return duracionEscala;
     }
 
     public String getTurnoTrabajo() {

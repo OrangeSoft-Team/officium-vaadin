@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.comunes.infraestructura.layout;
 
 import java.util.Optional;
 
+import com.proyecto.desarrollo.autenticacion.infraestructura.accesos.ConfigurarRutas;
 import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -81,7 +82,11 @@ public class MainLayout extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{createTab("Empresas", Empresas_vista.class), createTab("Ofertas Laborales", OfertasTrabajo_vista.class)};
+        ConfigurarRutas configurar_rutas = new ConfigurarRutas();
+        configurar_rutas.generar_rutas_menu();
+        return configurar_rutas.getRutas().stream()
+                .map(r -> createTab(r.getNombre() , r.getVista()))
+                .toArray(Component[]::new);
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {

@@ -1,4 +1,4 @@
-.space{
+.spacer{
     padding: 30px;
 }
 
@@ -6,7 +6,7 @@
     background-color: #F0F0F0 ;
 }
 
-h3,.form, .enviar{
+.botonera,.header{
     margin-left: auto;
     margin-right: auto;
 }
@@ -23,37 +23,14 @@ h3,.form, .enviar{
     padding: 10px;
 }
 
-.cancelar{
+.cancelar-detalle{
     background-color: #E65F5C;
     margin-right: 5px ;
     color: white;
+    margin-left: 30%;
 }
 
-.cancelar:hover{
-    background-color: red;
+.spaceadoHeader{
+    margin-left: 3em;
 }
-
-.btonEnviar{
-    background-color: cornflowerblue;
-    color: white;
-}
-
-.btonEnviar-active{
-    background-color: #00B592;
-    color: white;
-}
-
-.btonEnviar-active:hover{
-    background-color: #00B592;
-}
-
-.btonEnviarDeshabilitado{
-    background-color: grey;
-    color: white;
-}
-
-.buttonsSpace{
-    margin-left:30px
-}
-
 

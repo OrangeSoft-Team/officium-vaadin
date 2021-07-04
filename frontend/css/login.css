@@ -1,0 +1,42 @@
+.login-vista{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(333deg , rgba(0,181,146,0.9556197478991597) 0%, rgba(0,210,170,1) 62%, rgba(0,210,170,0.8715861344537815) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.contenedor_general{
+    width: 40%;
+    padding-bottom: 10%;
+    padding: 60px 0px;
+    max-width: 450px;
+    border-radius: 50px;
+    background-color: #FFFFFF !important;
+}
+
+.contenedor_general div{
+    align-self: center;
+}
+
+.contenedor_general div h1{
+    margin: 25px 0px;
+}
+
+.contenedor_general .login-boton{
+    color: #5D60F5;
+}
+
+@media screen and (max-width: 500px){
+    .contenedor_general{
+        max-width: 95%;
+    }
+    .contenedor_general div img{
+        width: 230px !important;
+    }
+    .contenedor_general div h1{
+        font-size: 35px;
+        margin: 20px 0px;
+    }
+}

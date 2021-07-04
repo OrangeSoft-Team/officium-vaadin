@@ -1,7 +1,8 @@
 package com.proyecto.desarrollo.ofertaLaboral.aplicacion;
 
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralGridVaadin;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -11,7 +12,7 @@ import org.json.simple.parser.ParseException;
 
 public class OfertaLaboralMapper {
 
-    private OfertaLaboralGridVaadin[] ofertasLaborales;
+    private OfertaLaboralConsultaDTO[] ofertasLaborales;
     private int cont;
 
     /*Metodo utilizado para convertir una oferta laboral en un DTO para enviar a persistencia*/
@@ -21,18 +22,18 @@ public class OfertaLaboralMapper {
         }
 
     /*Metodo utilizado para Parsear un Json y obtener un array de ofertasLaboralesGridVaadin*/
-    public OfertaLaboralGridVaadin[] jsonToGrid(String contenido) throws ParseException {
+    public OfertaLaboralConsultaDTO[] jsonToGrid(String contenido) throws ParseException {
         cont = 0;
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(contenido);
         JSONArray ofertas = (JSONArray) obj;
-        ofertasLaborales = new OfertaLaboralGridVaadin[ofertas.size()];
+        ofertasLaborales = new OfertaLaboralConsultaDTO[ofertas.size()];
         ofertas.forEach(ofer -> parsearOfertaLaboral((JSONObject) ofer));
         return this.ofertasLaborales;
     }
 
     private void parsearOfertaLaboral (JSONObject oferta){
-        this.ofertasLaborales[this.cont] = new OfertaLaboralGridVaadin(
+        this.ofertasLaborales[this.cont] = new OfertaLaboralConsultaDTO(
                 (String) oferta.get("UUID"),
                 (String) oferta.get("Titulo"),
                 (String) oferta.get("FechaPublicacion"),
@@ -48,10 +49,31 @@ public class OfertaLaboralMapper {
     }
 
     /*Metodo utilizado para convertir un DTO de detalle de oferta laboral en un detalle para mostrar en vaadin*/
-    /*public OfertaLaboralDetalleVaadin dtoDetalleToDetalleVaadin(OfertaLaboralDetalleDTO ofertaDetalleDTO){
-        return new OfertaLaboralDetalleVaadin(ofertaDetalleDTO.get);
+    public OfertaLaboralDetalleDTO jsonToDetalle(String contenido) throws ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(contenido);
+        JSONObject detalle = (JSONObject) obj;
+        return convertirDetalle(detalle);
        }
-    */
+
+    public OfertaLaboralDetalleDTO convertirDetalle(JSONObject detalle){
+        return new OfertaLaboralDetalleDTO(
+                (String) detalle.get("UUID"),
+                (String) detalle.get("Titulo"),
+                (String) detalle.get("FechaPublicacion"),
+                (String) detalle.get("FechaModificacion"),
+                (String) detalle.get("Cargo"),
+                (float) Float.parseFloat((String)detalle.get("Sueldo")),
+                (int) Integer.parseInt((String) detalle.get("DuracionEstimadaValor")),
+                (String) detalle.get("DuracionEstimadaEscala"),
+                (String) detalle.get("Descripcion"),
+                (String) detalle.get("TurnoTrabajo"),
+                (int) Integer.parseInt((String) detalle.get("NumeroVacantes")),
+                (String) detalle.get("UUIDEmpresa"),
+                (String) detalle.get("EmpresaNombre"),
+                (String) detalle.get("DireccionEmpresa")
+        );
+    }
    }
 
 

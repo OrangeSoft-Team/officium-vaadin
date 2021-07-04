@@ -9,8 +9,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.vaadin.flow.router.RouteAlias;
 
-@Route(value = "empresas", layout = MainLayout.class)
-@RouteAlias(value = "", layout = MainLayout.class)
+//@Route(value = "empresas", layout = MainLayout.class)
+//@RouteAlias(value = "", layout = MainLayout.class)
 @PageTitle("Empresas")
 
 public class Empresas_vista extends HorizontalLayout {

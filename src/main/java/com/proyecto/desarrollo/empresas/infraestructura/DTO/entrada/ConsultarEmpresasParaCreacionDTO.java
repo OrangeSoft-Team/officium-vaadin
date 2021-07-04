@@ -1,13 +1,13 @@
 package com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada;
 
 /*Esta clase se utilizará para obtener los nombres de las empresas y sus ids*/
-public class ConsultarEmpresasParaCreacion {
+public class ConsultarEmpresasParaCreacionDTO {
 
     private String UUID;
 
     private String nombre;
 
-    public ConsultarEmpresasParaCreacion(String UUID, String nombre) {
+    public ConsultarEmpresasParaCreacionDTO(String UUID, String nombre) {
         this.UUID = UUID;
         this.nombre = nombre;
     }
