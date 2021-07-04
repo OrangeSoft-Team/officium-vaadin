@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/bHw6nAC.png" alt="logo" width="400">
+  <img src="https://i.imgur.com/NIsgeWi.png" alt="logo" width="400">
 </p>
 <br>
 
@@ -49,12 +49,15 @@ Adicionalmente, se utilizan las siguientes plantillas para el repositorio:
 | <img src="https://nodejs.org/static/images/logo.svg" width="24">                                                                            | Ambiente de Ejecución      | NodeJS         | https://nodejs.org/es/                   | 14.17.1  |
 | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Npm-logo.svg/1200px-Npm-logo.svg.png" width="24">                       | Manejador de Dependencias  | NPM            | https://www.npmjs.com/                   | 6.4.1    | 
 | <img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" width="24">                                            | Ambiente de Ejecución      | Spring Boot    | https://spring.io/projects/spring-boot   | 2.4.5    |
+| <img src="https://www.nestoralmeida.com/wp-content/uploads/2019/06/junit_logo.jpg" width="24">                                              | Librería para tests        | JUnit          | https://junit.org/junit4/                | 4.13.2   |
 
 ### :wrench: Instalación de la Aplicación
 
 ---
 
 Para realizar la instalación de la aplicación, es necesario realizar los siguientes pasos:
+
+- Es necesario poseer Java, Maven, NodeJS y NPM en las versiones epecificadas.
 
 - Cree una copia local del repositorio en su dispositivo.
 
@@ -64,15 +67,6 @@ Para realizar la instalación de la aplicación, es necesario realizar los sigui
   <br>
   `mvn clean install`
 
-### :hammer: Construcción de la Aplicación (build)
-
----
-
-Para llevar a cabo la puesta en producción de esta aplicación, debe realizar los siguientes pasos:
-
-- Ejecute el siguiente comando en una consola de comandos cualquiera situada en la carpeta de la aplicación:
-
-  `Sin Especificar`
 
 ### :electric_plug: Ejecución de la Aplicación
 
@@ -111,7 +105,7 @@ Esta aplicación consta de tres tipos de pruebas automatizables ejecutables, las
 
 ---
 
-- [Vaddin DDD](https://vaadin.com/learn/tutorials/ddd)
 - [Documentación oficial de Vaadin](https://vaadin.com/docs/v14/)
+- [Vaddin DDD](https://vaadin.com/learn/tutorials/ddd)
 - [Vaadin con DDD y Arquitectura Hexagonal](https://vaadin.com/learn/tutorials/ddd/ddd_and_hexagonal)
 
