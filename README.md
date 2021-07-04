@@ -17,7 +17,6 @@ Este README consiste de las siguientes partes, listadas a continuación:
 - [Colaboradores de Desarrollo](#man_technologist-colaboradores-de-desarrollo)
 - [Stack de Tecnologías](#computer-stack-de-tecnologías)
 - [Instalación de la Aplicación](#wrench-instalación-de-la-aplicación)
-- [Construcción de la Aplicación (build)](#hammer-construcción-de-la-aplicación-build)
 - [Ejecución de la Aplicación](#electric_plug-ejecución-de-la-aplicación)
 - [Ejecución de las Pruebas Automatizadas](#test_tube-ejecución-de-las-pruebas-automatizadas)
 - [Referencias](#mag_right-referencias)
