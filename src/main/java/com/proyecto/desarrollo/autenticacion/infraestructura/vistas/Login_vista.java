@@ -37,7 +37,7 @@ public class Login_vista extends Div {
         var titulo = new H1("¡Bienvenid@!");
         var username = new TextField("Username");
         var password = new PasswordField("Password");
-        var boton = new Button("IniciarSesión" , event -> {
+        var boton = new Button("Iniciar Sesión" , event -> {
             try{
                 login_controlador.autenticar(username.getValue() , password.getValue());
                 UI.getCurrent().navigate("ofertas_trabajo");
@@ -46,6 +46,7 @@ public class Login_vista extends Div {
                 Notification.show(e.getMessage());
             }
         });
+        boton.addClassName("login-boton");
 
         addClassName("login-vista");
         setHeightFull();

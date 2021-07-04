@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(https://www.xtrafondos.com/wallpapers/tierra-desde-el-espacio-2981.jpg);
+    background: linear-gradient(333deg , rgba(0,181,146,0.9556197478991597) 0%, rgba(0,210,170,1) 62%, rgba(0,210,170,0.8715861344537815) 100%);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -13,7 +13,7 @@
     padding: 60px 0px;
     max-width: 450px;
     border-radius: 50px;
-    background: linear-gradient(310deg, rgb(194 212 216 / 87%) 0%, rgb(152 196 233) 100%) !important;
+    background-color: #FFFFFF !important;
 }
 
 .contenedor_general div{
@@ -22,6 +22,10 @@
 
 .contenedor_general div h1{
     margin: 25px 0px;
+}
+
+.contenedor_general .login-boton{
+    color: #5D60F5;
 }
 
 @media screen and (max-width: 500px){
