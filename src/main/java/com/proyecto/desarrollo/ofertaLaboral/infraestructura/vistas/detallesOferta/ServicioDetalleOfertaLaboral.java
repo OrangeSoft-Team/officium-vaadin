@@ -1,4 +1,4 @@
-package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta;
 
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;

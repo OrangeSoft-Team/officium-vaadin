@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
 
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

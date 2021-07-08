@@ -1,7 +1,7 @@
-package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.eventos;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.eventos;
 
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.CrearOfertaLaboral_vista;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 
 public class CreacionOferta extends EventoOfertaLaboral {
 

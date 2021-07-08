@@ -1,7 +1,8 @@
-package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas;
 
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -33,7 +34,7 @@ public class OfertasTrabajo_vista extends Div {
         inner.addClassName("agregarOferta");
         Button boton = new Button("Crear oferta laboral");
         boton.setClassName("crear");
-        RouterLink crear = new RouterLink("",CrearOfertaLaboral_vista.class);
+        RouterLink crear = new RouterLink("", CrearOfertaLaboral_vista.class);
         crear.getElement().appendChild(boton.getElement());
         inner.add(crear);
         agregar.add(inner);
@@ -62,5 +63,6 @@ public class OfertasTrabajo_vista extends Div {
         });
         return boton;
     }
+
 
 }

@@ -3,7 +3,6 @@ package com.proyecto.desarrollo.comunes.infraestructura.layout;
 import java.util.Optional;
 
 import com.proyecto.desarrollo.autenticacion.infraestructura.accesos.ConfigurarRutas;
-import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -21,7 +20,6 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.router.PageTitle;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.OfertasTrabajo_vista;
 
 /**
  * The main view is a top-level placeholder for other views.

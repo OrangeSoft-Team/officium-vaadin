@@ -3,11 +3,9 @@ package com.proyecto.desarrollo.autenticacion.infraestructura.accesos;
 import com.proyecto.desarrollo.autenticacion.infraestructura.vistas.Logout_vista;
 import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.CrearOfertaLaboral_vista;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.DetallesOfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.OfertasTrabajo_vista;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
 import com.vaadin.flow.router.RouteConfiguration;
 
 import java.util.ArrayList;

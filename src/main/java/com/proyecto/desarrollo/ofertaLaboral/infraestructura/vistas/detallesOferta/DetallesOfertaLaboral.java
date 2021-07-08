@@ -1,8 +1,8 @@
-package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta;
 
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioDetalleOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -179,7 +179,7 @@ public class DetallesOfertaLaboral extends Div {
         cancelar = new Button("Cancelar");
         cancelar.setClassName("cancelar-detalle");
         /*Esto es para volver a la vista incial*/
-        RouterLink volver = new RouterLink("",OfertasTrabajo_vista.class);
+        RouterLink volver = new RouterLink("", OfertasTrabajo_vista.class);
         volver.getElement().appendChild(cancelar.getElement());
         inner.add(volver);
         enviar.add(inner);

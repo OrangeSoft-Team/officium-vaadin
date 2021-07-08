@@ -1,13 +1,19 @@
-package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas;
+package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta;
 
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.controladores.ServicioCrearOfertaLaboral;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.eventos.CreacionOferta;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.eventos.confirmacionCreacion.CreacionExitosa;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.eventos.confirmacionCreacion.CreacionFallida;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.eventos.creacion.CreacionOferta;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -197,7 +203,7 @@ public class CrearOfertaLaboral_vista extends Div{
         inner.setClassName("enviar");
 
         configurarBotones();
-        RouterLink routerLink = new RouterLink("",OfertasTrabajo_vista.class);
+        RouterLink routerLink = new RouterLink("", OfertasTrabajo_vista.class);
         routerLink.getElement().appendChild(cancelar.getElement());
 
         inner.add(routerLink,submitt);
@@ -216,6 +222,10 @@ public class CrearOfertaLaboral_vista extends Div{
         add(contenedor);
         /*Agregar un listener a la vista para el evento de creacion*/
         addListener(CreacionOferta.class,this::crearOfertaPersistencia);
+        /*Agregar un listener para saber si la creacion en persistencia fue exitosa*/
+        addListener(CreacionExitosa.class,this::ofertaCreadaExitosamente);
+        /*Agregar un listener para saber si la creacion en persistencia fue fallida*/
+        addListener(CreacionFallida.class,this::ofertaNoCreada);
     }
 
     public CrearOfertaLaboral_vista(OfertaLaboral oferta) {
@@ -255,7 +265,15 @@ public class CrearOfertaLaboral_vista extends Div{
     /*Se atrapa el evento de creacion y se crea la nueva oferta*/
     private void crearOfertaPersistencia(CreacionOferta evento){
         controlador.crearOferta(evento.getContenido());
-        this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+        /*Si la creación es exitosa se cambia de vista y se dispara el evento de creación fallida*/
+        if (controlador.isExito()){
+            this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+            fireEvent(new CreacionExitosa(this));
+        }
+        /*Si la creacion es fallida se distapara el evento de creacion fallida*/
+        else{
+            fireEvent(new CreacionFallida(this));
+        }
     }
 
     private void configurarBotones(){
@@ -266,6 +284,18 @@ public class CrearOfertaLaboral_vista extends Div{
         cancelar = new Button("Cancelar");
 
         cancelar.setClassName("cancelar buttonsSpace");
+    }
+
+    private void ofertaCreadaExitosamente(CreacionExitosa evento){
+        Notification notificacion = new Notification("Oferta creada exitosamente");
+        notificacion.setPosition(Notification.Position.TOP_CENTER);
+        notificacion.open();
+    }
+
+    private void ofertaNoCreada(CreacionFallida evento){
+        Dialog modal = new Dialog();
+        modal.add(new Div(new Text("Creacion Fallida")), new Button("Cerrar", event -> modal.close()));
+        modal.open();
     }
 
     private boolean listoParaEnviar(){
