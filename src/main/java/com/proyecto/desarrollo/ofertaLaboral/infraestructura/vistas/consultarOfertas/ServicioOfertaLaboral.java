@@ -28,14 +28,4 @@ public class ServicioOfertaLaboral {
     }
 
 
-
-    /** Esto funciona cuando es un solo objeto en el json
-     * JSONParser parser = new JSONParser();
-     *         try (FileReader reader = new FileReader("src/main/resources/json/ofertasLaborales.json")){
-     *             Object obj = parser.parse(reader);
-     *             JSONObject ofertas = (JSONObject) obj;
-     *             parsearOfertaLaboral(ofertas);
-     */
-
-
 }

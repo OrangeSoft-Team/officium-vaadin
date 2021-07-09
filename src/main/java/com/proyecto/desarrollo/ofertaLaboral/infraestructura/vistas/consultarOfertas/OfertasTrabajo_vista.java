@@ -6,6 +6,8 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
@@ -21,31 +23,40 @@ public class OfertasTrabajo_vista extends Div {
     private ServicioOfertaLaboral controlador;
 
 
-    public OfertasTrabajo_vista() throws IOException, ParseException {
+    public OfertasTrabajo_vista() throws IOException, ParseException{
         addClassName("contenido");
         setHeightFull();
+        addClassName("oferta-laboral-vista");
+        configurarVista();
+    }
+
+    private void configurarVista() throws IOException, ParseException{
         /*Instanciar un controlador*/
         controlador = new ServicioOfertaLaboral();
 
-        /*Crear un div donde estara el boton de crear*/
-        Div agregar = new Div();
-        Div inner = new Div();
-        inner.setWidth("200px");
-        inner.addClassName("agregarOferta");
-        Button boton = new Button("Crear oferta laboral");
-        boton.setClassName("crear");
-        RouterLink crear = new RouterLink("", CrearOfertaLaboral_vista.class);
-        crear.getElement().appendChild(boton.getElement());
-        inner.add(crear);
-        agregar.add(inner);
+        /*Crear un div donde estaran los filtros*/
+        HorizontalLayout filtros = new HorizontalLayout();
+        filtros.setClassName("filtro");
 
-        addClassName("oferta-laboral-vista");
+        Div botonera = new Div();
+        botonera.setClassName("botonera-consulta");
+
+        Div estados = botoneraEstados();
+
+        Div contenedorTitulo = new Div();
+        contenedorTitulo.setWidth("50px");
+        H4 tituloFiltro = new H4("Filtros: ");
+        tituloFiltro.setClassName("titulo-filtro");
+        contenedorTitulo.add(tituloFiltro);
+
+        botonera.add(estados);
+        filtros.add(contenedorTitulo,botonera);
+
         /*Metodo para configurar las columnas que se mostraran en el grid*/
         configurarGrid();
         grid.setItems(controlador.obtenerData());
         grid.setClassName("grid");
-        add(agregar,grid);
-
+        add(filtros,grid);
     }
 
     private void configurarGrid() {
@@ -64,5 +75,49 @@ public class OfertasTrabajo_vista extends Div {
         return boton;
     }
 
+    private Div botoneraEstados(){
+        Div estados = new Div();
+        estados.setClassName("estados");
 
+        /*Boton de ofertas activas*/
+        Button activo = new Button("Ofertas Activas");
+        activo.setClassName("ofertas-activas");
+
+        /*Boton de ofertas inactivas*/
+        Button inactivo = new Button("Ofertas Inactivas");
+        inactivo.setClassName("ofertas-inactivas");
+
+        RouterLink crear = botoneraCrearOferta();
+        estados.add(activo, inactivo,crear);
+
+        /*Se agrega el listener para disparar el evento en caso de hacer click*/
+        activo.addClickListener(e-> {
+            if (inactivo.hasClassName("consulta-inactivos")){
+                inactivo.removeClassName("consulta-inactivos");
+            }
+            activo.addClassName("consulta-activos");
+
+        });
+
+        inactivo.addClickListener(e-> {
+            if (activo.hasClassName("consulta-activos")){
+                activo.removeClassName("consulta-activos");
+            }
+            inactivo.addClassName("consulta-inactivos");
+        });
+
+        return estados;
+    }
+
+    private RouterLink botoneraCrearOferta(){
+        /*Se crea el boton*/
+        Button boton = new Button("Crear oferta laboral");
+        boton.setClassName("crear");
+
+        /*Se crea la redirección*/
+        RouterLink crear = new RouterLink("", CrearOfertaLaboral_vista.class);
+        crear.getElement().appendChild(boton.getElement());
+
+        return crear;
+    }
 }
