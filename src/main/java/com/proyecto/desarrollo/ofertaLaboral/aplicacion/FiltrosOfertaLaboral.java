@@ -11,7 +11,7 @@ public class FiltrosOfertaLaboral {
         return filtrado;
     }
 
-    /*Se cuenta la cantidad de ofertas que cumplen con la condicion del estado*/
+    /*Se cuenta la cantidad de ofertas que cumplen con la condicion del estado para asi crear un array con esa cantidad*/
     public int contarFiltrados(OfertaLaboralConsultaDTO[] ofertas, String estado){
         int cont = 0;
         for (int i = 0;i <ofertas.length;i++){
@@ -21,7 +21,7 @@ public class FiltrosOfertaLaboral {
         return cont;
     }
 
-    /*Se obtienen las ofertas que cumplen*/
+    /*Se obtienen las ofertas que cumplen con el filtro de estado*/
     public OfertaLaboralConsultaDTO[] obtenerFiltrados(OfertaLaboralConsultaDTO[] ofertas, String estado,OfertaLaboralConsultaDTO[] filtrados){
         int cont = 0;
         for (int i = 0;i <ofertas.length;i++){

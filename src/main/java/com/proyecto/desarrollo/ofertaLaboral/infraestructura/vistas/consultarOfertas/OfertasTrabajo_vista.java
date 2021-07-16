@@ -98,15 +98,17 @@ public class OfertasTrabajo_vista extends Div {
 
         /*Se agrega el listener para disparar el evento en caso de hacer click*/
         activo.addClickListener(e-> {
+            /*Si el boton de filtrado por inactivo esta activado, se le quita el css al boton*/
             if (inactivo.hasClassName("consulta-inactivos")){
                 inactivo.removeClassName("consulta-inactivos");
             }
 
+            /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
                 quitarFiltro();
             }
-
+            /*Si no se cumple la condicion anterior se  aplica el filtro por estado activo*/
             else {
                 activo.addClassName("consulta-activos");
                 fireEvent(new EstadoActivo(this));
@@ -114,15 +116,16 @@ public class OfertasTrabajo_vista extends Div {
         });
 
         inactivo.addClickListener(e-> {
+            /*Si el boton de filtrado por activo esta activado, se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
             }
-
+            /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (inactivo.hasClassName("consulta-inactivos")){
                 inactivo.removeClassName("consulta-inactivos");
                 quitarFiltro();
             }
-
+            /*Si no se cumple la condicion anterior se  aplica el filtro por estado activo*/
             else {
                 inactivo.addClassName("consulta-inactivos");
                 fireEvent(new EstadoInactivo(this));
