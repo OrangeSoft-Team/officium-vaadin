@@ -1,12 +1,16 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas;
 
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EstadoActivo;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EstadoInactivo;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EventoAplicarFiltroEstado;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
@@ -28,6 +32,8 @@ public class OfertasTrabajo_vista extends Div {
         setHeightFull();
         addClassName("oferta-laboral-vista");
         configurarVista();
+        addListener(EstadoActivo.class,this::filtrarActivo);
+        addListener(EstadoInactivo.class,this::filtrarInactivo);
     }
 
     private void configurarVista() throws IOException, ParseException{
@@ -95,15 +101,32 @@ public class OfertasTrabajo_vista extends Div {
             if (inactivo.hasClassName("consulta-inactivos")){
                 inactivo.removeClassName("consulta-inactivos");
             }
-            activo.addClassName("consulta-activos");
 
+            if (activo.hasClassName("consulta-activos")){
+                activo.removeClassName("consulta-activos");
+                quitarFiltro();
+            }
+
+            else {
+                activo.addClassName("consulta-activos");
+                fireEvent(new EstadoActivo(this));
+            }
         });
 
         inactivo.addClickListener(e-> {
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
             }
-            inactivo.addClassName("consulta-inactivos");
+
+            if (inactivo.hasClassName("consulta-inactivos")){
+                inactivo.removeClassName("consulta-inactivos");
+                quitarFiltro();
+            }
+
+            else {
+                inactivo.addClassName("consulta-inactivos");
+                fireEvent(new EstadoInactivo(this));
+            }
         });
 
         return estados;
@@ -119,5 +142,24 @@ public class OfertasTrabajo_vista extends Div {
         crear.getElement().appendChild(boton.getElement());
 
         return crear;
+    }
+
+    /*Filtra por activos*/
+    private void filtrarActivo(EstadoActivo event){
+        actualizar(controlador.filtrar(event.getEstado()));
+    }
+
+    /*Filtra por inactivos*/
+    private void filtrarInactivo(EstadoInactivo event){
+        actualizar(controlador.filtrar(event.getEstado()));
+    }
+
+    /*Quita los filtros*/
+    private void quitarFiltro(){
+        actualizar(controlador.getOfertasLaborales());
+    }
+
+    private void actualizar(OfertaLaboralConsultaDTO[] ofertas){
+        grid.setItems(ofertas);
     }
 }

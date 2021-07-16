@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas;
 
+import com.proyecto.desarrollo.ofertaLaboral.aplicacion.FiltrosOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
@@ -27,5 +28,12 @@ public class ServicioOfertaLaboral {
         return ofertasLaborales;
     }
 
+    public OfertaLaboralConsultaDTO[] filtrar(String estado){
+        FiltrosOfertaLaboral filtrados = new FiltrosOfertaLaboral();
+        return filtrados.filtarPorEstado(estado,this.ofertasLaborales);
+    }
 
+    public OfertaLaboralConsultaDTO[] getOfertasLaborales() {
+        return ofertasLaborales;
+    }
 }

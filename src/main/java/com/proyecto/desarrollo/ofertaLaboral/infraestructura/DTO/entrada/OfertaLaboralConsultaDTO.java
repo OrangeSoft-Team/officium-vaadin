@@ -21,7 +21,9 @@ public class OfertaLaboralConsultaDTO {
 
     private String nombreEmpresa;
 
-    public OfertaLaboralConsultaDTO(String id, String titulo, String fechaPublicacion, String cargo, float sueldo, int valor , String escala, String turnoTrabajo, int numeroVacantes, String nombreEmpresa) {
+    private String estado;
+
+    public OfertaLaboralConsultaDTO(String id, String titulo, String fechaPublicacion, String cargo, float sueldo, int valor , String escala, String turnoTrabajo, int numeroVacantes, String nombreEmpresa,String estado) {
         this.id = id;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
@@ -32,6 +34,7 @@ public class OfertaLaboralConsultaDTO {
         this.turnoTrabajo = turnoTrabajo;
         this.numeroVacantes = numeroVacantes;
         this.nombreEmpresa = nombreEmpresa;
+        this.estado = estado;
     }
 
     public String getId() {
@@ -68,5 +71,9 @@ public class OfertaLaboralConsultaDTO {
 
     public String getNombreEmpresa() {
         return nombreEmpresa;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 }
