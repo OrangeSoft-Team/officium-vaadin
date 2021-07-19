@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia;
 
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
@@ -16,7 +17,10 @@ public class OfertasLaboralArchivoPersistenciaTest {
     @Before
     public void crearDatosPrueba() {
         OfertaLaboralMapper mapper =  new OfertaLaboralMapper();
-        OfertaLaboral oferta = new OfertaLaboral("Se busca Conserje","Se busca un conserje para que labore en la empresa Orangesoft durante el dia","Vendedor",(float)700.16,4,"dia", "diurno",8,"2");
+        HabilidadDTO[] habilidades = new HabilidadDTO[2];
+        habilidades[0] = new HabilidadDTO("1","conserje","limpieza");
+        habilidades[1] = new HabilidadDTO("2","administrado","recursos humanos");
+        OfertaLaboral oferta = new OfertaLaboral("Se busca Conserje","Se busca un conserje para que labore en la empresa Orangesoft durante el dia","Vendedor",(float)700.16,4,"dia", "diurno",8,"2","estudiante",habilidades);
         ofertaACrear = mapper.ofertaLaboralToDTOCreacion(oferta);
         adaptador = new OfertasLaboralArchivoPersistencia();
     }

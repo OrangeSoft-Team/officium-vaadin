@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.dominio;
 
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.valueObjects.*;
 
 public class OfertaLaboral {
@@ -22,7 +23,11 @@ public class OfertaLaboral {
 
     private String idEmpresa;
 
-    public OfertaLaboral(String titulo, String descripcion, String cargo, Float sueldo, int duracionEstimadaValor, String duracionEstimadaEscala, String turnoTrabajo, int numeroVacantes, String idEmpresa) {
+    private Habilidades[] habilidades;
+
+    private RequisitosEspeciales requisitosEspeciales;
+
+    public OfertaLaboral(String titulo, String descripcion, String cargo, Float sueldo, int duracionEstimadaValor, String duracionEstimadaEscala, String turnoTrabajo, int numeroVacantes, String idEmpresa, String requisitoEspecial, HabilidadDTO[] habilidadesObtenidas) {
         this.titulo = new Titulo(titulo);
         this.descripcion = new Descripcion(descripcion);
         this.cargo = new Cargo(cargo);
@@ -32,6 +37,13 @@ public class OfertaLaboral {
         this.turnoTrabajo = new TurnoTrabajo(turnoTrabajo);
         this.numeroVacantes = new NumeroVacantes(numeroVacantes);
         this.idEmpresa = idEmpresa;
+        /*Como es opcional, si es null no se hace la comprobación*/
+        if (requisitoEspecial == null) this.requisitosEspeciales = null;
+        else this.requisitosEspeciales = new RequisitosEspeciales(requisitoEspecial);
+        this.habilidades = new Habilidades[habilidadesObtenidas.length];
+        for (int i = 0 ; i < habilidades.length; i++){
+            this.habilidades[i] = new Habilidades(habilidadesObtenidas[i].getId(),habilidadesObtenidas[i].getNombre(),habilidadesObtenidas[i].getCategoria());
+        }
     }
 
     public Titulo getTitulo() {
@@ -68,5 +80,11 @@ public class OfertaLaboral {
         return idEmpresa;
     }
 
+    public Habilidades[] getHabilidades() {
+        return habilidades;
+    }
 
+    public RequisitosEspeciales getRequisitosEspeciales() {
+        return requisitosEspeciales;
+    }
 }
