@@ -69,7 +69,6 @@ public class ServicioCrearOfertaLaboral {
     public boolean ofertaValida(OfertaLaboral ofertaCreada) {
         Dialog modal = new Dialog();
         if (ofertaCreada.getTitulo().getTitulo() == "invalido"){
-
             modal.add(new Div(new Text("El titulo debe contener de 4 a 80 caracteres")), new Button("Cerrar", event -> modal.close()));
             modal.open();
             return false;
@@ -88,7 +87,7 @@ public class ServicioCrearOfertaLaboral {
         }
 
         else if (ofertaCreada.getDuracionEstimadaEscala().getEscala() == "invalido"){
-            modal.add(new Div(new Text("La duracion debe ser horas, dias, semanas o meses")), new Button("Cerrar", event -> modal.close()));
+            modal.add(new Div(new Text("La duracion debe ser horas, dias, semanas, meses o años")), new Button("Cerrar", event -> modal.close()));
             modal.open();
         return false;
         }

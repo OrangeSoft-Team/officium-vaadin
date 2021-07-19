@@ -13,8 +13,10 @@
   "uuidEmpresa":"1" ,
   "empresaNombre" :"Orangesoft",
   "direccionEmpresa": "Av Principal Juan Carlos Perez frente al mirador",
-  "habilades": [
-                  ["1","Conserje","Limpieza"],
-                  ["2","Contador","Administracion"]
+  "requisitosEspeciales": "rango de edad",
+  "habilidades": [
+          {"uuid": "1", "nombre" : "Conserje","categoria":"Limpieza"},
+          {"uuid":"2", "nombre" :"Contador","categoria":"Administracion"},
+          {"uuid":"3","nombre" :"Administrador","categoria":"Administracion"}
                ]
 }

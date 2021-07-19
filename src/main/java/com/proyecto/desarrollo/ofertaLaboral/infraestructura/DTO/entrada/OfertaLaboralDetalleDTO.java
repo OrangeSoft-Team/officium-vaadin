@@ -1,5 +1,7 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada;
 
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
+
 import java.util.StringTokenizer;
 
 public class OfertaLaboralDetalleDTO {
@@ -32,7 +34,11 @@ public class OfertaLaboralDetalleDTO {
 
     private String direccionEmpresa;
 
-    public OfertaLaboralDetalleDTO(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, int duracionValor, String duracionEscala, String descripcion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa) {
+    private String requerimientoEspecial;
+
+    private HabilidadDTO[] habilidades;
+
+    public OfertaLaboralDetalleDTO(String id, String titulo, String fechaPublicacion, String fechaModificacion, String cargo, float sueldo, int duracionValor, String duracionEscala, String descripcion, String turnoTrabajo, int numeroVacantes, String idEmpresa, String nombreEmpresa, String direccionEmpresa, String requerimientoEspecial, HabilidadDTO[] habilidades) {
         this.id = id;
         this.titulo = titulo;
         this.fechaPublicacion = fechaPublicacion;
@@ -47,6 +53,8 @@ public class OfertaLaboralDetalleDTO {
         this.idEmpresa = idEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.direccionEmpresa = direccionEmpresa;
+        this.requerimientoEspecial = requerimientoEspecial;
+        this.habilidades = habilidades;
     }
 
     public String getId() {
@@ -103,5 +111,13 @@ public class OfertaLaboralDetalleDTO {
 
     public String getDireccionEmpresa() {
         return direccionEmpresa;
+    }
+
+    public String getRequerimientoEspecial() {
+        return requerimientoEspecial;
+    }
+
+    public HabilidadDTO[] getHabilidades() {
+        return habilidades;
     }
 }

@@ -25,9 +25,9 @@ public class OfertaLaboralCreacion {
 
         private String requisitosEspeciales;
 
-        private Habilidades[] habilidades;
+        private HabilidadDTO[] habilidades;
 
-    public OfertaLaboralCreacion(String titulo, String descripcion, String cargo, float sueldo, int duracionEstimadaValor, String duracionEstimadaEscala, String turnoTrabajo, int numeroVacantes, String idEmpresa, String requisitosEspeciales, Habilidades[] habilidades) {
+    public OfertaLaboralCreacion(String titulo, String descripcion, String cargo, float sueldo, int duracionEstimadaValor, String duracionEstimadaEscala, String turnoTrabajo, int numeroVacantes, String idEmpresa, String requisitosEspeciales, HabilidadDTO[] habilidades) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.cargo = cargo;
@@ -81,7 +81,7 @@ public class OfertaLaboralCreacion {
         return requisitosEspeciales;
     }
 
-    public Habilidades[] getHabilidades() {
+    public HabilidadDTO[] getHabilidades() {
         return habilidades;
     }
 }
