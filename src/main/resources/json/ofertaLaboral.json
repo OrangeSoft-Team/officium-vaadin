@@ -1,12 +1,12 @@
 {
-  "UUID": "1",
-  "Titulo": "Se busca Conserje",
-  "FechaPublicacion": "15/10/2020",
-  "Cargo":"Conserje",
-  "Sueldo": "500",
-  "DuracionEstimadaValor": "3",
-  "DuracionEstimadaEscala":"mes",
-  "TurnoTrabajo" :"diurno",
-  "NumeroVacantes" :"5",
-  "EmpresaNombre" :"Orangesoft"
+  "uuid": "1",
+  "titulo": "Se busca Conserje",
+  "fechaPublicacion": "15/10/2020",
+  "cargo":"Conserje",
+  "sueldo": "500",
+  "duracionEstimadaValor": "3",
+  "duracionEstimadaEscala":"mes",
+  "turnoTrabajo" :"diurno",
+  "numeroVacantes" :"5",
+  "empresaNombre" :"Orangesoft"
 }

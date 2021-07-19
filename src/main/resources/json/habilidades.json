@@ -1,0 +1,18 @@
+[{
+  "uuid": "1",
+  "nombre": "Desarrollador",
+  "categoria": "Programador"
+},
+
+  {
+    "uuid": "2",
+    "nombre": "Conserje",
+    "categoria": "Conserje"
+  },
+
+  {
+    "uuid": "3",
+    "nombre": "Administrador",
+    "categoria": "Recursos Humanos"
+  }
+]
