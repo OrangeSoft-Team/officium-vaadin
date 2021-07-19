@@ -1,6 +1,10 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta;
 
+import com.proyecto.desarrollo.comunes.aplicacion.HabilidadesMapper;
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaHabilidades;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesArchivoPersistencia;
 import com.proyecto.desarrollo.empresas.aplicacion.EmpresasMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaEmpresas;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
@@ -21,7 +25,7 @@ public class ServicioCrearOfertaLaboral {
     /*Empresas en el sistema*/
     private ConsultarEmpresasParaCreacionDTO[] empresas;
     /*Mapper para empresas*/
-    private EmpresasMapper mapper = new EmpresasMapper();
+    private EmpresasMapper mapper;
     /*Mapper para ofertas laborales*/
     private OfertaLaboralMapper mapperOferta;
     /*Adaptador para Empresas*/
@@ -33,15 +37,31 @@ public class ServicioCrearOfertaLaboral {
     /*Creacion exitosa*/
     private boolean exito = false;
 
-    public ConsultarEmpresasParaCreacionDTO[] obtenerEmpresas() throws ParseException {
+    private HabilidadDTO[] habilidades;
+
+    public ServicioCrearOfertaLaboral() {
+        this.mapper = new EmpresasMapper();
+        this.mapperOferta = new OfertaLaboralMapper();
         this.adaptador = new EmpresasArchivoPersistencia();
+        this.ofertaAdapter = new OfertasLaboralArchivoPersistencia();
+    }
+
+    public ConsultarEmpresasParaCreacionDTO[] obtenerEmpresas() throws ParseException {
         String json = adaptador.getEmpresasOfertaLaboral();
         this.empresas = this.mapper.jsonToEmpresasCreacion(json);
         return this.empresas;
     }
 
-    public OfertaLaboral generarOferta(String titulo, String descripcion, String cargo, float sueldo, int valor, String escala, String turno, int vacantes, String empresa){
-        return new OfertaLaboral(titulo,descripcion,cargo,sueldo,valor,escala,turno,vacantes,empresa);
+    public HabilidadDTO[] obtenerHabilidades() throws ParseException{
+        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
+        String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
+        HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
+        this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        return this.habilidades;
+    }
+
+    public OfertaLaboral generarOferta(String titulo, String descripcion, String cargo, float sueldo, int valor, String escala, String turno, int vacantes, String empresa,String requerimientoEspecial,HabilidadDTO[] habilidades){
+        return new OfertaLaboral(titulo,descripcion,cargo,sueldo,valor,escala,turno,vacantes,empresa,requerimientoEspecial,habilidades);
     }
 
 
@@ -97,12 +117,16 @@ public class ServicioCrearOfertaLaboral {
             return false;
         }
 
+        else if (ofertaCreada.getHabilidades()[0].getId() == "invalido" || ofertaCreada.getHabilidades()[0].getNombre() == "invalido" || ofertaCreada.getHabilidades()[0].getCategoria() == "invalido") {
+            modal.add(new Div(new Text("La habilidad no es valida")), new Button("Cerrar", event -> modal.close()));
+            modal.open();
+            return false;
+        }
+
         return true;
     }
 
     public void crearOferta(OfertaLaboral ofertaCreada) {
-        this.ofertaAdapter = new OfertasLaboralArchivoPersistencia();
-        this.mapperOferta = new OfertaLaboralMapper();
         if(ofertaAdapter.crearOferta(this.mapperOferta.ofertaLaboralToDTOCreacion(ofertaCreada))){
             exito = true;
         }

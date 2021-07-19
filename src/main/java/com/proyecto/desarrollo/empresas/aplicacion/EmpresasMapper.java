@@ -23,7 +23,7 @@ public class EmpresasMapper {
     }
 
     private void parsearEmpresas(JSONObject empre) {
-        this.empresasCreacion[cont] = new ConsultarEmpresasParaCreacionDTO((String) empre.get("UUIDEmpresa"),(String) empre.get("NombreEmpresa"));
+        this.empresasCreacion[cont] = new ConsultarEmpresasParaCreacionDTO((String) empre.get("uuidEmpresa"),(String) empre.get("nombreEmpresa"));
         this.cont++;
     }
 }

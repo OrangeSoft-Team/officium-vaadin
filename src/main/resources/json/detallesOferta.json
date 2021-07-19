@@ -1,16 +1,20 @@
 {
-  "UUID": "1",
-  "Titulo": "Se busca Conserje",
-  "FechaPublicacion": "20/10/2020",
-  "FechaModificacion": "25/10/2020",
-  "Cargo":"Vendedor",
-  "Sueldo": "700.16",
-  "DuracionEstimadaValor": "4",
-  "DuracionEstimadaEscala":"dia",
-  "Descripcion": "Se busca un conserje para que labore en la empresa Orangesoft durante el dia",
-  "TurnoTrabajo" :"diurno",
-  "NumeroVacantes" :"8",
-  "UUIDEmpresa":"1" ,
-  "EmpresaNombre" :"Orangesoft",
-  "DireccionEmpresa": "Av Principal Juan Carlos Perez frente al mirador"
+  "uuid": "1",
+  "titulo": "Se busca Conserje",
+  "fechaPublicacion": "20/10/2020",
+  "fechaModificacion": "25/10/2020",
+  "cargo":"Vendedor",
+  "sueldo": "700.16",
+  "duracionEstimadaValor": "4",
+  "duracionEstimadaEscala":"dia",
+  "descripcion": "Se busca un conserje para que labore en la empresa Orangesoft durante el dia",
+  "turnoTrabajo" :"diurno",
+  "numeroVacantes" :"8",
+  "uuidEmpresa":"1" ,
+  "empresaNombre" :"Orangesoft",
+  "direccionEmpresa": "Av Principal Juan Carlos Perez frente al mirador",
+  "habilades": [
+                  ["1","Conserje","Limpieza"],
+                  ["2","Contador","Administracion"]
+               ]
 }
