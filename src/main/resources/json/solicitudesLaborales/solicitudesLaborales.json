@@ -1,0 +1,26 @@
+[
+{
+  "uuid": "1",
+  "tituloOferta": "Se busca Conserje",
+  "cargoOferta": "Conserje",
+  "estado": "activo",
+  "nombreEmpresa" : "Orangesoft",
+  "nombreEmpleado": "Robert Gonzalez"
+},
+  {
+    "uuid": "2",
+    "tituloOferta": "Se busca Desarrollador",
+    "cargoOferta": "Desarrollador",
+    "estado": "activo",
+    "nombreEmpresa" : "Orangesoft",
+    "nombreEmpleado": "Miguel de Olim"
+  },
+  {
+    "uuid": "3",
+    "tituloOferta": "Se busca Cocinero",
+    "cargoOferta": "Chef",
+    "estado": "inactivo",
+    "nombreEmpresa" : "SpaceX",
+    "nombreEmpleado": "Yelithza Ortiz"
+  }
+]
