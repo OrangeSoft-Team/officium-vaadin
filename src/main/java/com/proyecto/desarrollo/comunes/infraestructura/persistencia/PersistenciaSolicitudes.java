@@ -6,4 +6,5 @@ public interface PersistenciaSolicitudes {
 
     public String obtenerSolicitudes() throws IOException;
 
+    public String obtenerDetalle() throws IOException;
 }

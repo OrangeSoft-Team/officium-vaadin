@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicit
 
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaSolicitudes;
 import com.proyecto.desarrollo.solicitud.aplicacion.SolicitudMapper;
+import com.proyecto.desarrollo.solicitud.infraestructura.DTO.DetalleSolicitudLaboralDTO;
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.SolicitudLaboralDTO;
 import com.proyecto.desarrollo.solicitud.infraestructura.persistencia.SolicitudesLaboralesArchivoPersistencia;
 import org.json.simple.parser.ParseException;
@@ -26,5 +27,9 @@ public class ServicioConsultarSolicitudes {
     public SolicitudLaboralDTO[] obtenerSolicitudes() throws IOException, ParseException {
         /*Se obtiene del adaptador un json con las solicitudes y luego se mappean a un array de SolicitudLaboralDTO*/
         return this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
+    }
+
+    public DetalleSolicitudLaboralDTO obtenerDetalle(String uuid) throws IOException, ParseException {
+        return this.mapperSolicitud.jsonToDetalle(this.adaptador.obtenerDetalle());
     }
 }

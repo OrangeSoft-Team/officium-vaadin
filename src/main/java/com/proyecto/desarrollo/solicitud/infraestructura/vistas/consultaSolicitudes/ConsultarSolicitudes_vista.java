@@ -3,6 +3,8 @@ package com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicit
 
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.SolicitudLaboralDTO;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.modal.DetalleSolicitudModal;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
@@ -40,9 +42,38 @@ public class ConsultarSolicitudes_vista extends Div {
         grid.setClassName("grid-solicitudes-laborales");
         grid.setHeight("40em");
         grid.setColumns("tituloOferta","cargoOferta","nombreEmpresa","nombreEmpleado");
-        /* Se crea el boton de detalle, todavia no se ha implementado la interfaz asi que se deja comentado
-        grid.addComponentColumn(item ->crearBotonDetalle()).setHeader("Acciones");
-         */
+        grid.getColumnByKey("cargoOferta").setWidth("10px");
+        /* Se crea el boton de detalle, todavia no se ha implementado la interfaz asi que se deja comentado*/
+        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones");
+
+    }
+
+    private Component crearBotonera(String uuid) {
+        Div botonera = new Div();
+
+        Button aprobar = new Button("Aprobar");
+        aprobar.setClassName("aceptar-solicitud-boton");
+
+        Button rechazar = new Button("Rechazar");
+        rechazar.setClassName("rechazar-solicitud-boton");
+
+
+        Button detalle = new Button("Detalle");
+        detalle.setClassName("detalle-solicitud-boton");
+        detalle.addClickListener(e->{
+            try {
+                DetalleSolicitudModal detalleModal = new DetalleSolicitudModal(controlador.obtenerDetalle(uuid));
+                detalleModal.open();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+        });
+
+
+        botonera.add(aprobar,rechazar,detalle);
+        return botonera;
     }
 
     private void agregarItemsAlGrid() throws IOException, ParseException {

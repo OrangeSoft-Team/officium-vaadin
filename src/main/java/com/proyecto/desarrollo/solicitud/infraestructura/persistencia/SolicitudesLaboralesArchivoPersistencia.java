@@ -20,4 +20,17 @@ public class SolicitudesLaboralesArchivoPersistencia implements PersistenciaSoli
         return contenido;
     }
 
+    @Override
+    public String obtenerDetalle() throws IOException {
+        String contenido;
+        contenido = "";
+        try{
+            contenido = Files.readString(Paths.get("src/main/resources/json/solicitudesLaborales/detalleSolicitudLaboral.json"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contenido;
+    }
+
+
 }
