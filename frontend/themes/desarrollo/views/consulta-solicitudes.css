@@ -1,0 +1,47 @@
+.grid-solicitudes-laborales{
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 30px ;
+}
+
+.consulta-solicitudes-spacer{
+    height: 30px;
+}
+
+.aceptar-solicitud-boton{
+    background-color: #00B592;
+    color: white;
+    margin-right: 5px;
+}
+
+.rechazar-solicitud-boton{
+    background-color: #E65F5C;
+    color: white;
+    margin-right: 5px;
+}
+
+.detalle-solicitud-boton{
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.modal-space{
+    margin-right: 40px;
+}
+
+.titulo-width{
+    width: 150px;
+}
+
+.titulo-detalle-solicitud{
+    margin-top: 0.25em !important;
+}
+
+.cerrar-boton-detalle{
+    background-color: #FFC857;
+    color: white;
+}
+
+.top-space{
+    margin-top: 5px;
+}

@@ -6,6 +6,7 @@ import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.ConsultarSolicitudes_vista;
 import com.vaadin.flow.router.RouteConfiguration;
 
 import java.util.ArrayList;
@@ -28,11 +29,14 @@ public class ConfigurarRutas {
         this.rutas.add(new Ruta("crear-ofertas-laboral" , "Crear Oferta Laboral" , CrearOfertaLaboral_vista.class));
         this.rutas.add(new Ruta("detalle-oferta" , "Detalle Oferta Laboral" , DetallesOfertaLaboral.class));
         this.rutas.add(new Ruta("ofertas_trabajo" , "Ofertas de Trabajo" , OfertasTrabajo_vista.class));
+        this.rutas.add(new Ruta("solicitudes-laborales" , "Solicitudes Laborales" , ConsultarSolicitudes_vista.class));
     }
 
     public void generar_rutas_menu(){
         this.rutas.add(new Ruta("ofertas_trabajo" , "Ofertas de Trabajo" , OfertasTrabajo_vista.class));
+        this.rutas.add(new Ruta("solicitudes-laborales" , "Solicitudes Laborales" , ConsultarSolicitudes_vista.class));
         this.rutas.add(new Ruta("logout" , "Cerrar Sesión" , Logout_vista.class));
+
     }
 
     public ArrayList<Ruta> getRutas() {
