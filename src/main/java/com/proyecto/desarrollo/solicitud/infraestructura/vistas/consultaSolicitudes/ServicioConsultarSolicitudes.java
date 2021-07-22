@@ -26,10 +26,37 @@ public class ServicioConsultarSolicitudes {
 
     public SolicitudLaboralDTO[] obtenerSolicitudes() throws IOException, ParseException {
         /*Se obtiene del adaptador un json con las solicitudes y luego se mappean a un array de SolicitudLaboralDTO*/
-        return this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
+        this.solicitudes =this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
+        return solicitudesPendiente();
     }
 
     public DetalleSolicitudLaboralDTO obtenerDetalle(String uuid) throws IOException, ParseException {
         return this.mapperSolicitud.jsonToDetalle(this.adaptador.obtenerDetalle());
+    }
+
+    public Boolean aceptarSolicitud(String uuid) throws IOException {
+        return this.adaptador.aceptarSolicitud(uuid);
+    }
+
+    public int contarEstadoPendiente(){
+        int contador = 0;
+        for (int i = 0 ; i < solicitudes.length; i++){
+            if(solicitudes[i].getEstatus().equals("pendiente")){
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public SolicitudLaboralDTO[] solicitudesPendiente(){
+        SolicitudLaboralDTO[] pendientes = new SolicitudLaboralDTO[contarEstadoPendiente()];
+        int indice = 0;
+        for (int i = 0 ; i < solicitudes.length; i++){
+            if(solicitudes[i].getEstatus().equals("pendiente")){
+                pendientes[indice] = solicitudes[i];
+                indice++;
+            }
+        }
+        return pendientes;
     }
 }
