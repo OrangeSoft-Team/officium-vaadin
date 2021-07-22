@@ -69,6 +69,9 @@ public class DetalleSolicitudModal extends Dialog {
         if (this.detalle.getComentario() != null){
             comentario.setValue(this.detalle.getComentario());
         }
+        else {
+            comentario.setValue("No se tiene ningun comentario");
+        }
         comentario.setWidth("740px");
         comentario.setReadOnly(true);
         contenedorComentario.add(comentario);
@@ -77,7 +80,9 @@ public class DetalleSolicitudModal extends Dialog {
         Button cerrar = new Button("Cerrar",e->{close();});
         cerrar.addClassName("cerrar-boton-detalle");
 
-        Button aprobar = new Button("Aprobar");
+        Button aprobar = new Button("Aprobar",e->{
+
+        });
         aprobar.setClassName("aceptar-solicitud-boton");
 
         Button rechazar = new Button("Rechazar");

@@ -41,4 +41,8 @@ public class SolicitudLaboralDTO {
     public String getNombreEmpleado() {
         return nombreEmpleado;
     }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
 }

@@ -31,4 +31,12 @@ public class SolicitudesLaboralesArchivoPersistenciaTest {
             fail("No se retornaron ningunas solicitudes");
         }
     }
+
+    @Test
+    public void testAprobacion() throws IOException, ParseException {
+        /*El criterio para saber si funcionó el adaptador es que retorne verdadero, ya que no se retornara ningun tipo de información*/
+        if (!adaptador.aceptarSolicitud("1")){
+            fail("Ocurrio un fallo al momento de hacer la aprobación");
+        }
+    }
 }

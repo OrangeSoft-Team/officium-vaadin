@@ -7,4 +7,6 @@ public interface PersistenciaSolicitudes {
     public String obtenerSolicitudes() throws IOException;
 
     public String obtenerDetalle() throws IOException;
+
+    public boolean aceptarSolicitud(String uuid) throws IOException;
 }
