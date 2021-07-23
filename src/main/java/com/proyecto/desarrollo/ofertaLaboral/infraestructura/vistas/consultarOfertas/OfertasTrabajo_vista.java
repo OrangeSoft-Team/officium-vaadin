@@ -6,7 +6,9 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfe
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EventoAplicarFiltroEstado;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
+import com.vaadin.flow.component.FocusNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
@@ -18,6 +20,7 @@ import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 //@Route(value = "ofertas_trabajo", layout = MainLayout.class)
 @PageTitle("Ofertas Laboral")
@@ -98,6 +101,7 @@ public class OfertasTrabajo_vista extends Div {
 
         /*Filtro por nombre de empresa*/
         TextField filtroEmpresa = new TextField();
+        DatePicker filtroFecha = new DatePicker();
         filtroEmpresa.setLabel("Nombre de Empresa");
         filtroEmpresa.setWidth("11em");
         filtroEmpresa.addValueChangeListener(e->{
@@ -110,18 +114,44 @@ public class OfertasTrabajo_vista extends Div {
                 activo.removeClassName("consulta-activos");
             }
         });
+        filtroEmpresa.addFocusListener(e->{
+                filtroFecha.clear();
+        });
 
+        filtroFecha.setClassName("filtro-fecha");
+        filtroFecha.setLabel("Fecha de publicación");
+        filtroFecha.setClearButtonVisible(true);
+        filtroFecha.setPlaceholder("DD/MM/YYYY");
+        filtroFecha.addFocusListener(e->{
+            filtroEmpresa.setValue("");
+        });
+        filtroFecha.addValueChangeListener(e->{
+            if (filtroFecha.isEmpty()) {
+                actualizar(controlador.getOfertasLaborales());
+            }
+            else {
+                actualizar(controlador.filtrarFechaPubli(filtroFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+                if (inactivo.hasClassName("consulta-inactivos")) {
+                    inactivo.removeClassName("consulta-inactivos");
+                }
+                if (activo.hasClassName("consulta-activos")) {
+                    activo.removeClassName("consulta-activos");
+                }
+            }
+        });
 
         RouterLink crear = botoneraCrearOferta();
-        estados.add(activo, inactivo,filtroEmpresa,crear);
+        estados.add(activo, inactivo,filtroEmpresa,filtroFecha,crear);
 
         /*Se agrega el listener para disparar el evento en caso de hacer click*/
         activo.addClickListener(e-> {
             /*Si el boton de filtrado por inactivo esta activado, se le quita el css al boton*/
             if (inactivo.hasClassName("consulta-inactivos")){
                 inactivo.removeClassName("consulta-inactivos");
+                /*Se borran los filtros*/
+                filtroFecha.clear();
+                filtroEmpresa.setValue("");
             }
-
             /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
@@ -138,6 +168,9 @@ public class OfertasTrabajo_vista extends Div {
             /*Si el boton de filtrado por activo esta activado, se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
+                /*Se borran los filtros*/
+                filtroFecha.clear();
+                filtroEmpresa.setValue("");
             }
             /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (inactivo.hasClassName("consulta-inactivos")){

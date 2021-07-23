@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Locale;
 
 @Service
@@ -57,6 +58,29 @@ public class ServicioOfertaLaboral {
         int contador = 0;
         for (int i = 0 ; i < this.ofertasLaborales.length ; i++){
             if(this.ofertasLaborales[i].getNombreEmpresa().toLowerCase(Locale.ROOT).contains(nombreEmpresa.toLowerCase(Locale.ROOT))){
+                contador++;
+            }
+        }
+        return contador;
+    }
+
+    public OfertaLaboralConsultaDTO[] filtrarFechaPubli(String format) {
+        OfertaLaboralConsultaDTO[] filtradas = new OfertaLaboralConsultaDTO[contrarOfertasConFecha(format)];
+        System.out.println();
+        int indice = 0;
+        for (int i = 0; i < this.ofertasLaborales.length;i++){
+            if (this.ofertasLaborales[i].getFechaPublicacion().equals(format)){
+                filtradas[indice] = this.ofertasLaborales[i];
+                indice++;
+            }
+        }
+        return filtradas;
+    }
+
+    public int contrarOfertasConFecha(String value){
+        int contador = 0;
+        for (int i = 0; i < this.ofertasLaborales.length;i++){
+            if (this.ofertasLaborales[i].getFechaPublicacion().equals(value)){
                 contador++;
             }
         }
