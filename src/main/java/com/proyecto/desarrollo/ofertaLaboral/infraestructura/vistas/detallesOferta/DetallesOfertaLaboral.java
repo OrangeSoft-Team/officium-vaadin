@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta;
 
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
@@ -53,9 +54,20 @@ public class DetallesOfertaLaboral extends Div {
 
     private OfertaLaboralDetalleDTO ofertaDetallada;
 
+    private Select<HabilidadDTO> habilidades1;
+
+    private Select<HabilidadDTO> habilidades2;
+
+    private Select<HabilidadDTO> habilidades3;
+
+    private HabilidadDTO[] habilidades;
+
+    private TextArea requisitosEspeciales;
+
     public DetallesOfertaLaboral() throws ParseException {
         controlador = new ServicioDetalleOfertaLaboral();
         ofertaDetallada = controlador.obtenerOferta();
+        habilidades = ofertaDetallada.getHabilidades();
         setHeightFull();
         setClassName("ofertaDetalle");
 
@@ -161,8 +173,41 @@ public class DetallesOfertaLaboral extends Div {
         fechaModiciacion.setValue(this.ofertaDetallada.getFechaModificacion());
         fechaModiciacion.setReadOnly(true);
 
+        /*Habilidad 1*/
+        habilidades1 = new Select<>();
+        habilidades1.setLabel("Habilidades requeridas");
+        habilidades1.setItemLabelGenerator(HabilidadDTO::getNombre);
+        habilidades1.setItems(habilidades[0]);
+        habilidades1.setValue(habilidades[0]);
+        habilidades1.setReadOnly(true);
+
+
+        habilidades2 = new Select<>();
+        habilidades2.setLabel("Habilidades requeridas (opcional)");
+        habilidades2.setItemLabelGenerator(HabilidadDTO::getNombre);
+        if (habilidades.length >= 2){
+            habilidades2.setItems(habilidades[1]);
+            habilidades2.setValue(habilidades[1]);
+        }
+        habilidades2.setReadOnly(true);
+
+        habilidades3 = new Select<>();
+        habilidades3.setLabel("Habilidades requeridas (opcional)");
+        habilidades3.setItemLabelGenerator(HabilidadDTO::getNombre);
+        if (habilidades.length >= 3){
+            habilidades3.setItems(habilidades[2]);
+            habilidades3.setValue(habilidades[2]);
+        }
+        habilidades3.setReadOnly(true);
+
+        requisitosEspeciales = new TextArea();
+        requisitosEspeciales.setLabel("Requisitos Adicionales (Opcional)");
+        requisitosEspeciales.setMaxLength(256);
+        requisitosEspeciales.setValue(this.ofertaDetallada.getRequerimientoEspecial());
+        requisitosEspeciales.setReadOnly(true);
+
         /*Añadir los componentes del form al form*/
-        detalleOferta.add(titulo,cargo,sueldo,duracion,escala,turno,vacantes,empresasActual,descripcion);
+        detalleOferta.add(titulo,cargo,sueldo,duracion,escala,turno,vacantes,empresasActual,descripcion, habilidades1,habilidades2, habilidades3,requisitosEspeciales);
         /*Redistribucion responsive*/
         detalleOferta.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("1px",1),

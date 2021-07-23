@@ -11,7 +11,7 @@ public class DuracionEstimadaEscala {
     }
 
     public boolean esValido(String escala){
-        if (escala == "hora" || escala == "dia" || escala == "semana" || escala == "mes")
+        if (escala == "hora" || escala == "dia" || escala == "semana" || escala == "mes" || escala == "año" )
             return true;
         return false;
     }
