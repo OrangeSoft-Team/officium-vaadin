@@ -8,7 +8,8 @@
   "duracionEstimadaEscala":"mes",
   "turnoTrabajo" :"diurno",
   "numeroVacantes" :"5",
-  "empresaNombre" :"Orangesoft"
+  "empresaNombre" :"Orangesoft",
+  "estatus": "activo"
 },
 
 {
@@ -21,7 +22,8 @@
   "duracionEstimadaEscala":"dia",
   "turnoTrabajo" :"diurno",
   "numeroVacantes" :"8",
-  "empresaNombre" :"Orangesoft"
+  "empresaNombre" :"Orangesoft",
+  "estatus": "activo"
 },
 
 {
@@ -34,6 +36,7 @@
   "duracionEstimadaEscala":"hora",
   "turnoTrabajo" :"diurno",
   "numeroVacantes" :"10",
-  "empresaNombre" :"Orangesoft"
+  "empresaNombre" :"Orangesoft",
+  "estatus": "inactivo"
 }
 ]
