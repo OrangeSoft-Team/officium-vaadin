@@ -1,8 +1,33 @@
-.agregarOferta{
+.filtro{
     padding-top: 10px;
-    margin-left: auto;
-    padding-right: 40px;
-    padding-bottom: 5px;
+    margin-left: 1.5em;
+}
+
+.estados{
+    width: 100%;
+}
+
+.botonera-consulta{
+    padding-top: 15px;
+}
+
+.ofertas-activas{
+    background-color: lightgray;
+    color: white;
+}
+
+.ofertas-inactivas{
+    margin-left: 1em;
+    background-color: lightgray;
+    color: white;
+}
+
+.agregarOferta{
+    width: 200px;
+}
+
+.titulo-filtro{
+    padding-bottom: 15px;
 }
 
 .grid{
@@ -17,5 +42,13 @@
 .crear{
     background-color: #00B592;
     color: #FFFFFF;
+    margin-left:1em;
 }
 
+.consulta-activos{
+    background-color: cornflowerblue;
+}
+
+.consulta-inactivos{
+    background-color: cornflowerblue;
+}

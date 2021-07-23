@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas;
 
+import com.proyecto.desarrollo.ofertaLaboral.aplicacion.FiltrosOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
@@ -27,15 +28,12 @@ public class ServicioOfertaLaboral {
         return ofertasLaborales;
     }
 
+    public OfertaLaboralConsultaDTO[] filtrar(String estado){
+        FiltrosOfertaLaboral filtrados = new FiltrosOfertaLaboral();
+        return filtrados.filtarPorEstado(estado,this.ofertasLaborales);
+    }
 
-
-    /** Esto funciona cuando es un solo objeto en el json
-     * JSONParser parser = new JSONParser();
-     *         try (FileReader reader = new FileReader("src/main/resources/json/ofertasLaborales.json")){
-     *             Object obj = parser.parse(reader);
-     *             JSONObject ofertas = (JSONObject) obj;
-     *             parsearOfertaLaboral(ofertas);
-     */
-
-
+    public OfertaLaboralConsultaDTO[] getOfertasLaborales() {
+        return ofertasLaborales;
+    }
 }
