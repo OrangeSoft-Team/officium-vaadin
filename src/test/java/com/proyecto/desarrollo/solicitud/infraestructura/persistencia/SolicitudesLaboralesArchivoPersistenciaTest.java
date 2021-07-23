@@ -38,5 +38,15 @@ public class SolicitudesLaboralesArchivoPersistenciaTest {
         if (!adaptador.aceptarSolicitud("1")){
             fail("Ocurrio un fallo al momento de hacer la aprobación");
         }
+        System.out.println("Solicitud aprobada exitosamente");
+    }
+
+    @Test
+    public void testRechazo() throws IOException, ParseException {
+        /*El criterio para saber si funcionó el adaptador es que retorne verdadero, ya que no se retornara ningun tipo de información*/
+        if (!adaptador.rechazarSolicitud("1")){
+            fail("Ocurrio un fallo al momento de hacer la aprobación");
+        }
+        System.out.println("Solicitud rechazada exitosamente");
     }
 }

@@ -60,4 +60,25 @@ public class SolicitudesLaboralesArchivoPersistencia implements PersistenciaSoli
     }
 
 
+    @Override
+    public boolean rechazarSolicitud(String uuid) throws IOException {
+        SolicitudMapper mapper = new SolicitudMapper();
+        try{
+            SolicitudLaboralDTO[] solicitudes = mapper.jsonToGrid(obtenerSolicitudes());
+            for (int i = 0;i< solicitudes.length;i++){
+                if (solicitudes[i].getUuid().equals(uuid)){
+                    solicitudes[i].setEstatus("rechazado");
+                    FileWriter writer = new FileWriter("src/main/resources/json/solicitudesLaborales/solicitudesLaborales.json");
+                    ObjectMapper mapperJson = new ObjectMapper();
+                    String json = mapperJson.writeValueAsString(solicitudes);
+                    writer.write(json);
+                    writer.close();
+                    return true;
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
