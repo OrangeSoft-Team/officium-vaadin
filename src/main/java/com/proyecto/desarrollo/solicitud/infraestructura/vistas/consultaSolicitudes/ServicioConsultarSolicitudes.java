@@ -38,6 +38,10 @@ public class ServicioConsultarSolicitudes {
         return this.adaptador.aceptarSolicitud(uuid);
     }
 
+    public Boolean rechazarSolicitud(String uuid) throws IOException {
+        return this.adaptador.rechazarSolicitud(uuid);
+    }
+
     public int contarEstadoPendiente(){
         int contador = 0;
         for (int i = 0 ; i < solicitudes.length; i++){

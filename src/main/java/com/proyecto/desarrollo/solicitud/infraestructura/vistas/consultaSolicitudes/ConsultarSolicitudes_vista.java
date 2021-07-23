@@ -5,6 +5,8 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOfer
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.SolicitudLaboralDTO;
 import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.AprobadoExitoso;
 import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.AprobadoFallido;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.RechazoExitoso;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.RechazoFallido;
 import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.modal.DetalleSolicitudModal;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -74,7 +76,20 @@ public class ConsultarSolicitudes_vista extends Div {
         });
         aprobar.setClassName("aceptar-solicitud-boton");
 
-        Button rechazar = new Button("Rechazar");
+        Button rechazar = new Button("Rechazar", e->{
+            try {
+                /*Si la aprobación fue exitosa, se dispara un evento de exito*/
+                if (controlador.rechazarSolicitud(uuid)){
+                    fireEvent(new RechazoExitoso(this));
+                }
+                /*Si la aprobación no fue exitosa, se dispara un evento de fracaso*/
+                else {
+                    fireEvent(new RechazoFallido(this));
+                }
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         rechazar.setClassName("rechazar-solicitud-boton");
 
 
@@ -99,6 +114,8 @@ public class ConsultarSolicitudes_vista extends Div {
     private void agregarListeners(){
             addListener(AprobadoExitoso.class, this::aprobadoExitoso);
             addListener(AprobadoFallido.class, this::aprobadoFallido);
+            addListener(RechazoExitoso.class, this::rechazoExitoso);
+        addListener(RechazoFallido.class, this::rechazoFallido);
     }
 
     private void aprobadoExitoso(AprobadoExitoso evento){
@@ -117,6 +134,27 @@ public class ConsultarSolicitudes_vista extends Div {
 
     private void aprobadoFallido(AprobadoFallido evento){
         Notification notificacion = new Notification("Fallo al aprobar la solicitud",3000);
+        notificacion.setPosition(Notification.Position.TOP_CENTER);
+        notificacion.addThemeVariants(NotificationVariant.LUMO_ERROR);
+        notificacion.open();
+    }
+
+    private void rechazoExitoso(RechazoExitoso evento){
+        Notification notificacion = new Notification("Solicitud rechazada exitosamente",3000);
+        notificacion.setPosition(Notification.Position.TOP_CENTER);
+        notificacion.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+        notificacion.open();
+        try {
+            agregarItemsAlGrid();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void rechazoFallido(RechazoFallido evento){
+        Notification notificacion = new Notification("Fallo al rechazar la solicitud",3000);
         notificacion.setPosition(Notification.Position.TOP_CENTER);
         notificacion.addThemeVariants(NotificationVariant.LUMO_ERROR);
         notificacion.open();

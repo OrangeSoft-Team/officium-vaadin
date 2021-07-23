@@ -9,4 +9,6 @@ public interface PersistenciaSolicitudes {
     public String obtenerDetalle() throws IOException;
 
     public boolean aceptarSolicitud(String uuid) throws IOException;
+
+    public boolean rechazarSolicitud(String uuid) throws IOException;
 }
