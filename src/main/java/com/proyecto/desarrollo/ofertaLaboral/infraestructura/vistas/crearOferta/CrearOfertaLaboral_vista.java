@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta;
 
+import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
@@ -12,7 +13,6 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -55,6 +55,16 @@ public class CrearOfertaLaboral_vista extends Div{
 
     /*Se guarda para test ya que no se ha implementado los eventos*/
     private OfertaLaboral ofertaCreada;
+
+    private Select<HabilidadDTO> habilidades1;
+
+    private Select<HabilidadDTO> habilidades2;
+
+    private Select<HabilidadDTO> habilidades3;
+
+    private TextArea requisitosEspeciales;
+
+    private HabilidadDTO[] habilidades = new HabilidadDTO[3];
 
     public CrearOfertaLaboral_vista() throws ParseException {
         setHeightFull();
@@ -188,8 +198,38 @@ public class CrearOfertaLaboral_vista extends Div{
             }
         });
 
+        habilidades1 = new Select<>();
+        habilidades1.setLabel("Habilidades requeridas");
+        habilidades1.setItemLabelGenerator(HabilidadDTO::getNombre);
+        habilidades1.setItems(controlador.obtenerHabilidades());
+        habilidades1.addValueChangeListener(e->{
+           if (listoParaEnviar() && !sueldo.isInvalid() && !duracion.isInvalid() && !vacantes.isInvalid()){
+               submitt.setEnabled(true);
+               submitt.setClassName("btonEnviar-active");
+           }
+        });
+
+
+        habilidades2 = new Select<>();
+        habilidades2.setLabel("Habilidades requeridas (opcional)");
+        habilidades2.setItemLabelGenerator(HabilidadDTO::getNombre);
+        habilidades2.setItems(controlador.obtenerHabilidades());
+
+        habilidades3 = new Select<>();
+        habilidades3.setLabel("Habilidades requeridas (opcional)");
+        habilidades3.setItemLabelGenerator(HabilidadDTO::getNombre);
+        habilidades3.setItems(controlador.obtenerHabilidades());
+
+
+
+        requisitosEspeciales = new TextArea();
+        requisitosEspeciales.setLabel("Requisitos Adicionales (Opcional)");
+        requisitosEspeciales.setMaxLength(256);
+        requisitosEspeciales.setHelperText("Minimo 4 y Maximo 256 caracteres");
+        requisitosEspeciales.setPlaceholder("El solicitante debe estar en un rango de edad de entre 20 - 50 años");
+
         /*Falta el ID de la empresa*/
-        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,descripcion,empresas);
+        crearOferta.add(titulo, cargo,sueldo,duracion,escala,turno,vacantes,descripcion,empresas, habilidades1,habilidades2,habilidades3, requisitosEspeciales);
 
         contenido.add(crearOferta);
         contenido.setClassName("espacio");
@@ -247,6 +287,16 @@ public class CrearOfertaLaboral_vista extends Div{
         this.vacantes.setValue(Integer.toString(oferta.getNumeroVacantes().getVacantes()));
         this.empresas = new Select<>();
         this.empresas.setValue(new ConsultarEmpresasParaCreacionDTO(oferta.getIdEmpresa(), " "));
+        this.requisitosEspeciales = new TextArea();
+        this.requisitosEspeciales.setValue(oferta.getRequisitosEspeciales().getRequisitosEspeciales());
+        this.habilidades = new HabilidadDTO[2];
+        this.habilidades1 = new Select<>();
+        this.habilidades1.setValue(new HabilidadDTO(oferta.getHabilidades()[0].getId(),oferta.getHabilidades()[0].getNombre(),oferta.getHabilidades()[0].getCategoria()));
+        this.habilidades2 = new Select<>();
+        this.habilidades2.setValue(new HabilidadDTO(oferta.getHabilidades()[1].getId(),oferta.getHabilidades()[1].getNombre(),oferta.getHabilidades()[1].getCategoria()));
+        this.habilidades[0] = this.habilidades1.getValue();
+        this.habilidades[1] = this.habilidades2.getValue();
+        this.habilidades3 = new Select<>();
         this.submitt = new Button();
         this.submitt.addClickListener(e -> verificar());
         /*Agregar un listener a la vista para el evento de creacion*/
@@ -256,8 +306,23 @@ public class CrearOfertaLaboral_vista extends Div{
 
     /*Inicialmente se verifica si la oferta laboral cumple con los parametros, en caso afirmativo se genera un evento*/
     private void verificar() {
-        if(controlador.ofertaValida(controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID()))) {
-            ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID());
+        if (!habilidades3.isEmpty()){
+            habilidades = new HabilidadDTO[3];
+            habilidades[0] = habilidades1.getValue();
+            habilidades[1] = habilidades2.getValue();
+            habilidades[2] = habilidades3.getValue();
+        }
+        else if (!habilidades2.isEmpty()){
+            habilidades = new HabilidadDTO[2];
+            habilidades[0] = habilidades1.getValue();
+            habilidades[1] = habilidades2.getValue();
+        }
+        else{
+            habilidades = new HabilidadDTO[1];
+            habilidades[0] = habilidades1.getValue();
+        }
+        if(controlador.ofertaValida(controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID(),this.requisitosEspeciales.getValue(),habilidades))) {
+            ofertaCreada = controlador.generarOferta(this.titulo.getValue(),this.descripcion.getValue(),this.cargo.getValue(),Float.parseFloat(this.sueldo.getValue()),Integer.parseInt(this.duracion.getValue()),this.escala.getValue(),this.turno.getValue(), Integer.parseInt(this.vacantes.getValue()),this.empresas.getValue().getUUID(),this.requisitosEspeciales.getValue(),this.habilidades);
             fireEvent(new CreacionOferta(this,ofertaCreada));
         }
     }
@@ -299,7 +364,7 @@ public class CrearOfertaLaboral_vista extends Div{
     }
 
     private boolean listoParaEnviar(){
-        if (this.titulo.isEmpty() || this.descripcion.isEmpty() || this.cargo.isEmpty() || this.sueldo.isEmpty() || this.duracion.isEmpty() || this.escala.isEmpty() || this.turno.isEmpty() || this.vacantes.isEmpty() || this.empresas.isEmpty())
+        if (this.titulo.isEmpty() || this.descripcion.isEmpty() || this.cargo.isEmpty() || this.sueldo.isEmpty() || this.duracion.isEmpty() || this.escala.isEmpty() || this.turno.isEmpty() || this.vacantes.isEmpty() || this.empresas.isEmpty() || this.habilidades1.isEmpty())
             return false;
         return true;
     }
@@ -354,5 +419,25 @@ public class CrearOfertaLaboral_vista extends Div{
 
     public OfertaLaboral getOfertaCreada() {
         return ofertaCreada;
+    }
+
+    public Select<HabilidadDTO> getHabilidades1() {
+        return habilidades1;
+    }
+
+    public Select<HabilidadDTO> getHabilidades2() {
+        return habilidades2;
+    }
+
+    public Select<HabilidadDTO> getHabilidades3() {
+        return habilidades3;
+    }
+
+    public TextArea getRequisitosEspeciales() {
+        return requisitosEspeciales;
+    }
+
+    public HabilidadDTO[] getHabilidades() {
+        return habilidades;
     }
 }

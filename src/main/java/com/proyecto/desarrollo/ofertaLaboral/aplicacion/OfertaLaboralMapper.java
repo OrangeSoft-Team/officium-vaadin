@@ -18,7 +18,7 @@ public class OfertaLaboralMapper {
     /*Metodo utilizado para convertir una oferta laboral en un DTO para enviar a persistencia*/
     public OfertaLaboralCreacion ofertaLaboralToDTOCreacion(OfertaLaboral ofertaLaboral){
         /*Como oferta laboral utiliza value objetcs, es inevitable el doble get*/
-        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),ofertaLaboral.getIdEmpresa());
+        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),ofertaLaboral.getIdEmpresa(),ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), ofertaLaboral.getHabilidades());
         }
 
     /*Metodo utilizado para Parsear un Json y obtener un array de ofertasLaboralesGridVaadin*/
@@ -34,17 +34,16 @@ public class OfertaLaboralMapper {
 
     private void parsearOfertaLaboral (JSONObject oferta){
         this.ofertasLaborales[this.cont] = new OfertaLaboralConsultaDTO(
-                (String) oferta.get("UUID"),
-                (String) oferta.get("Titulo"),
-                (String) oferta.get("FechaPublicacion"),
-                (String) oferta.get("Cargo"),
-                Float.parseFloat((String) oferta.get("Sueldo")),
-                Integer.parseInt((String) oferta.get("DuracionEstimadaValor")) ,
-                (String) oferta.get("DuracionEstimadaEscala"),
-                (String) oferta.get("TurnoTrabajo"),
-                Integer.parseInt((String) oferta.get("NumeroVacantes")),
-                (String) oferta.get("EmpresaNombre"),
-                (String) oferta.get("Estado")
+                (String) oferta.get("uuid"),
+                (String) oferta.get("titulo"),
+                (String) oferta.get("fechaPublicacion"),
+                (String) oferta.get("cargo"),
+                Float.parseFloat((String) oferta.get("sueldo")),
+                Integer.parseInt((String) oferta.get("duracionEstimadaValor")) ,
+                (String) oferta.get("duracionEstimadaEscala"),
+                (String) oferta.get("turnoTrabajo"),
+                Integer.parseInt((String) oferta.get("numeroVacantes")),
+                (String) oferta.get("empresaNombre")
         );
         this.cont++;
     }
@@ -59,20 +58,20 @@ public class OfertaLaboralMapper {
 
     public OfertaLaboralDetalleDTO convertirDetalle(JSONObject detalle){
         return new OfertaLaboralDetalleDTO(
-                (String) detalle.get("UUID"),
-                (String) detalle.get("Titulo"),
-                (String) detalle.get("FechaPublicacion"),
-                (String) detalle.get("FechaModificacion"),
-                (String) detalle.get("Cargo"),
-                (float) Float.parseFloat((String)detalle.get("Sueldo")),
-                (int) Integer.parseInt((String) detalle.get("DuracionEstimadaValor")),
-                (String) detalle.get("DuracionEstimadaEscala"),
-                (String) detalle.get("Descripcion"),
-                (String) detalle.get("TurnoTrabajo"),
-                (int) Integer.parseInt((String) detalle.get("NumeroVacantes")),
-                (String) detalle.get("UUIDEmpresa"),
-                (String) detalle.get("EmpresaNombre"),
-                (String) detalle.get("DireccionEmpresa")
+                (String) detalle.get("uuid"),
+                (String) detalle.get("titulo"),
+                (String) detalle.get("fechaPublicacion"),
+                (String) detalle.get("fechaModificacion"),
+                (String) detalle.get("cargo"),
+                (float) Float.parseFloat((String)detalle.get("sueldo")),
+                (int) Integer.parseInt((String) detalle.get("duracionEstimadaValor")),
+                (String) detalle.get("duracionEstimadaEscala"),
+                (String) detalle.get("descripcion"),
+                (String) detalle.get("turnoTrabajo"),
+                (int) Integer.parseInt((String) detalle.get("numeroVacantes")),
+                (String) detalle.get("uuidEmpresa"),
+                (String) detalle.get("empresaNombre"),
+                (String) detalle.get("direccionEmpresa")
         );
     }
    }

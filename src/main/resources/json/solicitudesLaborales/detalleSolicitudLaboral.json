@@ -1,0 +1,12 @@
+{
+  "uuid": "1",
+  "uuidOfertaLaboral": "1",
+  "tituloOferta": "Se busca Conserje",
+  "cargoOferta": "Conserje",
+  "estatus": "activo",
+  "uuidEmpresa": "1",
+  "nombreEmpresa" : "Orangesoft",
+  "uuidEmpleado": "1",
+  "nombreEmpleado": "Robert Gonzalez",
+  "comentario": null
+}

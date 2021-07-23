@@ -1,14 +1,14 @@
 [
   {
-    "UUIDEmpresa": "1",
-    "NombreEmpresa": "OrangeSoft"
+    "uuidEmpresa": "1",
+    "nombreEmpresa": "OrangeSoft"
   },
   {
-    "UUIDEmpresa": "2",
-    "NombreEmpresa": "Citrus"
+    "uuidEmpresa": "2",
+    "nombreEmpresa": "Citrus"
   },
   {
-    "UUIDEmpresa": "3",
-    "NombreEmpresa": "Racoon"
+    "uuidEmpresa": "3",
+    "nombreEmpresa": "Racoon"
   }
   ]
