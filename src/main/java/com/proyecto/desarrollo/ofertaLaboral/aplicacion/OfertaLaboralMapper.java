@@ -51,7 +51,8 @@ public class OfertaLaboralMapper {
                 (String) oferta.get("duracionEstimadaEscala"),
                 (String) oferta.get("turnoTrabajo"),
                 Integer.parseInt((String) oferta.get("numeroVacantes")),
-                (String) oferta.get("empresaNombre")
+                (String) oferta.get("empresaNombre"),
+                (String) oferta.get("estatus")
         );
         this.cont++;
     }

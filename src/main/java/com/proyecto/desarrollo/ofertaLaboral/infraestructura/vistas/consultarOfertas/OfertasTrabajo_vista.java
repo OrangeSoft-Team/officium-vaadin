@@ -12,6 +12,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
@@ -43,9 +44,11 @@ public class OfertasTrabajo_vista extends Div {
         /*Crear un div donde estaran los filtros*/
         HorizontalLayout filtros = new HorizontalLayout();
         filtros.setClassName("filtro");
+        filtros.setWidthFull();
 
         Div botonera = new Div();
         botonera.setClassName("botonera-consulta");
+        botonera.setWidth("90%");
 
         Div estados = botoneraEstados();
 
@@ -69,7 +72,7 @@ public class OfertasTrabajo_vista extends Div {
         grid.setHeight("40em");
         grid.addClassName("ofertas-laborales");
         grid.removeColumnByKey("id");
-        grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion");
+        grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion","nombreEmpresa");
         grid.addComponentColumn(item ->crearBotonDetalle()).setHeader("Acciones");
     }
 
@@ -93,8 +96,24 @@ public class OfertasTrabajo_vista extends Div {
         Button inactivo = new Button("Ofertas Inactivas");
         inactivo.setClassName("ofertas-inactivas");
 
+        /*Filtro por nombre de empresa*/
+        TextField filtroEmpresa = new TextField();
+        filtroEmpresa.setLabel("Nombre de Empresa");
+        filtroEmpresa.setWidth("11em");
+        filtroEmpresa.addValueChangeListener(e->{
+            actualizar(controlador.filtrarEmpresa(filtroEmpresa.getValue()));
+            /*Quita el css de los botones por si alguno esta encendido*/
+            if (inactivo.hasClassName("consulta-inactivos")){
+                inactivo.removeClassName("consulta-inactivos");
+            }
+            if (activo.hasClassName("consulta-activos")){
+                activo.removeClassName("consulta-activos");
+            }
+        });
+
+
         RouterLink crear = botoneraCrearOferta();
-        estados.add(activo, inactivo,crear);
+        estados.add(activo, inactivo,filtroEmpresa,crear);
 
         /*Se agrega el listener para disparar el evento en caso de hacer click*/
         activo.addClickListener(e-> {

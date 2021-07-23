@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.Locale;
 
 @Service
 public class ServicioOfertaLaboral {
@@ -35,5 +36,30 @@ public class ServicioOfertaLaboral {
 
     public OfertaLaboralConsultaDTO[] getOfertasLaborales() {
         return ofertasLaborales;
+    }
+
+    public OfertaLaboralConsultaDTO[] filtrarEmpresa(String nombreEmpresa) {
+        if (nombreEmpresa.equals("")){
+            return this.ofertasLaborales;
+        }
+        OfertaLaboralConsultaDTO[] filtradas = new OfertaLaboralConsultaDTO[contarOfertasConNombre(nombreEmpresa)];
+        int indice = 0;
+        for (int i = 0; i < this.ofertasLaborales.length; i++) {
+            if (this.ofertasLaborales[i].getNombreEmpresa().toLowerCase(Locale.ROOT).contains(nombreEmpresa.toLowerCase(Locale.ROOT))) {
+                filtradas[indice] = this.ofertasLaborales[i];
+                indice++;
+            }
+        }
+        return filtradas;
+    }
+
+    public int contarOfertasConNombre(String nombreEmpresa){
+        int contador = 0;
+        for (int i = 0 ; i < this.ofertasLaborales.length ; i++){
+            if(this.ofertasLaborales[i].getNombreEmpresa().toLowerCase(Locale.ROOT).contains(nombreEmpresa.toLowerCase(Locale.ROOT))){
+                contador++;
+            }
+        }
+        return contador;
     }
 }
