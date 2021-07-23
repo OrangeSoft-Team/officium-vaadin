@@ -1,5 +1,5 @@
 .filtro{
-    padding-top: 10px;
+    padding-bottom: 15px;
     margin-left: 1.5em;
 }
 
@@ -8,7 +8,8 @@
 }
 
 .botonera-consulta{
-    padding-top: 15px;
+    padding-top: 5px;
+    padding-right: 10px;
 }
 
 .ofertas-activas{
@@ -20,6 +21,7 @@
     margin-left: 1em;
     background-color: lightgray;
     color: white;
+    margin-right: 1em;
 }
 
 .agregarOferta{
@@ -27,7 +29,7 @@
 }
 
 .titulo-filtro{
-    padding-bottom: 15px;
+  margin-top: 2.50em!important;
 }
 
 .grid{
