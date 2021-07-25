@@ -21,7 +21,7 @@ public class OfertaLaboral {
 
     private NumeroVacantes numeroVacantes;
 
-    private String idEmpresa;
+    private String uuidEmpresa;
 
     private Habilidades[] habilidades;
 
@@ -36,7 +36,7 @@ public class OfertaLaboral {
         this.duracionEstimadaEscala = new DuracionEstimadaEscala(duracionEstimadaEscala);
         this.turnoTrabajo = new TurnoTrabajo(turnoTrabajo);
         this.numeroVacantes = new NumeroVacantes(numeroVacantes);
-        this.idEmpresa = idEmpresa;
+        this.uuidEmpresa = idEmpresa;
         /*Como es opcional, si es null no se hace la comprobación*/
         if (requisitoEspecial == null) this.requisitosEspeciales = null;
         else this.requisitosEspeciales = new RequisitosEspeciales(requisitoEspecial);
@@ -76,8 +76,8 @@ public class OfertaLaboral {
 
     public Descripcion getDescripcion(){return descripcion;}
 
-    public String getIdEmpresa() {
-        return idEmpresa;
+    public String getUuidEmpresa() {
+        return uuidEmpresa;
     }
 
     public Habilidades[] getHabilidades() {

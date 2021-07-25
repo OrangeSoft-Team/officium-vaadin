@@ -26,7 +26,7 @@ public class OfertaLaboralMapper {
             habildades[i] = new HabilidadDTO(ofertaLaboral.getHabilidades()[i].getId(),ofertaLaboral.getHabilidades()[i].getNombre(),ofertaLaboral.getHabilidades()[i].getCategoria());
         }
         /*Como oferta laboral utiliza value objetcs, es inevitable el doble get*/
-        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),ofertaLaboral.getIdEmpresa(),ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
+        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),ofertaLaboral.getUuidEmpresa(),ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
         }
 
     /*Metodo utilizado para Parsear un Json y obtener un array de ofertasLaboralesGridVaadin*/
@@ -41,17 +41,20 @@ public class OfertaLaboralMapper {
     }
 
     private void parsearOfertaLaboral (JSONObject oferta){
+        Double sueldo = (Double) oferta.get("sueldo");
+        Long valor = (Long) oferta.get("duracionEstimadaValor");
+        Long vacantes = (Long) oferta.get("numeroVacantes");
         this.ofertasLaborales[this.cont] = new OfertaLaboralConsultaDTO(
                 (String) oferta.get("uuid"),
                 (String) oferta.get("titulo"),
                 (String) oferta.get("fechaPublicacion"),
                 (String) oferta.get("cargo"),
-                Float.parseFloat((String) oferta.get("sueldo")),
-                Integer.parseInt((String) oferta.get("duracionEstimadaValor")) ,
+                sueldo.floatValue(),
+                valor.intValue() ,
                 (String) oferta.get("duracionEstimadaEscala"),
                 (String) oferta.get("turnoTrabajo"),
-                Integer.parseInt((String) oferta.get("numeroVacantes")),
-                (String) oferta.get("empresaNombre"),
+                vacantes.intValue(),
+                (String) oferta.get("nombreEmpresa"),
                 (String) oferta.get("estatus")
         );
         this.cont++;
@@ -72,18 +75,21 @@ public class OfertaLaboralMapper {
         jsonArray.forEach(hab -> {
             parsearHabilidad((JSONObject) hab);
         });
+        Double sueldo = (Double) detalle.get("sueldo");
+        Long valor = (Long) detalle.get("duracionEstimadaValor");
+        Long vacantes = (Long) detalle.get("numeroVacantes");
         return new OfertaLaboralDetalleDTO(
                 (String) detalle.get("uuid"),
                 (String) detalle.get("titulo"),
                 (String) detalle.get("fechaPublicacion"),
                 (String) detalle.get("fechaModificacion"),
                 (String) detalle.get("cargo"),
-                (float) Float.parseFloat((String)detalle.get("sueldo")),
-                (int) Integer.parseInt((String) detalle.get("duracionEstimadaValor")),
+                sueldo.floatValue(),
+                valor.intValue(),
                 (String) detalle.get("duracionEstimadaEscala"),
                 (String) detalle.get("descripcion"),
                 (String) detalle.get("turnoTrabajo"),
-                (int) Integer.parseInt((String) detalle.get("numeroVacantes")),
+                vacantes.intValue(),
                 (String) detalle.get("uuidEmpresa"),
                 (String) detalle.get("empresaNombre"),
                 (String) detalle.get("direccionEmpresa"),
