@@ -1,18 +1,19 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas;
 
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EstadoActivo;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EstadoInactivo;
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.EventoAplicarFiltroEstado;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.cancelarOferta.EventoCancelarOferta;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.filtrarEstado.EstadoActivo;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.filtrarEstado.EstadoInactivo;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
-import com.vaadin.flow.component.FocusNotifier;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
@@ -38,6 +39,7 @@ public class OfertasTrabajo_vista extends Div {
         configurarVista();
         addListener(EstadoActivo.class,this::filtrarActivo);
         addListener(EstadoInactivo.class,this::filtrarInactivo);
+        addListener(EventoCancelarOferta.class,this::cancelarOferta);
     }
 
     private void configurarVista() throws IOException, ParseException{
@@ -74,17 +76,26 @@ public class OfertasTrabajo_vista extends Div {
     private void configurarGrid() {
         grid.setHeight("40em");
         grid.addClassName("ofertas-laborales");
-        grid.removeColumnByKey("id");
+        grid.removeColumnByKey("uuid");
+        grid.addColumn(item ->new Text(item.getDuracion())).setHeader("duracion");
         grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion","nombreEmpresa");
-        grid.addComponentColumn(item ->crearBotonDetalle()).setHeader("Acciones");
+        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("11em");
     }
 
-    private Button crearBotonDetalle() {
-        Button boton = new Button("Detalle",buttonClickEvent -> {
+    private Div crearBotonera(String uuid) {
+        Div botones = new Div();
+        Button detalle = new Button("Detalle",buttonClickEvent -> {
             /*todo colocar el id de la oferta detalle por parametro */
             getUI().ifPresent(ui -> ui.navigate(DetallesOfertaLaboral.class));
         });
-        return boton;
+        detalle.setClassName("detalle-oferta");
+        Button cancelar = new Button("Cancelar",buttonClickEvent -> {
+            fireEvent(new EventoCancelarOferta(this,uuid));
+        });
+        cancelar.setClassName("cancelar-oferta");
+
+        botones.add(detalle,cancelar);
+        return botones;
     }
 
     private Div botoneraEstados(){
@@ -149,8 +160,6 @@ public class OfertasTrabajo_vista extends Div {
             if (inactivo.hasClassName("consulta-inactivos")){
                 inactivo.removeClassName("consulta-inactivos");
                 /*Se borran los filtros*/
-                filtroFecha.clear();
-                filtroEmpresa.setValue("");
             }
             /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
@@ -162,15 +171,14 @@ public class OfertasTrabajo_vista extends Div {
                 activo.addClassName("consulta-activos");
                 fireEvent(new EstadoActivo(this));
             }
+            if (!filtroFecha.isEmpty()) filtroFecha.clear();
+            if (!filtroEmpresa.isEmpty()) filtroEmpresa.clear();
         });
 
         inactivo.addClickListener(e-> {
             /*Si el boton de filtrado por activo esta activado, se le quita el css al boton*/
             if (activo.hasClassName("consulta-activos")){
                 activo.removeClassName("consulta-activos");
-                /*Se borran los filtros*/
-                filtroFecha.clear();
-                filtroEmpresa.setValue("");
             }
             /*Si el filtro ya estaba aplicado se elimina el filtro y se le quita el css al boton*/
             if (inactivo.hasClassName("consulta-inactivos")){
@@ -182,6 +190,8 @@ public class OfertasTrabajo_vista extends Div {
                 inactivo.addClassName("consulta-inactivos");
                 fireEvent(new EstadoInactivo(this));
             }
+            if (!filtroFecha.isEmpty()) filtroFecha.clear();
+            if (!filtroEmpresa.isEmpty()) filtroEmpresa.clear();
         });
 
         return estados;
@@ -216,5 +226,29 @@ public class OfertasTrabajo_vista extends Div {
 
     private void actualizar(OfertaLaboralConsultaDTO[] ofertas){
         grid.setItems(ofertas);
+    }
+
+    private void cancelarOferta(EventoCancelarOferta evento){
+
+            if (controlador.cancelarOferta(evento.getUuid())){
+                Notification notificacion = new Notification("Oferta cancelada exitosamente",3000);
+                notificacion.setPosition(Notification.Position.TOP_CENTER);
+                notificacion.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                notificacion.open();
+                try {
+                    actualizar(controlador.obtenerData());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Notification notificacion = new Notification("Fallo al cancelar la Oferta",3000);
+                notificacion.setPosition(Notification.Position.TOP_CENTER);
+                notificacion.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                notificacion.open();
+            }
+
     }
 }
