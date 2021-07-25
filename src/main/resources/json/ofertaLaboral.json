@@ -3,11 +3,11 @@
   "titulo": "Se busca Conserje",
   "fechaPublicacion": "15/10/2020",
   "cargo":"Conserje",
-  "sueldo": "500",
-  "duracionEstimadaValor": "3",
+  "sueldo": 500.13,
+  "duracionEstimadaValor": 3,
   "duracionEstimadaEscala":"mes",
   "turnoTrabajo" :"diurno",
-  "numeroVacantes" :"5",
+  "numeroVacantes" :5,
   "empresaNombre" :"Orangesoft",
   "estatus": "activo"
 }
