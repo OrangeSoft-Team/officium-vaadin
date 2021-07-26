@@ -86,4 +86,17 @@ public class ServicioOfertaLaboral {
         }
         return contador;
     }
+
+    public Boolean cancelarOferta(String uuid)  {
+        try {
+            if (adaptador.cancelarOferta(uuid)) {
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -86,7 +86,7 @@ public class CrearOfertaLaboral_vistaTest {
         Assert.assertEquals("dia",oferta.getOfertaCreada().getDuracionEstimadaEscala().getEscala());
         Assert.assertEquals("diurno",oferta.getOfertaCreada().getTurnoTrabajo().getTurno());
         Assert.assertEquals(8,oferta.getOfertaCreada().getNumeroVacantes().getVacantes());
-        Assert.assertEquals("1",oferta.getOfertaCreada().getIdEmpresa());
+        Assert.assertEquals("1",oferta.getOfertaCreada().getUuidEmpresa());
         Assert.assertEquals(700.16,oferta.getOfertaCreada().getSueldo().getSueldo(),0.01f);
         for (int i = 0; i < oferta.getHabilidades().length;i++){
             if (i == 0){

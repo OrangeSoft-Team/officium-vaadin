@@ -2,7 +2,10 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -51,5 +54,26 @@ public class OfertasLaboralArchivoPersistencia implements PersistenciaOfertaLabo
         return false;
     }
 
-
+    @Override
+    public Boolean cancelarOferta(String uuid) throws IOException, ParseException {
+        OfertaLaboralMapper mapperOferta = new OfertaLaboralMapper();
+        OfertaLaboralConsultaDTO[] ofertas = mapperOferta.jsonToGrid(obtenerOfertasLaborales());
+        for (int i = 0; i < ofertas.length; i++){
+            if (ofertas[i].getUuid().equals(uuid)){
+                ofertas[i].setEstatus("cancelado");
+                break;
+            }
+        }
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            FileWriter writer = new FileWriter("src/main/resources/json/ofertasLaborales.json");
+            String json = mapper.writeValueAsString(ofertas);
+            writer.write(json);
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

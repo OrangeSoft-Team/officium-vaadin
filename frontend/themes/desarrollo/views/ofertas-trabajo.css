@@ -58,3 +58,14 @@
 .filtro-fecha{
     margin-left: 1em;
 }
+
+.detalle-oferta{
+    background-color: #00B592;
+    color: #FFFFFF;
+    margin-right: 5px;
+}
+
+.cancelar-oferta{
+    background-color: #E65F5C;
+    color: white;
+}

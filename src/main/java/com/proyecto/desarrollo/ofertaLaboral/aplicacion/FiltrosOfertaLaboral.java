@@ -15,7 +15,7 @@ public class FiltrosOfertaLaboral {
     public int contarFiltrados(OfertaLaboralConsultaDTO[] ofertas, String estado){
         int cont = 0;
         for (int i = 0;i <ofertas.length;i++){
-            if (ofertas[i].getEstado().equals(estado)) cont++;
+            if (ofertas[i].getEstatus().equals(estado)) cont++;
         }
         System.out.println(cont);
         return cont;
@@ -25,9 +25,9 @@ public class FiltrosOfertaLaboral {
     public OfertaLaboralConsultaDTO[] obtenerFiltrados(OfertaLaboralConsultaDTO[] ofertas, String estado,OfertaLaboralConsultaDTO[] filtrados){
         int cont = 0;
         for (int i = 0;i <ofertas.length;i++){
-            if (ofertas[i].getEstado().equals(estado)) {
+            if (ofertas[i].getEstatus().equals(estado)) {
                 filtrados[cont] = ofertas[i];
-                System.out.println(ofertas[i].getEstado());
+                System.out.println(ofertas[i].getEstatus());
                 cont++;
                 }
             }

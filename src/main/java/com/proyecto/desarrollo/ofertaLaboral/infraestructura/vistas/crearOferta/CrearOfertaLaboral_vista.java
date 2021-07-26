@@ -286,7 +286,7 @@ public class CrearOfertaLaboral_vista extends Div{
         this.vacantes = new TextField();
         this.vacantes.setValue(Integer.toString(oferta.getNumeroVacantes().getVacantes()));
         this.empresas = new Select<>();
-        this.empresas.setValue(new ConsultarEmpresasParaCreacionDTO(oferta.getIdEmpresa(), " "));
+        this.empresas.setValue(new ConsultarEmpresasParaCreacionDTO(oferta.getUuidEmpresa(), " "));
         this.requisitosEspeciales = new TextArea();
         this.requisitosEspeciales.setValue(oferta.getRequisitosEspeciales().getRequisitosEspeciales());
         this.habilidades = new HabilidadDTO[2];
