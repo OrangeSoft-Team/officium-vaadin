@@ -79,7 +79,7 @@ public class OfertasTrabajo_vista extends Div {
         grid.removeColumnByKey("uuid");
         grid.addColumn(item ->new Text(item.getDuracion())).setHeader("duracion");
         grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion","nombreEmpresa");
-        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("11em");
+        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("14em");
     }
 
     private Div crearBotonera(String uuid) {
@@ -94,7 +94,29 @@ public class OfertasTrabajo_vista extends Div {
         });
         cancelar.setClassName("cancelar-oferta");
 
-        botones.add(detalle,cancelar);
+
+        Button duplicar = new Button("Duplicar",buttonClickEvent -> {
+            try {
+                if (controlador.duplicarOferta(uuid)){
+                    Notification notificacion = new Notification("Oferta duplicada exitosamente",3000);
+                    notificacion.setPosition(Notification.Position.TOP_CENTER);
+                    notificacion.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                    notificacion.open();
+                    actualizar(this.controlador.obtenerData());
+                }
+                else{
+                    Notification notificacion = new Notification("Fallo al cancelar la Oferta",3000);
+                    notificacion.setPosition(Notification.Position.TOP_CENTER);
+                    notificacion.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    notificacion.open();
+                }
+            } catch (ParseException | IOException e) {
+                e.printStackTrace();
+            }
+        });
+        duplicar.setClassName("duplicar-oferta");
+
+        botones.add(detalle,cancelar,duplicar);
         return botones;
     }
 
@@ -249,6 +271,5 @@ public class OfertasTrabajo_vista extends Div {
                 notificacion.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 notificacion.open();
             }
-
     }
 }

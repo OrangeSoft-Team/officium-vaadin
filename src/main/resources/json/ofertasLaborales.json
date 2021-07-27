@@ -1,1 +1,60 @@
-[{"uuid":"1","titulo":"Se busca Conserje","fechaPublicacion":"15/10/2020","cargo":"Conserje","sueldo":500.0,"duracionEstimadaValor":3,"duracionEstimadaEscala":"mes","turnoTrabajo":"diurno","numeroVacantes":5,"nombreEmpresa":"Orangesoft","estatus":"cancelado"},{"uuid":"2","titulo":"Se contrata un Vendedor","fechaPublicacion":"20/10/2020","cargo":"Vendedor","sueldo":700.16,"duracionEstimadaValor":4,"duracionEstimadaEscala":"dia","turnoTrabajo":"diurno","numeroVacantes":8,"nombreEmpresa":"Orangesoft","estatus":"activo"},{"uuid":"3","titulo":"Queremos un conserje","fechaPublicacion":"02/09/2016","cargo":"Conserje","sueldo":800.17,"duracionEstimadaValor":1,"duracionEstimadaEscala":"hora","turnoTrabajo":"diurno","numeroVacantes":10,"nombreEmpresa":"Racoon","estatus":"inactivo"}]
+[
+  {
+    "uuid": "1",
+    "titulo": "Se busca Conserje",
+    "fechaPublicacion": "20/10/2020",
+    "fechaModificacion": "25/10/2020",
+    "cargo": "Vendedor",
+    "sueldo": 700.16,
+    "duracionEstimadaValor": 4,
+    "duracionEstimadaEscala": "dia",
+    "descripcion": "Se busca un conserje para que labore en la empresa Orangesoft durante el dia",
+    "turnoTrabajo": "diurno",
+    "numeroVacantes": 8,
+    "uuidEmpresa": "1",
+    "nombreEmpresa": "Orangesoft",
+    "direccionEmpresa": "Av Principal Juan Carlos Perez frente al mirador",
+    "requisitosEspeciales": "rango de edad",
+    "habilidades": [
+      {
+        "uuid": "1",
+        "nombre": "Conserje",
+        "categoria": "Limpieza"
+      },
+      {
+        "uuid": "2",
+        "nombre": "Contador",
+        "categoria": "Administracion"
+      },
+      {
+        "uuid": "3",
+        "nombre": "Administrador",
+        "categoria": "Administracion"
+      }
+    ]
+  },
+  {
+    "uuid": "2",
+    "titulo": "Se busca Desarrollador",
+    "fechaPublicacion": "5/12/2020",
+    "fechaModificacion": null,
+    "cargo": "Desarrollador",
+    "sueldo": 60.16,
+    "duracionEstimadaValor": 1,
+    "duracionEstimadaEscala": "mes",
+    "descripcion": "Se busca un desarrollador para que trabaje en Racoon durante el verano",
+    "turnoTrabajo": "diurno",
+    "numeroVacantes": 2,
+    "uuidEmpresa": "2",
+    "nombreEmpresa": "Racoon",
+    "direccionEmpresa": "Av Principal Juan Carlos Perez frente al mirador",
+    "requisitosEspeciales": "rango de edad",
+    "habilidades": [
+      {
+        "uuid": "1",
+        "nombre": "Desarrollador",
+        "categoria": "Desarrollo"
+      }
+    ]
+  }
+]

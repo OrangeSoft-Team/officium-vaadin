@@ -10,7 +10,7 @@ public interface PersistenciaOfertaLaboral {
 
     public String obtenerOfertasLaborales() throws IOException;
 
-    public String obtenerDetalles();
+    public String obtenerDetalles(String uuid);
 
     public Boolean crearOferta(OfertaLaboralCreacion oferta);
 

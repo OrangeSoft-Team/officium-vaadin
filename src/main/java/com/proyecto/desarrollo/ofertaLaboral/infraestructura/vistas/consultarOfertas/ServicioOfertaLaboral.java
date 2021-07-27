@@ -3,7 +3,9 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOf
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.FiltrosOfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
@@ -17,12 +19,16 @@ public class ServicioOfertaLaboral {
 
     private OfertaLaboralConsultaDTO[] ofertasLaborales;
     private int cont;
-    private OfertaLaboralMapper mapper = new OfertaLaboralMapper();
+    private OfertaLaboralMapper mapper ;
     private PersistenciaOfertaLaboral adaptador;
 
-    public OfertaLaboralConsultaDTO[] obtenerData() throws IOException, ParseException {
+    public ServicioOfertaLaboral(){
         /*Se crear una instancia del adaptador*/
         adaptador = new OfertasLaboralArchivoPersistencia();
+        this.mapper = new OfertaLaboralMapper();
+    }
+
+    public OfertaLaboralConsultaDTO[] obtenerData() throws IOException, ParseException {
         /*Se obtiene un json del adaptador*/
         String stringDeOfertas = adaptador.obtenerOfertasLaborales();
         /*Se pasa el Json al mapper para crear las intancias de ofertasLaborales*/
@@ -96,6 +102,15 @@ public class ServicioOfertaLaboral {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    public Boolean duplicarOferta(String uuid) throws ParseException {
+        OfertaLaboralDetalleDTO detalle = mapper.jsonToDetalle(adaptador.obtenerDetalles(uuid));
+        OfertaLaboral duplicado = new OfertaLaboral(detalle.getTitulo(),detalle.getDescripcion(),detalle.getCargo(),detalle.getSueldo(),detalle.getDuracionValor(), detalle.getDuracionEscala(), detalle.getTurnoTrabajo(),detalle.getNumeroVacantes(), detalle.getIdEmpresa(), detalle.getRequerimientoEspecial(),detalle.getHabilidades());
+        if (adaptador.crearOferta(this.mapper.ofertaLaboralToDTOCreacion(duplicado))){
+            return true;
         }
         return false;
     }
