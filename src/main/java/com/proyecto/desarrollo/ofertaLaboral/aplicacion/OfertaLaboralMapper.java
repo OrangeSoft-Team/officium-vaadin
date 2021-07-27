@@ -10,14 +10,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.util.Iterator;
-
 
 public class OfertaLaboralMapper {
 
     private OfertaLaboralConsultaDTO[] ofertasLaborales;
     private int cont;
+    private int contHab;
     private HabilidadDTO[] habilidadesDetalles;
+
 
     /*Metodo utilizado para convertir una oferta laboral en un DTO para enviar a persistencia*/
     public OfertaLaboralCreacion ofertaLaboralToDTOCreacion(OfertaLaboral ofertaLaboral){
@@ -70,7 +70,7 @@ public class OfertaLaboralMapper {
 
     public OfertaLaboralDetalleDTO convertirDetalle(JSONObject detalle){
         JSONArray jsonArray = (JSONArray) detalle.get("habilidades");
-        this.cont = 0;
+        this.contHab = 0;
         this.habilidadesDetalles = new HabilidadDTO[jsonArray.size()];
         jsonArray.forEach(hab -> {
             parsearHabilidad((JSONObject) hab);
@@ -99,8 +99,8 @@ public class OfertaLaboralMapper {
     }
 
     private void parsearHabilidad(JSONObject hab) {
-        this.habilidadesDetalles[this.cont] =new HabilidadDTO((String) hab.get("uuid"),(String) hab.get("nombre"),(String) hab.get("categoria"));
-        this.cont++;
+        this.habilidadesDetalles[this.contHab] =new HabilidadDTO((String) hab.get("uuid"),(String) hab.get("nombre"),(String) hab.get("categoria"));
+        this.contHab++;
     }
 }
 

@@ -7,7 +7,6 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaL
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +27,7 @@ public class OfertasLaboralArchivoPersistencia implements PersistenciaOfertaLabo
     }
 
     @Override
-    public String obtenerDetalles() {
+    public String obtenerDetalles(String uuid) {
         String contenido;
         contenido = "";
         try{
