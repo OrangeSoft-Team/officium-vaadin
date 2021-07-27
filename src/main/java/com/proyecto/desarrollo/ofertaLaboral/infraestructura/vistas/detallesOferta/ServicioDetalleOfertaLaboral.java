@@ -10,10 +10,10 @@ public class ServicioDetalleOfertaLaboral {
 
     private OfertaLaboralDetalleDTO oferta;
 
-    public OfertaLaboralDetalleDTO obtenerOferta() throws ParseException {
+    public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException {
         PersistenciaOfertaLaboral adaptador = new OfertasLaboralArchivoPersistencia();
         OfertaLaboralMapper mapper = new OfertaLaboralMapper();
-        this.oferta = mapper.jsonToDetalle(adaptador.obtenerDetalles());
+        this.oferta = mapper.jsonToDetalle(adaptador.obtenerDetalles(uuid));
         return this.oferta;
     }
 }

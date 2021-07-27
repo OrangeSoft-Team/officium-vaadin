@@ -66,7 +66,8 @@ public class DetallesOfertaLaboral extends Div {
 
     public DetallesOfertaLaboral() throws ParseException {
         controlador = new ServicioDetalleOfertaLaboral();
-        ofertaDetallada = controlador.obtenerOferta();
+        /*ADAPTAR AL NUEVO UUID*/
+        ofertaDetallada = controlador.obtenerOferta("1");
         habilidades = ofertaDetallada.getHabilidades();
         setHeightFull();
         setClassName("ofertaDetalle");
