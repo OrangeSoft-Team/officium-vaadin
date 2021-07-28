@@ -6,9 +6,13 @@
     background-color: #F0F0F0 ;
 }
 
-.botonera,.header{
+.botonera{
     margin-left: auto;
     margin-right: auto;
+}
+
+.header{
+    margin-left: auto;
 }
 
 .card{
@@ -34,3 +38,24 @@
     margin-left: 3em;
 }
 
+.editar{
+    color: cornflowerblue;
+    margin-left: 16em;
+    margin-top: 1.25em;
+}
+
+@media only screen and (min-width: 1025px){
+    .editar{
+        margin-left: 26em;
+    }
+}
+
+.boton-editar{
+    background: transparent;
+}
+
+.enviar-modificacion{
+    margin-left: 5px;
+    background-color: #00B592;
+    color: white;
+}
