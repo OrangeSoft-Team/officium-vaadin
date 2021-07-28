@@ -5,6 +5,7 @@ import com.proyecto.desarrollo.comunes.infraestructura.persistencia.Persistencia
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralModificacion;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileWriter;
@@ -67,6 +68,21 @@ public class OfertasLaboralArchivoPersistencia implements PersistenciaOfertaLabo
             ObjectMapper mapper = new ObjectMapper();
             FileWriter writer = new FileWriter("src/main/resources/json/ofertasLaborales.json");
             String json = mapper.writeValueAsString(ofertas);
+            writer.write(json);
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean modificarOferta(String uuid, OfertaLaboralModificacion oferta) {
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            FileWriter writer = new FileWriter("src/main/resources/json/modificacionOfertaLaboral.json");
+            String json = mapper.writeValueAsString(oferta);
             writer.write(json);
             writer.close();
             return true;
