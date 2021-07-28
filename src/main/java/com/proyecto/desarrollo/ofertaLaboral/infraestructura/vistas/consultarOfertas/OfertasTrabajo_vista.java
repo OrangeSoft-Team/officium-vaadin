@@ -17,6 +17,7 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.RouteParameters;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
@@ -79,14 +80,14 @@ public class OfertasTrabajo_vista extends Div {
         grid.removeColumnByKey("uuid");
         grid.addColumn(item ->new Text(item.getDuracion())).setHeader("duracion");
         grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion","nombreEmpresa");
-        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("14em");
+        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("16em");
     }
 
     private Div crearBotonera(String uuid) {
         Div botones = new Div();
         Button detalle = new Button("Detalle",buttonClickEvent -> {
             /*todo colocar el id de la oferta detalle por parametro */
-            getUI().ifPresent(ui -> ui.navigate(DetallesOfertaLaboral.class));
+            getUI().ifPresent(ui -> ui.navigate(DetallesOfertaLaboral.class, new RouteParameters("ofertaID",uuid)));
         });
         detalle.setClassName("detalle-oferta");
         Button cancelar = new Button("Cancelar",buttonClickEvent -> {
