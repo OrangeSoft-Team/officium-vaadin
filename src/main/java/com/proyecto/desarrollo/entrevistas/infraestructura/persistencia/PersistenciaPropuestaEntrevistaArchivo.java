@@ -20,4 +20,9 @@ public class PersistenciaPropuestaEntrevistaArchivo implements PersistenciaPropu
         return contenido;
     }
 
+    @Override
+    public Boolean proponerEntrevista(String uuid) {
+        return true;
+    }
+
 }

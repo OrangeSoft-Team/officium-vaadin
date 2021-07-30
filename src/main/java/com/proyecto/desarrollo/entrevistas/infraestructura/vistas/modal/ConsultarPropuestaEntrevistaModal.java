@@ -25,10 +25,12 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
 
     private Div botonera;
 
-    public ConsultarPropuestaEntrevistaModal(){
+    private String uuidSolicitud;
+
+    public ConsultarPropuestaEntrevistaModal(String uuid){
         /*Se instancia el controlador*/
         this.controlador = new ServicioConsultarPropuestaModal();
-
+        this.uuidSolicitud = uuid;
         /*Se definen alto y ancho*/
         setHeight("27em");
         setWidth("43em");
@@ -121,7 +123,18 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
         else{
             setHeight("32em");
             botonera.setWidth("270px");
-            Button proponer = new Button("Proponer");
+            Button proponer = new Button("Proponer",buttonClickEvent ->{
+                if(controlador.proponerEntrevista(this.uuidSolicitud)) {
+                    try {
+                        ConsultarPropuestaEntrevistaModal modal = new ConsultarPropuestaEntrevistaModal(this.uuidSolicitud);
+                        close();
+                        modal.open();
+                        modal.buscarEntrevista(this.uuidSolicitud);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             proponer.setClassName("proponer-entrevista");
             botonera.add(proponer,cancelar,cerrar);
         }

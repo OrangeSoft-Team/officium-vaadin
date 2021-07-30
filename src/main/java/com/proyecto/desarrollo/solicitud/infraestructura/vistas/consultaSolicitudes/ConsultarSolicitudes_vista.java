@@ -118,7 +118,7 @@ public class ConsultarSolicitudes_vista extends Div {
         Div botonera = new Div();
 
         Button entrevista = new Button("Entrevista",e->{
-            ConsultarPropuestaEntrevistaModal modalEntrevista = new ConsultarPropuestaEntrevistaModal();
+            ConsultarPropuestaEntrevistaModal modalEntrevista = new ConsultarPropuestaEntrevistaModal(uuid);
             modalEntrevista.buscarEntrevista(uuid);
             modalEntrevista.open();
         });

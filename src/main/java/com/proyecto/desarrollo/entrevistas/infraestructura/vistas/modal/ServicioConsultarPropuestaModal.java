@@ -4,6 +4,7 @@ import com.proyecto.desarrollo.comunes.infraestructura.persistencia.Persistencia
 import com.proyecto.desarrollo.entrevistas.aplicacion.EntrevistasMapper;
 import com.proyecto.desarrollo.entrevistas.infraestructura.DTOs.entrada.ConsultaPropuestaEntrevistaDTO;
 import com.proyecto.desarrollo.entrevistas.infraestructura.persistencia.PersistenciaPropuestaEntrevistaArchivo;
+import com.vaadin.flow.component.notification.Notification;
 import org.json.simple.parser.ParseException;
 
 public class ServicioConsultarPropuestaModal {
@@ -26,6 +27,21 @@ public class ServicioConsultarPropuestaModal {
 
     public ConsultaPropuestaEntrevistaDTO getPropuesta() {
         return propuesta;
+    }
+
+    public Boolean proponerEntrevista(String uuid) {
+        if(adaptador.proponerEntrevista(uuid)){
+            Notification notificacion = new Notification("Entrevista propuesta exitosamente");
+            notificacion.setPosition(Notification.Position.TOP_CENTER);
+            notificacion.setDuration(3000);
+            notificacion.open();
+            return true;
+        }
+        Notification notificacion = new Notification("Fallo al proponer entrevista");
+        notificacion.setPosition(Notification.Position.TOP_CENTER);
+        notificacion.setDuration(3000);
+        notificacion.open();
+        return false;
     }
 }
 
