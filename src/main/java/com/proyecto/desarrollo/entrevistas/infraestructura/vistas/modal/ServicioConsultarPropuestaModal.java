@@ -22,7 +22,6 @@ public class ServicioConsultarPropuestaModal {
 
     public void obtenerPropuesta(String uuid) throws ParseException {
         this.propuesta = mapper.jsonToPropuesta(adaptador.consultaPropuestaEntrevista(uuid));
-        System.out.println("hola");
     }
 
     public ConsultaPropuestaEntrevistaDTO getPropuesta() {
@@ -30,7 +29,7 @@ public class ServicioConsultarPropuestaModal {
     }
 
     public Boolean proponerEntrevista(String uuid) {
-        if(adaptador.proponerEntrevista(uuid)){
+        if (adaptador.proponerEntrevista(uuid)) {
             Notification notificacion = new Notification("Entrevista propuesta exitosamente");
             notificacion.setPosition(Notification.Position.TOP_CENTER);
             notificacion.setDuration(3000);
@@ -41,6 +40,12 @@ public class ServicioConsultarPropuestaModal {
         notificacion.setPosition(Notification.Position.TOP_CENTER);
         notificacion.setDuration(3000);
         notificacion.open();
+        return false;
+    }
+
+    public Boolean proponerEntrevista(String uuid, Boolean test){
+        if (adaptador.proponerEntrevista(uuid))
+            return  true;
         return false;
     }
 }

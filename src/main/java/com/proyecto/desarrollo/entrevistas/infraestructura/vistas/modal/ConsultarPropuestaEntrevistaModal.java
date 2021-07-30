@@ -4,7 +4,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -26,6 +25,10 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
     private Div botonera;
 
     private String uuidSolicitud;
+
+    private Button proponer;
+
+    private Button cancelar;
 
     public ConsultarPropuestaEntrevistaModal(String uuid){
         /*Se instancia el controlador*/
@@ -112,7 +115,7 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
         });
         cerrar.setClassName("cerrar-modal");
 
-        Button cancelar = new Button("Cancelar");
+        cancelar = new Button("Cancelar");
         cancelar.setClassName("cancelar-entrevista");
 
 
@@ -123,7 +126,7 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
         else{
             setHeight("32em");
             botonera.setWidth("270px");
-            Button proponer = new Button("Proponer",buttonClickEvent ->{
+            proponer = new Button("Proponer",buttonClickEvent ->{
                 if(controlador.proponerEntrevista(this.uuidSolicitud)) {
                     try {
                         ConsultarPropuestaEntrevistaModal modal = new ConsultarPropuestaEntrevistaModal(this.uuidSolicitud);
@@ -141,4 +144,15 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
         return botonera;
     }
 
+    public Button getProponer() {
+        return proponer;
+    }
+
+    public Button getCancelar() {
+        return cancelar;
+    }
+
+    public ServicioConsultarPropuestaModal getControlador() {
+        return controlador;
+    }
 }
