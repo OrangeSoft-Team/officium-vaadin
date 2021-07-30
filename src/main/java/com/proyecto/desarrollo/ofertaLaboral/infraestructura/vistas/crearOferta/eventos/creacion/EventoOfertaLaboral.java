@@ -1,6 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.eventos.creacion;
 
-import com.proyecto.desarrollo.ofertaLaboral.aplicacion.eventos.OfertaLaboralEvento;
+import com.proyecto.desarrollo.ofertaLaboral.dominio.eventos.OfertaLaboralEvento;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.crearOferta.CrearOfertaLaboral_vista;
 import com.vaadin.flow.component.ComponentEvent;

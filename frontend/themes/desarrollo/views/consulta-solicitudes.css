@@ -8,19 +8,19 @@
     height: 30px;
 }
 
-.aceptar-solicitud-boton{
+.aceptar-solicitud-boton,.proponer-entrevista{
     background-color: #00B592;
     color: white;
     margin-right: 5px;
 }
 
-.rechazar-solicitud-boton{
+.rechazar-solicitud-boton,.cancelar-entrevista{
     background-color: #E65F5C;
     color: white;
     margin-right: 5px;
 }
 
-.detalle-solicitud-boton{
+.detalle-solicitud-boton,.boton-entrevista,.cerrar-modal{
     background-color: cornflowerblue;
     color: white;
 }
@@ -44,4 +44,9 @@
 
 .top-space{
     margin-top: 5px;
+}
+
+H2{
+    margin-top: 0;
+    margin-bottom: 0;
 }

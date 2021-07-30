@@ -60,7 +60,7 @@ public class OfertasLaboralArchivoPersistencia implements PersistenciaOfertaLabo
         OfertaLaboralConsultaDTO[] ofertas = mapperOferta.jsonToGrid(obtenerOfertasLaborales());
         for (int i = 0; i < ofertas.length; i++){
             if (ofertas[i].getUuid().equals(uuid)){
-                ofertas[i].setEstatus("cancelado");
+                ofertas[i].setEstatus("inactivo");
                 break;
             }
         }

@@ -1,6 +1,6 @@
-package com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento;
+package com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.cambioEstado;
 
-import com.proyecto.desarrollo.solicitud.aplicacion.eventos.SolicitudEvento;
+import com.proyecto.desarrollo.solicitud.dominio.eventos.SolicitudEvento;
 import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.ConsultarSolicitudes_vista;
 import com.vaadin.flow.component.ComponentEvent;
 

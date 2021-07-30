@@ -17,6 +17,8 @@ public class ServicioConsultarSolicitudes {
 
     private SolicitudMapper mapperSolicitud;
 
+    private SolicitudLaboralDTO[] solicitudesOrdenadas;
+
     public ServicioConsultarSolicitudes() {
         /*Se instancia el adaptador*/
         this.adaptador = new SolicitudesLaboralesArchivoPersistencia();
@@ -27,7 +29,7 @@ public class ServicioConsultarSolicitudes {
     public SolicitudLaboralDTO[] obtenerSolicitudes() throws IOException, ParseException {
         /*Se obtiene del adaptador un json con las solicitudes y luego se mappean a un array de SolicitudLaboralDTO*/
         this.solicitudes =this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
-        return solicitudesPendiente();
+        return ordenar();
     }
 
     public DetalleSolicitudLaboralDTO obtenerDetalle(String uuid) throws IOException, ParseException {
@@ -42,25 +44,46 @@ public class ServicioConsultarSolicitudes {
         return this.adaptador.rechazarSolicitud(uuid);
     }
 
-    public int contarEstadoPendiente(){
-        int contador = 0;
+    public int solicitudesPendiente(int contador){
+        int indice = contador;
         for (int i = 0 ; i < solicitudes.length; i++){
             if(solicitudes[i].getEstatus().equals("pendiente")){
-                contador++;
-            }
-        }
-        return contador;
-    }
-
-    public SolicitudLaboralDTO[] solicitudesPendiente(){
-        SolicitudLaboralDTO[] pendientes = new SolicitudLaboralDTO[contarEstadoPendiente()];
-        int indice = 0;
-        for (int i = 0 ; i < solicitudes.length; i++){
-            if(solicitudes[i].getEstatus().equals("pendiente")){
-                pendientes[indice] = solicitudes[i];
+                this.solicitudesOrdenadas[indice] = solicitudes[i];
                 indice++;
             }
         }
-        return pendientes;
+        return indice;
+    }
+
+    private int solicitudesAprobadas(int contador) {
+        int indice = contador;
+        for (int i = 0 ; i < solicitudes.length; i++){
+            if(solicitudes[i].getEstatus().equals("aprobado")){
+                this.solicitudesOrdenadas[indice] = solicitudes[i];
+                indice++;
+            }
+        }
+        return indice;
+    }
+
+    private void solicitudesRechazadas(int contador) {
+        int indice = contador;
+        for (int i = 0 ; i < solicitudes.length; i++){
+            if(solicitudes[i].getEstatus().equals("rechazado")){
+                this.solicitudesOrdenadas[indice] = solicitudes[i];
+                indice++;
+            }
+        }
+    }
+
+
+    public SolicitudLaboralDTO[] ordenar(){
+        this.solicitudesOrdenadas = new SolicitudLaboralDTO[this.solicitudes.length];
+        int contador = 0;
+        /*Busca las ofertas pendientes y devuelvo un indice en el array*/
+        contador = solicitudesPendiente(contador);
+        contador = solicitudesAprobadas(contador);
+        solicitudesRechazadas(contador);
+        return solicitudesOrdenadas;
     }
 }

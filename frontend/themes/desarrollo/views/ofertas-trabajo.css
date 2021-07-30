@@ -68,10 +68,10 @@
 .cancelar-oferta{
     background-color: #E65F5C;
     color: white;
+    margin-right: 5px;
 }
 
 .duplicar-oferta{
-    margin-left: 5px;
     background: cornflowerblue;
     color: white;
 }

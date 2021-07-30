@@ -1,21 +1,19 @@
 package com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes;
 
 
-import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.detallesOferta.DetallesOfertaLaboral;
+import com.proyecto.desarrollo.entrevistas.infraestructura.vistas.modal.ConsultarPropuestaEntrevistaModal;
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.SolicitudLaboralDTO;
-import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.AprobadoExitoso;
-import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.AprobadoFallido;
-import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.RechazoExitoso;
-import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.RechazoFallido;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.cambioEstado.AprobadoExitoso;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.cambioEstado.AprobadoFallido;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.cambioEstado.RechazoExitoso;
+import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.evento.cambioEstado.RechazoFallido;
 import com.proyecto.desarrollo.solicitud.infraestructura.vistas.consultaSolicitudes.modal.DetalleSolicitudModal;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import org.json.simple.parser.ParseException;
 
@@ -50,14 +48,19 @@ public class ConsultarSolicitudes_vista extends Div {
     private void configurarGrid() {
         grid.setClassName("grid-solicitudes-laborales");
         grid.setHeight("40em");
-        grid.setColumns("tituloOferta","cargoOferta","nombreEmpresa","nombreEmpleado");
+        grid.setColumns("tituloOferta","estatus","cargoOferta","nombreEmpresa","nombreEmpleado");
         grid.getColumnByKey("cargoOferta").setWidth("10px");
         /* Se crea el boton de detalle, todavia no se ha implementado la interfaz asi que se deja comentado*/
-        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones");
-
+        grid.addComponentColumn(item ->{
+            if(item.getEstatus().equals("aprobado"))
+                return crearBotoneraEntrevista(item.getUuid());
+            else if(item.getEstatus().equals("rechazado"))
+                return new Div();
+            return crearBotoneraEstados(item.getUuid());
+        }).setHeader("Acciones");
     }
 
-    private Component crearBotonera(String uuid) {
+    private Component crearBotoneraEstados(String uuid) {
         Div botonera = new Div();
 
         Button aprobar = new Button("Aprobar",e->{
@@ -108,6 +111,19 @@ public class ConsultarSolicitudes_vista extends Div {
 
 
         botonera.add(aprobar,rechazar,detalle);
+        return botonera;
+    }
+
+    private Div crearBotoneraEntrevista(String uuid){
+        Div botonera = new Div();
+
+        Button entrevista = new Button("Entrevista",e->{
+            ConsultarPropuestaEntrevistaModal modalEntrevista = new ConsultarPropuestaEntrevistaModal(uuid);
+            modalEntrevista.buscarEntrevista(uuid);
+            modalEntrevista.open();
+        });
+        entrevista.setClassName("boton-entrevista");
+        botonera.add(entrevista);
         return botonera;
     }
 

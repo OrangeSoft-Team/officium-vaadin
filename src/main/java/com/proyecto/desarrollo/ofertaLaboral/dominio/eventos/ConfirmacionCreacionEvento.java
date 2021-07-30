@@ -1,4 +1,4 @@
-package com.proyecto.desarrollo.ofertaLaboral.aplicacion.eventos;
+package com.proyecto.desarrollo.ofertaLaboral.dominio.eventos;
 
 public class ConfirmacionCreacionEvento {
 
