@@ -1,6 +1,6 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.eventos.cancelarOferta;
 
-import com.proyecto.desarrollo.ofertaLaboral.aplicacion.eventos.CancelarOfertaEvento;
+import com.proyecto.desarrollo.ofertaLaboral.dominio.eventos.CancelarOfertaEvento;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfertas.OfertasTrabajo_vista;
 import com.vaadin.flow.component.ComponentEvent;
 

@@ -1,4 +1,4 @@
-package com.proyecto.desarrollo.solicitud.aplicacion.eventos;
+package com.proyecto.desarrollo.solicitud.dominio.eventos;
 
 public class SolicitudEvento {
 
