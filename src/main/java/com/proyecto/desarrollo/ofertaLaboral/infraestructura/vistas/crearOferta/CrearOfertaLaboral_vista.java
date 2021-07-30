@@ -354,6 +354,7 @@ public class CrearOfertaLaboral_vista extends Div{
     private void ofertaCreadaExitosamente(CreacionExitosa evento){
         Notification notificacion = new Notification("Oferta creada exitosamente");
         notificacion.setPosition(Notification.Position.TOP_CENTER);
+        notificacion.setDuration(3000);
         notificacion.open();
     }
 

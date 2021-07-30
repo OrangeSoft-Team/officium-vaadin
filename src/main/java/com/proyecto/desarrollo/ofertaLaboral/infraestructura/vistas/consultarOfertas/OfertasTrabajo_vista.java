@@ -80,10 +80,10 @@ public class OfertasTrabajo_vista extends Div {
         grid.removeColumnByKey("uuid");
         grid.addColumn(item ->new Text(item.getDuracion())).setHeader("duracion");
         grid.setColumns("titulo", "cargo","sueldo","duracion","turnoTrabajo","numeroVacantes", "fechaPublicacion","nombreEmpresa");
-        grid.addComponentColumn(item ->crearBotonera(item.getUuid())).setHeader("Acciones").setWidth("16em");
+        grid.addComponentColumn(item ->crearBotonera(item.getUuid(),item.getEstatus())).setHeader("Acciones").setWidth("16em");
     }
 
-    private Div crearBotonera(String uuid) {
+    private Div crearBotonera(String uuid,String estatus) {
         Div botones = new Div();
         Button detalle = new Button("Detalle",buttonClickEvent -> {
             /*todo colocar el id de la oferta detalle por parametro */
@@ -117,7 +117,10 @@ public class OfertasTrabajo_vista extends Div {
         });
         duplicar.setClassName("duplicar-oferta");
 
-        botones.add(detalle,cancelar,duplicar);
+        if (estatus.equals("inactivo"))
+            botones.add(detalle,duplicar);
+        else
+            botones.add(detalle,cancelar,duplicar);
         return botones;
     }
 
