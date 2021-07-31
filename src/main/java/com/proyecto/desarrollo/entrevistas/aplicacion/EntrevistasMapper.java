@@ -1,8 +1,6 @@
 package com.proyecto.desarrollo.entrevistas.aplicacion;
 
 import com.proyecto.desarrollo.entrevistas.infraestructura.DTOs.entrada.ConsultaPropuestaEntrevistaDTO;
-import com.proyecto.desarrollo.entrevistas.infraestructura.DTOs.salida.CrearPropuestaEntrevistaDTO;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -28,9 +26,5 @@ public class EntrevistasMapper {
                 (String) propuesta.get("estatus"),
                 (String) propuesta.get("vinculo")
         );
-    }
-
-    public CrearPropuestaEntrevistaDTO crearPropuesta(String fecha){
-        return new CrearPropuestaEntrevistaDTO(fecha);
     }
 }
