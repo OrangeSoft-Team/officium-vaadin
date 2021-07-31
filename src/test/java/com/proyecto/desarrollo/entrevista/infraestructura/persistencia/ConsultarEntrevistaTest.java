@@ -19,7 +19,7 @@ public class ConsultarEntrevistaTest {
 
     @Before
     public void instanciarAtributos(){
-        entrevista = new ConsultaPropuestaEntrevistaDTO("1","15/1/2020","Entrevista para Se busca Cocinero","activo","htttp://www.prueba.com");
+        entrevista = new ConsultaPropuestaEntrevistaDTO("1","15/10/2021","Entrevista para Trabajo de conserje","activo","http:://probando.com");
         adaptador = new PersistenciaPropuestaEntrevistaArchivo();
         mapper = new EntrevistasMapper();
     }

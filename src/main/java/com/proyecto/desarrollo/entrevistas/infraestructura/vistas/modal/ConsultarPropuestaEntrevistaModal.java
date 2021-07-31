@@ -115,41 +115,43 @@ public class ConsultarPropuestaEntrevistaModal extends Dialog{
         });
         cerrar.setClassName("cerrar-modal");
 
-        cancelar = new Button("Cancelar");
-        cancelar.setClassName("cancelar-entrevista");
-
-
         if(controlador.getPropuesta().getUuid() != null){
             botonera.setWidth("200px");
+            cancelar = new Button("Cancelar",buttonClickEvent -> {
+                if(controlador.cancelarEntrevista(this.uuidSolicitud)) {
+                    try {
+                        cargarNuevoModal();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            cancelar.setClassName("cancelar-entrevista");
             botonera.add(cancelar,cerrar);
         }
         else{
             setHeight("32em");
-            botonera.setWidth("270px");
+            botonera.setWidth("176px");
             proponer = new Button("Proponer",buttonClickEvent ->{
                 if(controlador.proponerEntrevista(this.uuidSolicitud)) {
                     try {
-                        ConsultarPropuestaEntrevistaModal modal = new ConsultarPropuestaEntrevistaModal(this.uuidSolicitud);
-                        close();
-                        modal.open();
-                        modal.buscarEntrevista(this.uuidSolicitud);
+                        cargarNuevoModal();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
             proponer.setClassName("proponer-entrevista");
-            botonera.add(proponer,cancelar,cerrar);
+            botonera.add(proponer,cerrar);
         }
         return botonera;
     }
 
-    public Button getProponer() {
-        return proponer;
-    }
-
-    public Button getCancelar() {
-        return cancelar;
+    private void cargarNuevoModal(){
+        ConsultarPropuestaEntrevistaModal modal = new ConsultarPropuestaEntrevistaModal(this.uuidSolicitud);
+        close();
+        modal.open();
+        modal.buscarEntrevista(this.uuidSolicitud);
     }
 
     public ServicioConsultarPropuestaModal getControlador() {
