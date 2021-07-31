@@ -1,15 +1,21 @@
 package com.proyecto.desarrollo.autenticacion.aplicacion.persistencia;
 
 import com.proyecto.desarrollo.autenticacion.dominio.Staff;
-import com.proyecto.desarrollo.autenticacion.dominio.valueObjects.NombreUsuario;
+import com.proyecto.desarrollo.autenticacion.dominio.excepciones.AutenticacionInvalidaExcepcion;
+import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.entrada.UsuarioAutenticadoFirebaseEntradaDTO;
+import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.entrada.UsuarioAutenticadoNestEntradaDTO;
+import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.UsuarioAutenticadoFirebaseSalidaDTO;
+import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.UsuarioAutenticadoNestSalidaDTO;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
 public interface PersistenciaStaff {
 
-    public String obtenerStaffs() throws IOException;
+    public String obtenerStaffs();
 
-    public Staff obtenerStaffPorNombreUsuario(NombreUsuario nombreusuario) throws ParseException;
+    public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion;
+
+    public UsuarioAutenticadoNestEntradaDTO obtener_staff(UsuarioAutenticadoNestSalidaDTO credenciales);
 
 }
