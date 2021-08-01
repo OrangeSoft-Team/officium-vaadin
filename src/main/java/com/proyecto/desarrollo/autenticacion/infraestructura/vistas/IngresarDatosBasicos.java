@@ -44,7 +44,14 @@ public class IngresarDatosBasicos extends Div {
         }
 
         var boton = new Button("Modificar" , event -> {
-            Notification.show("Pulso");
+            Boolean ingreso_exitoso = controlador.ingresar_datos_basicos(primer_nombre.getValue() , primer_apellido.getValue() , cargo.getValue());
+            if (ingreso_exitoso){
+                Notification.show("yes");
+                UI.getCurrent().navigate("ingresar_datos_basicos");
+            }
+            else{
+                Notification.show("no");
+            }
         });
 
         Div divcorreo = new Div();

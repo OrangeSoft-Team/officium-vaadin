@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.autenticacion.dominio;
 
+import com.proyecto.desarrollo.autenticacion.dominio.valueObjects.CargoStaff;
 import com.proyecto.desarrollo.autenticacion.dominio.valueObjects.CorreoElectronico;
 import com.proyecto.desarrollo.autenticacion.dominio.valueObjects.Nombre;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.valueObjects.Cargo;
@@ -7,7 +8,7 @@ import com.proyecto.desarrollo.ofertaLaboral.dominio.valueObjects.Cargo;
 public class Staff {
     private Nombre primer_nombre;
     private Nombre primer_apellido;
-    private Cargo cargo;
+    private CargoStaff cargo;
     private CorreoElectronico correo;
 
     public Staff(Nombre primer_nombre, Nombre primer_apellido) {
@@ -15,12 +16,13 @@ public class Staff {
         this.primer_apellido = primer_apellido;
     }
 
-    public Staff(Nombre primer_nombre, Nombre primer_apellido, Cargo cargo, CorreoElectronico correo) {
+    public Staff(Nombre primer_nombre, Nombre primer_apellido, CargoStaff cargo, CorreoElectronico correo) {
         this.primer_nombre = primer_nombre;
         this.primer_apellido = primer_apellido;
         this.cargo = cargo;
         this.correo = correo;
     }
+
 
     public Nombre getPrimer_nombre() {
         return primer_nombre;
@@ -30,7 +32,7 @@ public class Staff {
         return primer_apellido;
     }
 
-    public Cargo getCargo() {
+    public CargoStaff getCargo() {
         return cargo;
     }
 
