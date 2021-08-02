@@ -9,6 +9,7 @@ import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.UsuarioA
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public interface PersistenciaStaff {
 
@@ -16,6 +17,6 @@ public interface PersistenciaStaff {
 
     public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion;
 
-    public UsuarioAutenticadoNestEntradaDTO obtener_staff(UsuarioAutenticadoNestSalidaDTO credenciales);
+    public UsuarioAutenticadoNestEntradaDTO obtener_staff(UsuarioAutenticadoNestSalidaDTO credenciales) throws IOException, ParseException;
 
 }
