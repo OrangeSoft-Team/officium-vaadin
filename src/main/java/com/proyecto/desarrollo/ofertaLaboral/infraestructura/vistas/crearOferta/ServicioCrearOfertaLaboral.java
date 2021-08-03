@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 @Service
 public class ServicioCrearOfertaLaboral {
@@ -56,9 +57,13 @@ public class ServicioCrearOfertaLaboral {
 
     public HabilidadDTO[] obtenerHabilidades() throws ParseException{
         PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
-        String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
-        HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
-        this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        try {
+            String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
+            HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
+            this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return this.habilidades;
     }
 

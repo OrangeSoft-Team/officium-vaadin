@@ -17,6 +17,7 @@ import com.vaadin.flow.component.html.Div;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class ServicioDetalleOfertaLaboral {
 
@@ -36,9 +37,13 @@ public class ServicioDetalleOfertaLaboral {
 
     public HabilidadDTO[] obtenerHabilidades() throws ParseException{
         PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
-        String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
-        HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
-        this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        try {
+            String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
+            HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
+            this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return this.habilidades;
     }
 
