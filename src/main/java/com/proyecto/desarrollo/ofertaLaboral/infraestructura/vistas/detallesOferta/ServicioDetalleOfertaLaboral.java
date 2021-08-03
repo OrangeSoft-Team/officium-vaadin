@@ -16,6 +16,8 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+
 public class ServicioDetalleOfertaLaboral {
 
     private OfertaLaboralDetalleDTO oferta;
@@ -26,7 +28,7 @@ public class ServicioDetalleOfertaLaboral {
         adaptador = new OfertasLaboralArchivoPersistencia();
     }
 
-    public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException {
+    public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException, IOException {
         OfertaLaboralMapper mapper = new OfertaLaboralMapper();
         this.oferta = mapper.jsonToDetalle(adaptador.obtenerDetalles(uuid));
         return this.oferta;
@@ -48,7 +50,7 @@ public class ServicioDetalleOfertaLaboral {
         return 0;
     }
 
-    public boolean verificar(OfertaLaboral modificacion, String uuid){
+    public boolean verificar(OfertaLaboral modificacion, String uuid) throws IOException, ParseException {
         Dialog modal = new Dialog();
         if (modificacion.getTitulo().getTitulo().equals("invalido")){
             modal.add(new Div(new Text("El titulo debe contener de 4 a 80 caracteres")), new Button("Cerrar", event -> modal.close()));

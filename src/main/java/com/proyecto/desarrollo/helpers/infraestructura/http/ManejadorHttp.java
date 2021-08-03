@@ -133,16 +133,18 @@ public class ManejadorHttp {
     public static String realizar_peticion_put(JSONObject datos_enviar , URL url) throws IOException, ParseException {
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-// Enable output for the connection.
-        conn.setDoOutput(true);
-        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        conn.setRequestProperty("Accept", "application/json");
 // Set HTTP request method.
         conn.setRequestMethod("PUT");
-
-        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-        writer.write(datos_enviar.toString());
-        writer.close();
+/*Si no se tiene que enviar ningun dato, no se habilita la salida de datos*/
+        if (datos_enviar !=null) {
+            // Enable output for the connection.
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Accept", "application/json");
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+            writer.write(datos_enviar.toString());
+            writer.close();
+        }
 
         int respCode = conn.getResponseCode(); // New items get NOT_FOUND on PUT
         if (respCode == HttpURLConnection.HTTP_OK || respCode == HttpURLConnection.HTTP_NOT_FOUND) {

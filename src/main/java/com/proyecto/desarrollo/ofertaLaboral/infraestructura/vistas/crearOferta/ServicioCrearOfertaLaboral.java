@@ -19,6 +19,8 @@ import com.vaadin.flow.component.html.Div;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class ServicioCrearOfertaLaboral {
 
@@ -125,7 +127,7 @@ public class ServicioCrearOfertaLaboral {
         return true;
     }
 
-    public void crearOferta(OfertaLaboral ofertaCreada) {
+    public void crearOferta(OfertaLaboral ofertaCreada) throws IOException, ParseException {
         if(ofertaAdapter.crearOferta(this.mapperOferta.ofertaLaboralToDTOCreacion(ofertaCreada))){
             exito = true;
         }
