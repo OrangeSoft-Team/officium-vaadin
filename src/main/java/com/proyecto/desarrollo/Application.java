@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.vaadin.artur.helpers.LaunchUtil;
 
+import java.util.Collections;
+
 /**
  * The entry point of the Spring Boot application.
  */
@@ -12,7 +14,14 @@ import org.vaadin.artur.helpers.LaunchUtil;
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));
+        SpringApplication app = new SpringApplication(Application.class);
+        String port = System.getenv("port");
+        if (port != null){
+            app.setDefaultProperties(Collections.singletonMap("server.port",port));
+        }
+        app.setDefaultProperties(Collections.singletonMap("server.port", "8080"));
+
+        LaunchUtil.launchBrowserInDevelopmentMode(app.run(args));
     }
 
 }
