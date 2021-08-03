@@ -28,30 +28,36 @@ public class ListaEmpleados_vista extends Div {
 
     public ListaEmpleados_vista(Empleados_controlador controlador) {
 
-        lista_empleados_completa = controlador.obtener_lista_empleados();
-        addClassName("oferta-laboral-vista");
-        addClassName("contenido");
-        setHeightFull();
+        try {
+            lista_empleados_completa = controlador.obtener_lista_empleados();
 
-        HorizontalLayout filtros = new HorizontalLayout();
-        filtros.setClassName("filtro");
-        filtros.setWidthFull();
+            addClassName("oferta-laboral-vista");
+            addClassName("contenido");
+            setHeightFull();
 
-        Div contenedorTitulo = new Div();
-        contenedorTitulo.setWidth("50px");
-        H4 tituloFiltro = new H4("Filtros: ");
-        tituloFiltro.setClassName("titulo-filtro");
-        contenedorTitulo.add(tituloFiltro);
+            HorizontalLayout filtros = new HorizontalLayout();
+            filtros.setClassName("filtro");
+            filtros.setWidthFull();
 
-        Div botonera = this.generar_filtros();
+            Div contenedorTitulo = new Div();
+            contenedorTitulo.setWidth("50px");
+            H4 tituloFiltro = new H4("Filtros: ");
+            tituloFiltro.setClassName("titulo-filtro");
+            contenedorTitulo.add(tituloFiltro);
 
-        filtros.add(contenedorTitulo , botonera);
+            Div botonera = this.generar_filtros();
+
+            filtros.add(contenedorTitulo, botonera);
 
 
-        this.configurar_grid();
-        grid.setItems(lista_empleados_completa);
-        grid.setClassName("grid");
-        add(filtros , grid);
+            this.configurar_grid();
+            grid.setItems(lista_empleados_completa);
+            grid.setClassName("grid");
+            add(filtros, grid);
+        }
+        catch (Exception e){
+            Notification.show(e.getMessage());
+        }
 
     }
 
@@ -66,7 +72,7 @@ public class ListaEmpleados_vista extends Div {
     private Div crear_botones_item(String uuid){
         Div botones = new Div();
         Button detalle = new Button("Detalle",buttonClickEvent -> {
-            getUI().ifPresent(ui -> ui.navigate(DetallesOfertaLaboral.class, new RouteParameters("empleadoID", uuid)));
+            getUI().ifPresent(ui -> ui.navigate(EmpleadoDetalle_vista.class, new RouteParameters("empleadoID", uuid)));
         });
         detalle.setClassName("detalle-oferta");
         botones.add(detalle);
