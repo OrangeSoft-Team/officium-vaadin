@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.autenticacion.infraestructura.accesos;
 
+import com.proyecto.desarrollo.autenticacion.infraestructura.vistas.IngresarDatosBasicos;
 import com.proyecto.desarrollo.autenticacion.infraestructura.vistas.Logout_vista;
 import com.proyecto.desarrollo.comunes.infraestructura.layout.MainLayout;
 import com.proyecto.desarrollo.empresas.infraestructura.vista.Empresas_vista;
@@ -25,6 +26,7 @@ public class ConfigurarRutas {
     }
 
     public void generar_rutas(){
+        this.rutas.add(new Ruta("ingresar_datos_basicos" , "Editar Perfil" , IngresarDatosBasicos.class));
         this.rutas.add(new Ruta("empresas" , "Empresas" , Empresas_vista.class));
         this.rutas.add(new Ruta("crear-ofertas-laboral" , "Crear Oferta Laboral" , CrearOfertaLaboral_vista.class));
         this.rutas.add(new Ruta("detalle-oferta/:ofertaID?" , "Detalle Oferta Laboral" , DetallesOfertaLaboral.class));
@@ -33,10 +35,10 @@ public class ConfigurarRutas {
     }
 
     public void generar_rutas_menu(){
+        this.rutas.add(new Ruta("ingresar_datos_basicos" , "Editar Perfil" , IngresarDatosBasicos.class));
         this.rutas.add(new Ruta("ofertas_trabajo" , "Ofertas de Trabajo" , OfertasTrabajo_vista.class));
         this.rutas.add(new Ruta("solicitudes-laborales" , "Solicitudes Laborales" , ConsultarSolicitudes_vista.class));
         this.rutas.add(new Ruta("logout" , "Cerrar Sesión" , Logout_vista.class));
-
     }
 
     public ArrayList<Ruta> getRutas() {
