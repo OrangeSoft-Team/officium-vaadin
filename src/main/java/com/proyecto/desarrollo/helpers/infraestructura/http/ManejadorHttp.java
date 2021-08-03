@@ -48,7 +48,7 @@ public class ManejadorHttp {
 //        }
 //    }
 
-    public static String realizar_peticion_post(JSONObject datos_enviar , URL url) throws IOException, ParseException {
+    public static String realizar_peticion_post_inicio_sesion(JSONObject datos_enviar , URL url) throws IOException, ParseException {
 
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
@@ -60,6 +60,85 @@ public class ManejadorHttp {
         conn.setRequestProperty("Accept", "application/json");
 // Set HTTP request method.
         conn.setRequestMethod("POST");
+
+        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+        writer.write(datos_enviar.toString());
+        writer.close();
+
+        int respCode = conn.getResponseCode(); // New items get NOT_FOUND on PUT
+        if (respCode == HttpURLConnection.HTTP_OK || respCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            System.out.println("entre");
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            // Read input data stream.
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+
+            String res = response.toString();
+            System.out.println(res);
+
+            return res;
+
+        } else {
+            System.out.println(respCode);
+            throw new IOException();
+        }
+    }
+
+
+    public static String realizar_peticion_post(JSONObject datos_enviar , URL url) throws IOException, ParseException {
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+// Enable output for the connection.
+        conn.setDoOutput(true);
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        conn.setRequestProperty("Accept", "application/json");
+// Set HTTP request method.
+        conn.setRequestMethod("POST");
+
+        OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+        writer.write(datos_enviar.toString());
+        writer.close();
+
+        int respCode = conn.getResponseCode(); // New items get NOT_FOUND on PUT
+        if (respCode == HttpURLConnection.HTTP_OK || respCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            System.out.println("entre");
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            // Read input data stream.
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+
+            String res = response.toString();
+            System.out.println(res);
+
+            return res;
+
+        } else {
+            System.out.println(respCode);
+            throw new IOException();
+        }
+    }
+
+    public static String realizar_peticion_put(JSONObject datos_enviar , URL url) throws IOException, ParseException {
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+// Enable output for the connection.
+        conn.setDoOutput(true);
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        conn.setRequestProperty("Accept", "application/json");
+// Set HTTP request method.
+        conn.setRequestMethod("PUT");
 
         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
         writer.write(datos_enviar.toString());

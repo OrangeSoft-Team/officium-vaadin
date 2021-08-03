@@ -53,7 +53,7 @@ public class PersistenciaStaffNest implements PersistenciaStaff {
         json_peticion.put("correoElectronico" , credenciales.getCorreo());
         json_peticion.put("token" , credenciales.getToken());
 
-        String respuesta_string = ManejadorHttp.realizar_peticion_post(json_peticion , url);
+        String respuesta_string = ManejadorHttp.realizar_peticion_post_inicio_sesion(json_peticion , url);
 
         JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(respuesta_string);
@@ -65,13 +65,28 @@ public class PersistenciaStaffNest implements PersistenciaStaff {
     }
 
     @Override
-    public DatosBasicosUsuarioEntradaDTO obtener_datos_basicos(){
-        DatosBasicosUsuarioEntradaDTO respuesta = new DatosBasicosUsuarioEntradaDTO("Jose" , "Perez" , "cargo" , "correo");
+    public DatosBasicosUsuarioEntradaDTO obtener_datos_basicos() throws IOException, ParseException {
+
+        URL url = new URL(this.url_base + "/api/staff/perfil");
+        String respuesta_string = ManejadorHttp.realizar_peticion_get(url);
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(respuesta_string);
+        DatosBasicosUsuarioEntradaDTO respuesta = new DatosBasicosUsuarioEntradaDTO(json.get("primerNombre").toString() , json.get("primerApellido").toString() , json.get("cargo").toString() , json.get("correoElectronico").toString());
+
+//        DatosBasicosUsuarioEntradaDTO respuesta = new DatosBasicosUsuarioEntradaDTO("Jose" , "Perez" , "cargo" , "correo");
         return respuesta;
     }
 
     @Override
-    public Boolean ingresar_datos_basicos(DatosBasicosUsuarioSalidaDTO peticion){
+    public Boolean ingresar_datos_basicos(DatosBasicosUsuarioSalidaDTO peticion) throws IOException, ParseException{
+        URL url = new URL(this.url_base + "/api/staff/perfil");
+
+        JSONObject json_peticion=new JSONObject();
+        json_peticion.put("primerNombre" , peticion.getPrimer_nombre());
+        json_peticion.put("primerApellido" , peticion.getPrimer_apellido());
+        json_peticion.put("cargo" , peticion.getCargo());
+
+        ManejadorHttp.realizar_peticion_put(json_peticion , url);
         return true;
     }
 

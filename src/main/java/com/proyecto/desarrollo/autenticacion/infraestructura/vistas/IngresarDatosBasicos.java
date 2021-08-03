@@ -18,62 +18,74 @@ import com.vaadin.flow.router.PageTitle;
 @PageTitle("Editar Perfil")
 public class IngresarDatosBasicos extends Div {
     private Staff staff;
-    public IngresarDatosBasicos(IngresarDatosBasicos_Controlador controlador){
-        staff = controlador.ObtenerDatosStaff();
+    public IngresarDatosBasicos(){
 
-        var correo = new TextField("Correo");
-        correo.setReadOnly(true);
-        if (staff.getCorreo() != null) {
-            correo.setValue(staff.getCorreo().getCorreoElectronico());
-        }
-        correo.setReadOnly(true);
+        try {
+            IngresarDatosBasicos_Controlador controlador = new IngresarDatosBasicos_Controlador();
+            staff = controlador.ObtenerDatosStaff();
 
-        var primer_nombre = new TextField("Primer Nombre");
-        if (staff.getPrimer_nombre() != null) {
-            primer_nombre.setValue(staff.getPrimer_nombre().getNombre());
-        }
-
-        var primer_apellido = new TextField("Primer Apellido");
-        if (staff.getPrimer_apellido() != null) {
-            primer_apellido.setValue(staff.getPrimer_apellido().getNombre());
-        }
-
-        var cargo = new TextField("Cargo");
-        if (staff.getCargo() != null) {
-            cargo.setValue(staff.getCargo().getCargo());
-        }
-
-        var boton = new Button("Modificar" , event -> {
-            Boolean ingreso_exitoso = controlador.ingresar_datos_basicos(primer_nombre.getValue() , primer_apellido.getValue() , cargo.getValue());
-            if (ingreso_exitoso){
-                Notification.show("yes");
-                UI.getCurrent().navigate("ingresar_datos_basicos");
+            var correo = new TextField("Correo");
+            correo.setReadOnly(true);
+            if (staff.getCorreo() != null) {
+                correo.setValue(staff.getCorreo().getCorreoElectronico());
             }
-            else{
-                Notification.show("no");
+
+            var primer_nombre = new TextField("Primer Nombre");
+            if (staff.getPrimer_nombre() != null) {
+                primer_nombre.setValue(staff.getPrimer_nombre().getNombre());
             }
-        });
 
-        Div divcorreo = new Div();
-        divcorreo.add(correo);
-        Div divprimer_nombre = new Div();
-        divprimer_nombre.add(primer_nombre);
-        Div divprimer_apellido = new Div();
-        divprimer_apellido.add(primer_apellido);
-        Div divcargo = new Div();
-        divcargo.add(cargo);
-        Div divboton = new Div();
-        divboton.add(boton);
+            var primer_apellido = new TextField("Primer Apellido");
+            if (staff.getPrimer_apellido() != null) {
+                primer_apellido.setValue(staff.getPrimer_apellido().getNombre());
+            }
+
+            var cargo = new TextField("Cargo");
+            if (staff.getCargo() != null) {
+                cargo.setValue(staff.getCargo().getCargo());
+            }
+
+            var boton = new Button("Modificar", event -> {
+                try {
+                    Boolean ingreso_exitoso = controlador.ingresar_datos_basicos(primer_nombre.getValue(), primer_apellido.getValue(), cargo.getValue());
+                    if (ingreso_exitoso) {
+                        Notification.show("Datos modificados con éxito");
+                        UI.getCurrent().navigate("ingresar_datos_basicos");
+                    } else {
+                        Notification.show("Error con la modificación de los datos");
+                    }
+                }
+                catch (Exception e){
+                    Notification.show("Error general. Por favor contacte con la empresa");
+                }
+            });
+
+            Div divcorreo = new Div();
+            divcorreo.add(correo);
+            Div divprimer_nombre = new Div();
+            divprimer_nombre.add(primer_nombre);
+            Div divprimer_apellido = new Div();
+            divprimer_apellido.add(primer_apellido);
+            Div divcargo = new Div();
+            divcargo.add(cargo);
+            Div divboton = new Div();
+            divboton.add(boton);
 
 
-        VerticalLayout contenedor_general = new VerticalLayout();
-        contenedor_general.add(divcorreo , divprimer_nombre , divprimer_apellido , divcargo , divboton);
-        contenedor_general.setAlignItems(FlexComponent.Alignment.CENTER);
+            VerticalLayout contenedor_general = new VerticalLayout();
+            contenedor_general.add(divcorreo, divprimer_nombre, divprimer_apellido, divcargo, divboton);
+            contenedor_general.setAlignItems(FlexComponent.Alignment.CENTER);
 
 
-        add(
-                contenedor_general
-        );
+            add(
+                    contenedor_general
+            );
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Notification.show("Error general. Por favor contacte con la empresa");
+        }
 
     }
 }

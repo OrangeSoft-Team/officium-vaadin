@@ -21,8 +21,8 @@ public interface PersistenciaStaff {
 
     public UsuarioAutenticadoNestEntradaDTO obtener_staff(UsuarioAutenticadoNestSalidaDTO credenciales) throws IOException, ParseException;
 
-    public DatosBasicosUsuarioEntradaDTO obtener_datos_basicos();
+    public DatosBasicosUsuarioEntradaDTO obtener_datos_basicos() throws MalformedURLException, IOException, ParseException;
 
-    public Boolean ingresar_datos_basicos(DatosBasicosUsuarioSalidaDTO peticion);
+    public Boolean ingresar_datos_basicos(DatosBasicosUsuarioSalidaDTO peticion) throws IOException, ParseException;
 
 }
