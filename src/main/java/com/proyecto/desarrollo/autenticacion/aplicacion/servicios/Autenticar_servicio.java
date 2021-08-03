@@ -31,6 +31,7 @@ public class Autenticar_servicio {
 
         }
         catch (Exception e){
+            e.printStackTrace();
             throw new AutenticacionInvalidaExcepcion();
         }
 
