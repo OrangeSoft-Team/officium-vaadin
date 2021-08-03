@@ -73,7 +73,7 @@ public class ConsultarSolicitudes_vista extends Div {
                 else {
                     fireEvent(new AprobadoFallido(this));
                 }
-            } catch (IOException ioException) {
+            } catch (IOException | ParseException ioException) {
                 ioException.printStackTrace();
             }
         });

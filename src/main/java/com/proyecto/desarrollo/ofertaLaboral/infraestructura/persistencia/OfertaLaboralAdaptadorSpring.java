@@ -1,7 +1,5 @@
 package com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
 import com.proyecto.desarrollo.helpers.infraestructura.http.ManejadorHttp;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralCreacion;

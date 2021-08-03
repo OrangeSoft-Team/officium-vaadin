@@ -26,7 +26,7 @@ public class SolicitudesLaboralesArchivoPersistencia implements PersistenciaSoli
     }
 
     @Override
-    public String obtenerDetalle() throws IOException {
+    public String obtenerDetalle(String uuid) throws IOException {
         String contenido;
         contenido = "";
         try{

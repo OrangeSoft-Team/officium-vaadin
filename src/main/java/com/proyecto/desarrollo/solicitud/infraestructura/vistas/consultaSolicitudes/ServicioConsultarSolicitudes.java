@@ -33,10 +33,10 @@ public class ServicioConsultarSolicitudes {
     }
 
     public DetalleSolicitudLaboralDTO obtenerDetalle(String uuid) throws IOException, ParseException {
-        return this.mapperSolicitud.jsonToDetalle(this.adaptador.obtenerDetalle());
+        return this.mapperSolicitud.jsonToDetalle(this.adaptador.obtenerDetalle(uuid));
     }
 
-    public Boolean aceptarSolicitud(String uuid) throws IOException {
+    public Boolean aceptarSolicitud(String uuid) throws IOException, ParseException {
         return this.adaptador.aceptarSolicitud(uuid);
     }
 
