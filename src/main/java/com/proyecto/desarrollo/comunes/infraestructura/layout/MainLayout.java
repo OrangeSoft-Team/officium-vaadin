@@ -2,6 +2,7 @@ package com.proyecto.desarrollo.comunes.infraestructura.layout;
 
 import java.util.Optional;
 
+import com.proyecto.desarrollo.autenticacion.dominio.Staff;
 import com.proyecto.desarrollo.autenticacion.infraestructura.accesos.ConfigurarRutas;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -18,6 +19,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.router.PageTitle;
 
@@ -48,7 +50,10 @@ public class MainLayout extends AppLayout {
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
-        Avatar avatar = new Avatar();
+        Staff usuario = VaadinSession.getCurrent().getAttribute(Staff.class);
+        String primeraLetra = usuario.getPrimer_nombre().getNombre().substring(0, 1);
+        String segundaLetra = usuario.getPrimer_apellido().getNombre().substring(0, 1);
+        Avatar avatar = new Avatar(primeraLetra + segundaLetra);
         avatar.addClassNames("ms-auto", "me-m");
         layout.add(avatar);
         return layout;
