@@ -295,7 +295,6 @@ public class CrearOfertaLaboral_vista extends Div{
         this.habilidades1 = new Select<>();
         this.habilidades1.setValue(new HabilidadDTO(oferta.getHabilidades()[0].getId(),oferta.getHabilidades()[0].getNombre(),oferta.getHabilidades()[0].getCategoria()));
         this.habilidades2 = new Select<>();
-        this.habilidades2.setValue(new HabilidadDTO(oferta.getHabilidades()[1].getId(),oferta.getHabilidades()[1].getNombre(),oferta.getHabilidades()[1].getCategoria()));
         this.habilidades[0] = this.habilidades1.getValue();
         this.habilidades[1] = this.habilidades2.getValue();
         this.habilidades3 = new Select<>();

@@ -33,9 +33,8 @@ public class CrearOfertaLaboral_vistaTest {
         empresas.add(empresa1);
         empresa2 = new ConsultarEmpresasParaCreacionDTO("2","Racoon Lovers");
         empresas.add(empresa2);
-        HabilidadDTO[] habilidades = new HabilidadDTO[2];
-        habilidades[0] = new HabilidadDTO("1","conserje","limpieza");
-        habilidades[1] = new HabilidadDTO("2","administrado","recursos humanos");
+        HabilidadDTO[] habilidades = new HabilidadDTO[1];
+        habilidades[0] = new HabilidadDTO("76da530e-a50b-43d5-874a-f7d48d9d8ab4","Computadoras","Manteninimiento");
         /*Se crea una oferta laboral con la empresa 1*/
         ofertaLaboral = new OfertaLaboral("Se busca Conserje","Se busca un conserje para que labore en la empresa Orangesoft durante el dia","Vendedor",(float)700.16,4,"dia", "diurno",8,empresas.get(0).getUUID(),"edad",habilidades);
     }
@@ -56,18 +55,9 @@ public class CrearOfertaLaboral_vistaTest {
         Assert.assertEquals("1",oferta.getEmpresas().getValue().getUUID());
         Assert.assertEquals(700.16,Float.parseFloat(oferta.getSueldo().getValue()),0.01f);
         Assert.assertEquals("edad",oferta.getRequisitosEspeciales().getValue());
-        for (int i = 0; i < oferta.getHabilidades().length;i++){
-            if (i == 0){
-                Assert.assertEquals("1",oferta.getHabilidades()[i].getUuid());
-                Assert.assertEquals("conserje",oferta.getHabilidades()[i].getNombre());
-                Assert.assertEquals("limpieza",oferta.getHabilidades()[i].getCategoria());
-            }
-            else {
-                Assert.assertEquals("2",oferta.getHabilidades()[i].getUuid());
-                Assert.assertEquals("administrado",oferta.getHabilidades()[i].getNombre());
-                Assert.assertEquals("recursos humanos",oferta.getHabilidades()[i].getCategoria());
-            }
-        }
+        Assert.assertEquals("76da530e-a50b-43d5-874a-f7d48d9d8ab4",oferta.getHabilidades()[0].getUuid());
+        Assert.assertEquals("Computadoras",oferta.getHabilidades()[0].getNombre());
+        Assert.assertEquals("Manteninimiento",oferta.getHabilidades()[0].getCategoria());
         System.out.println("Todo correcto");
     }
 
@@ -88,18 +78,9 @@ public class CrearOfertaLaboral_vistaTest {
         Assert.assertEquals(8,oferta.getOfertaCreada().getNumeroVacantes().getVacantes());
         Assert.assertEquals("1",oferta.getOfertaCreada().getUuidEmpresa());
         Assert.assertEquals(700.16,oferta.getOfertaCreada().getSueldo().getSueldo(),0.01f);
-        for (int i = 0; i < oferta.getHabilidades().length;i++){
-            if (i == 0){
-                Assert.assertEquals("1",oferta.getOfertaCreada().getHabilidades()[i].getId());
-                Assert.assertEquals("conserje",oferta.getOfertaCreada().getHabilidades()[i].getNombre());
-                Assert.assertEquals("limpieza",oferta.getOfertaCreada().getHabilidades()[i].getCategoria());
-            }
-            else {
-                Assert.assertEquals("2",oferta.getOfertaCreada().getHabilidades()[i].getId());
-                Assert.assertEquals("administrado",oferta.getOfertaCreada().getHabilidades()[i].getNombre());
-                Assert.assertEquals("recursos humanos",oferta.getOfertaCreada().getHabilidades()[i].getCategoria());
-            }
-        }
+        Assert.assertEquals("76da530e-a50b-43d5-874a-f7d48d9d8ab4",oferta.getHabilidades()[0].getUuid());
+        Assert.assertEquals("Computadoras",oferta.getHabilidades()[0].getNombre());
+        Assert.assertEquals("Manteninimiento",oferta.getHabilidades()[0].getCategoria());
         if (!oferta.getControlador().isExito())
             fail("La creacion en persistencia no fue exitosa");
 

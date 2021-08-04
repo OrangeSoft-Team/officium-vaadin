@@ -168,7 +168,8 @@ public class OfertasTrabajo_vista extends Div {
                 actualizar(controlador.getOfertasLaborales());
             }
             else {
-                actualizar(controlador.filtrarFechaPubli(filtroFecha.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+                actualizar(controlador.filtrarFechaPubli(filtroFecha.getValue().format(DateTimeFormatter.ofPattern("YYYY/MM/dd"))));
+                System.out.println(filtroFecha.getValue().format(DateTimeFormatter.ofPattern("YYYY-MM-dd")));
                 if (inactivo.hasClassName("consulta-inactivos")) {
                     inactivo.removeClassName("consulta-inactivos");
                 }
