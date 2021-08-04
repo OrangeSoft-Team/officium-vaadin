@@ -156,7 +156,7 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
 
         /*Duracion Escala*/
         escala = new Select<>();
-        escala.setItems("hora","dia","mes","año");
+        escala.setItems("hora","dia","semana","mes");
         escala.setReadOnly(true);
 
         /*Turno Trabajo*/
@@ -322,14 +322,14 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         fechaPublicacion.setValue(this.ofertaDetallada.getFechaPublicacion());
         fechaModiciacion.setValue(this.ofertaDetallada.getFechaModificacion());
         habilidades1.setItems(habilidadesCompletas);
-        habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[0].getId())]);
+        habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[0].getUuid())]);
         habilidades2.setItems(habilidadesCompletas);
         if (habilidades.length >= 2){
-            habilidades2.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[1].getId())]);
+            habilidades2.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[1].getUuid())]);
         }
         habilidades3.setItems(habilidadesCompletas);
         if (habilidades.length >= 3){
-            habilidades3.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[2].getId())]);
+            habilidades3.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[2].getUuid())]);
         }
         requisitosEspeciales.setValue(this.ofertaDetallada.getRequerimientoEspecial());
     }

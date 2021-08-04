@@ -6,6 +6,7 @@ import com.proyecto.desarrollo.comunes.infraestructura.persistencia.Persistencia
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralConsultaDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertaLaboralAdaptadorSpring;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import org.springframework.stereotype.Service;
 import org.json.simple.parser.ParseException;
@@ -24,7 +25,7 @@ public class ServicioOfertaLaboral {
 
     public ServicioOfertaLaboral(){
         /*Se crear una instancia del adaptador*/
-        adaptador = new OfertasLaboralArchivoPersistencia();
+        adaptador = new OfertaLaboralAdaptadorSpring();
         this.mapper = new OfertaLaboralMapper();
     }
 
@@ -33,6 +34,8 @@ public class ServicioOfertaLaboral {
         String stringDeOfertas = adaptador.obtenerOfertasLaborales();
         /*Se pasa el Json al mapper para crear las intancias de ofertasLaborales*/
         this.ofertasLaborales = mapper.jsonToGrid(stringDeOfertas);
+        if(this.ofertasLaborales.length == 0)
+            return null;
         return ofertasLaborales;
     }
 

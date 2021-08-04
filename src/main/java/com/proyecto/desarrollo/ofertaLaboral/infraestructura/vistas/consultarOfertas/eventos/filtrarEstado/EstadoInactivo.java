@@ -5,7 +5,7 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfe
 public class EstadoInactivo extends EventoAplicarFiltroEstado{
 
     public EstadoInactivo(OfertasTrabajo_vista source) {
-        super(source,"inactivo");
+        super(source,"CANCELADO");
     }
 
 }

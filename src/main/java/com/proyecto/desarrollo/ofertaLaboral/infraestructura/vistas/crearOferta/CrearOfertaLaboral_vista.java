@@ -161,7 +161,7 @@ public class CrearOfertaLaboral_vista extends Div{
                 submitt.setClassName("btonEnviar-active");
             }
         });
-        escala.setItems("hora","dia","mes","año");
+        escala.setItems("hora","dia","semana","mes");
         escala.setValue("hora");
 
         turno = new Select<>();

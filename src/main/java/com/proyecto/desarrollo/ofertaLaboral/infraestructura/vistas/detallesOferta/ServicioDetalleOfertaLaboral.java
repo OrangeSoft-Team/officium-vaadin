@@ -4,6 +4,7 @@ import com.proyecto.desarrollo.comunes.aplicacion.HabilidadesMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaHabilidades;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesAdaptadorSpring;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesArchivoPersistencia;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
@@ -36,7 +37,7 @@ public class ServicioDetalleOfertaLaboral {
     }
 
     public HabilidadDTO[] obtenerHabilidades() throws ParseException{
-        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
+        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesAdaptadorSpring();
         try {
             String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
             HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
@@ -49,7 +50,7 @@ public class ServicioDetalleOfertaLaboral {
 
     public int getHabilidad(HabilidadDTO[] habilidades, String uuid) {
         for (int i = 0 ; i < habilidades.length; i++){
-            if (habilidades[i].getId().equals(uuid))
+            if (habilidades[i].getUuid().equals(uuid))
                 return i;
         }
         return 0;

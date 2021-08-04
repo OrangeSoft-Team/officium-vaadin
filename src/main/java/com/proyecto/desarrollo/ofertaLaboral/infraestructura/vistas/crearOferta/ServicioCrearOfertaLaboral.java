@@ -4,13 +4,16 @@ import com.proyecto.desarrollo.comunes.aplicacion.HabilidadesMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaHabilidades;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesAdaptadorSpring;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesArchivoPersistencia;
 import com.proyecto.desarrollo.empresas.aplicacion.EmpresasMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaEmpresas;
 import com.proyecto.desarrollo.empresas.infraestructura.DTO.entrada.ConsultarEmpresasParaCreacionDTO;
+import com.proyecto.desarrollo.empresas.infraestructura.Persistencia.EmpresaAdaptadorSpring;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.empresas.infraestructura.Persistencia.EmpresasArchivoPersistencia;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertaLaboralAdaptadorSpring;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -46,17 +49,18 @@ public class ServicioCrearOfertaLaboral {
         this.mapper = new EmpresasMapper();
         this.mapperOferta = new OfertaLaboralMapper();
         this.adaptador = new EmpresasArchivoPersistencia();
-        this.ofertaAdapter = new OfertasLaboralArchivoPersistencia();
+        this.ofertaAdapter = new OfertaLaboralAdaptadorSpring();
     }
 
     public ConsultarEmpresasParaCreacionDTO[] obtenerEmpresas() throws ParseException {
         String json = adaptador.getEmpresasOfertaLaboral();
+        System.out.println(json);
         this.empresas = this.mapper.jsonToEmpresasCreacion(json);
         return this.empresas;
     }
 
     public HabilidadDTO[] obtenerHabilidades() throws ParseException{
-        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
+        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesAdaptadorSpring();
         try {
             String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
             HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
