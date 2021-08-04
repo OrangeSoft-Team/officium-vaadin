@@ -1,5 +1,6 @@
 package com.proyecto.desarrollo.helpers.infraestructura.http;
 
+import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 
 import org.json.simple.JSONArray;
@@ -80,7 +81,10 @@ public class ManejadorHttp {
 
 
             String res = response.toString();
-            System.out.println(res);
+
+            FileWriter writerArchivo = new FileWriter("src/main/resources/springAuthToken/token.txt");
+            writerArchivo.write(conn.getHeaderField("Authorization"));
+            writerArchivo.close();
 
             return res;
 

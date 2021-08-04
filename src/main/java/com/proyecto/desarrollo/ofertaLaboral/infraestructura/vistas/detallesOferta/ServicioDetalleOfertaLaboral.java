@@ -10,6 +10,7 @@ import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralModificacion;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertaLaboralAdaptadorSpring;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;

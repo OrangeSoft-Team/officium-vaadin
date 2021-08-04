@@ -4,6 +4,7 @@ import com.proyecto.desarrollo.comunes.infraestructura.persistencia.Persistencia
 import com.proyecto.desarrollo.solicitud.aplicacion.SolicitudMapper;
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.DetalleSolicitudLaboralDTO;
 import com.proyecto.desarrollo.solicitud.infraestructura.DTO.SolicitudLaboralDTO;
+import com.proyecto.desarrollo.solicitud.infraestructura.persistencia.SolicitudesLaboralesAdaptadorSpring;
 import com.proyecto.desarrollo.solicitud.infraestructura.persistencia.SolicitudesLaboralesArchivoPersistencia;
 import org.json.simple.parser.ParseException;
 
@@ -27,8 +28,13 @@ public class ServicioConsultarSolicitudes {
     }
 
     public SolicitudLaboralDTO[] obtenerSolicitudes() throws IOException, ParseException {
+        String contenido = this.adaptador.obtenerSolicitudes();
+        if (contenido.equals(""))
+            return null;
         /*Se obtiene del adaptador un json con las solicitudes y luego se mappean a un array de SolicitudLaboralDTO*/
-        this.solicitudes =this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
+        else {
+            this.solicitudes = this.mapperSolicitud.jsonToGrid(this.adaptador.obtenerSolicitudes());
+        }
         return ordenar();
     }
 

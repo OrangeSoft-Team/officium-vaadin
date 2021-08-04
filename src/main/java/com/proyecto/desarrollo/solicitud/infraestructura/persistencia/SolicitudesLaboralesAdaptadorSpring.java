@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class SolicitudesLaboralesAdaptadorSpring implements PersistenciaSolicitudes {
 
-    private String urlApi = "https://www.officium-spring.herokuapp.com/api/staff/postulaciones";
+    private String urlApi = "http://localhost:8081/api/staff/postulaciones";
 
     @Override
     public String obtenerSolicitudes() throws IOException, ParseException {
@@ -29,8 +29,7 @@ public class SolicitudesLaboralesAdaptadorSpring implements PersistenciaSolicitu
         URL url = new URL(this.urlApi + "/" + uuid + "/aceptar");
         try {
             String response = ManejadorHttp.realizar_peticion_put(null, url);
-            if (response.equals("201"))
-                return true;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -44,8 +43,7 @@ public class SolicitudesLaboralesAdaptadorSpring implements PersistenciaSolicitu
         URL url = new URL(this.urlApi + "/" + uuid + "/rechazar");
         try {
             String response = ManejadorHttp.realizar_peticion_put(null, url);
-            if (response.equals("201"))
-                return true;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
