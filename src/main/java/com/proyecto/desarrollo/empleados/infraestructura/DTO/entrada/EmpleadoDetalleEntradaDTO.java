@@ -9,38 +9,23 @@ import java.util.Date;
 public class EmpleadoDetalleEntradaDTO {
     private String uuid;
     private String primerNombre;
-    private String primerApellido;
     private String segundoNombre;
+    private String primerApellido;
     private String segundoApellido;
     private String correo;
     private String estatus;
     private String genero;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String calleUno;
     private String calleDos;
+    private String codigoPostal;
     private String nombrePais;
     private String nombreEstado;
     private String nombreCiudad;
     private ArrayList<EmpleadoHabilidadDTO> habilidades;
     private ArrayList<EmpleadoExperienciaDTO> experiencias;
 
-    public EmpleadoDetalleEntradaDTO(String uuid, String primerNombre, String primerApellido, String segundoNombre, String segundoApellido, String correo, String estatus, String genero, Date fechaNacimiento, String calleUno, String calleDos, String nombrePais, String nombreEstado, String nombreCiudad, ArrayList<EmpleadoHabilidadDTO> habilidades, ArrayList<EmpleadoExperienciaDTO> experiencias) {
-        this.uuid = uuid;
-        this.primerNombre = primerNombre;
-        this.primerApellido = primerApellido;
-        this.segundoNombre = segundoNombre;
-        this.segundoApellido = segundoApellido;
-        this.correo = correo;
-        this.estatus = estatus;
-        this.genero = genero;
-        this.fechaNacimiento = fechaNacimiento;
-        this.calleUno = calleUno;
-        this.calleDos = calleDos;
-        this.nombrePais = nombrePais;
-        this.nombreEstado = nombreEstado;
-        this.nombreCiudad = nombreCiudad;
-        this.habilidades = habilidades;
-        this.experiencias = experiencias;
+    public EmpleadoDetalleEntradaDTO() {
     }
 
     public String getUuid() {
@@ -75,7 +60,7 @@ public class EmpleadoDetalleEntradaDTO {
         return genero;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -105,5 +90,77 @@ public class EmpleadoDetalleEntradaDTO {
 
     public ArrayList<EmpleadoExperienciaDTO> getExperiencias() {
         return experiencias;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+        public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setCalleUno(String calleUno) {
+        this.calleUno = calleUno;
+    }
+
+    public void setCalleDos(String calleDos) {
+        this.calleDos = calleDos;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
+    }
+
+    public void setNombreCiudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
+    }
+
+    public void setHabilidades(ArrayList<EmpleadoHabilidadDTO> habilidades) {
+        this.habilidades = habilidades;
+    }
+
+    public void setExperiencias(ArrayList<EmpleadoExperienciaDTO> experiencias) {
+        this.experiencias = experiencias;
     }
 }

@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public interface PersistenciaEmpleado {
 
     public ArrayList<EmpleadoEntradaDTO> obtener_lista_empleados() throws IOException, ParseException;
-    public EmpleadoDetalleEntradaDTO obtener_detalle_empleado(EmpleadoDetalleSalidaDTO credenciales) throws IOException;
+    public EmpleadoDetalleEntradaDTO obtener_detalle_empleado(EmpleadoDetalleSalidaDTO credenciales) throws IOException, ParseException;
 
 }
