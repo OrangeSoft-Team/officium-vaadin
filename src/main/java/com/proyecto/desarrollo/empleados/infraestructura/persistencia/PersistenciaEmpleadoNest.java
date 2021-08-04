@@ -48,21 +48,51 @@ public class PersistenciaEmpleadoNest implements PersistenciaEmpleado {
 
         EmpleadoDetalleEntradaDTO empleado_detalle = new EmpleadoDetalleEntradaDTO();
 
-        empleado_detalle.setUuid(json.get("uuid").toString());
-        empleado_detalle.setPrimerNombre(json.get("primerNombre").toString());
-        empleado_detalle.setSegundoNombre(json.get("segundoNombre").toString());
-        empleado_detalle.setPrimerApellido(json.get("primerApellido").toString());
-        empleado_detalle.setSegundoApellido(json.get("segundoApellido").toString());
-        empleado_detalle.setCorreo(json.get("correo").toString());
-        empleado_detalle.setGenero(json.get("genero").toString());
-        empleado_detalle.setEstatus(json.get("estatus").toString());
-        empleado_detalle.setFechaNacimiento(json.get("fechaNacimiento").toString());
-        empleado_detalle.setCalleUno(json.get("calleUno").toString());
-        empleado_detalle.setCalleDos(json.get("calleDos").toString());
-        empleado_detalle.setCodigoPostal(json.get("codigoPostal").toString());
-        empleado_detalle.setNombrePais(json.get("nombrePais").toString());
-        empleado_detalle.setNombreEstado(json.get("nombreEstado").toString());
-        empleado_detalle.setNombreCiudad(json.get("nombreCiudad").toString());
+        if (json.get("uuid") != null) {
+            empleado_detalle.setUuid(json.get("uuid").toString());
+        }
+        if (json.get("primerNombre") != null) {
+            empleado_detalle.setPrimerNombre(json.get("primerNombre").toString());
+        }
+        if (json.get("segundoNombre") != null) {
+            empleado_detalle.setSegundoNombre(json.get("segundoNombre").toString());
+        }
+        if (json.get("primerApellido") != null) {
+            empleado_detalle.setPrimerApellido(json.get("primerApellido").toString());
+        }
+        if (json.get("segundoApellido") != null) {
+            empleado_detalle.setSegundoApellido(json.get("segundoApellido").toString());
+        }
+        if (json.get("correo") != null) {
+            empleado_detalle.setCorreo(json.get("correo").toString());
+        }
+        if (json.get("genero") != null) {
+            empleado_detalle.setGenero(json.get("genero").toString());
+        }
+        if (json.get("estatus") != null) {
+            empleado_detalle.setEstatus(json.get("estatus").toString());
+        }
+        if (json.get("fechaNacimiento") != null) {
+            empleado_detalle.setFechaNacimiento(json.get("fechaNacimiento").toString());
+        }
+        if (json.get("calleUno") != null) {
+            empleado_detalle.setCalleUno(json.get("calleUno").toString());
+        }
+        if (json.get("calleDos") != null) {
+            empleado_detalle.setCalleDos(json.get("calleDos").toString());
+        }
+        if (json.get("codigoPostal") != null) {
+            empleado_detalle.setCodigoPostal(json.get("codigoPostal").toString());
+        }
+        if (json.get("nombrePais") != null) {
+            empleado_detalle.setNombrePais(json.get("nombrePais").toString());
+        }
+        if (json.get("nombreEstado") != null) {
+            empleado_detalle.setNombreEstado(json.get("nombreEstado").toString());
+        }
+        if (json.get("nombreCiudad") != null) {
+            empleado_detalle.setNombreCiudad(json.get("nombreCiudad").toString());
+        }
 
 
         ArrayList<EmpleadoHabilidadDTO> empleado_habilidades = new ArrayList<EmpleadoHabilidadDTO>();
