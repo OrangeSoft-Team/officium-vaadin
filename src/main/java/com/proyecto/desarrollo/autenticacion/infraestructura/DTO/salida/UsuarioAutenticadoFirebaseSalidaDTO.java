@@ -12,9 +12,8 @@ public class UsuarioAutenticadoFirebaseSalidaDTO {
     public String getCorreo() {
         return correo;
     }
-    public String getClase() {
+
+    public String getContrasena() {
         return contrasena;
     }
-
-
 }

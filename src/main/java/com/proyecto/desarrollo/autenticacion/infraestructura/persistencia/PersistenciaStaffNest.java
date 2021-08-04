@@ -1,5 +1,12 @@
 package com.proyecto.desarrollo.autenticacion.infraestructura.persistencia;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.common.collect.Lists;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import com.proyecto.desarrollo.autenticacion.aplicacion.persistencia.PersistenciaStaff;
 import com.proyecto.desarrollo.autenticacion.dominio.excepciones.AutenticacionInvalidaExcepcion;
 import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.entrada.DatosBasicosUsuarioEntradaDTO;
@@ -9,15 +16,7 @@ import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.DatosBas
 import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.UsuarioAutenticadoFirebaseSalidaDTO;
 import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.salida.UsuarioAutenticadoNestSalidaDTO;
 import com.proyecto.desarrollo.helpers.infraestructura.http.ManejadorHttp;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -39,8 +38,24 @@ public class PersistenciaStaffNest implements PersistenciaStaff {
     }
 
     @Override
-    public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion{
-        UsuarioAutenticadoFirebaseEntradaDTO respuesta = new UsuarioAutenticadoFirebaseEntradaDTO("0OMPgbyAyaNoyNk2");
+    public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion, IOException, ParseException {
+
+        URL url = new URL("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAlpmRnWovaKQHDx57oW62H5veuv-xCbvk");
+
+        JSONObject json_peticion=new JSONObject();
+        json_peticion.put("email" , credenciales.getCorreo());
+        json_peticion.put("password" , credenciales.getContrasena());
+        json_peticion.put("returnSecureToken" , true);
+
+        String respuesta_string = ManejadorHttp.realizar_peticion_post_inicio_sesion(json_peticion , url);
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(respuesta_string);
+        System.out.println(json.get("localId"));
+
+
+
+        UsuarioAutenticadoFirebaseEntradaDTO respuesta = new UsuarioAutenticadoFirebaseEntradaDTO(json.get("localId").toString());
         return respuesta;
     }
 
