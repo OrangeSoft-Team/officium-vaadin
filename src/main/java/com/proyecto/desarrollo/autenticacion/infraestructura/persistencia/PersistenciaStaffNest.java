@@ -40,7 +40,7 @@ public class PersistenciaStaffNest implements PersistenciaStaff {
 
     @Override
     public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion{
-        UsuarioAutenticadoFirebaseEntradaDTO respuesta = new UsuarioAutenticadoFirebaseEntradaDTO("0OMPgbyAyaNoyNk2");
+        UsuarioAutenticadoFirebaseEntradaDTO respuesta = new UsuarioAutenticadoFirebaseEntradaDTO("9g65kUWa4SWfeXHfM0CRBSZlMmO2");
         return respuesta;
     }
 
