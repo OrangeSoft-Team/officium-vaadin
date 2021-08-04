@@ -69,7 +69,8 @@ public class OfertasTrabajo_vista extends Div {
 
         /*Metodo para configurar las columnas que se mostraran en el grid*/
         configurarGrid();
-        grid.setItems(controlador.obtenerData());
+        if (controlador.obtenerData() != null)
+            grid.setItems(controlador.obtenerData());
         grid.setClassName("grid");
         add(filtros,grid);
     }
@@ -129,11 +130,11 @@ public class OfertasTrabajo_vista extends Div {
         estados.setClassName("estados");
 
         /*Boton de ofertas activas*/
-        Button activo = new Button("Ofertas Activas");
+        Button activo = new Button("Ofertas Publicadas");
         activo.setClassName("ofertas-activas");
 
         /*Boton de ofertas inactivas*/
-        Button inactivo = new Button("Ofertas Inactivas");
+        Button inactivo = new Button("Ofertas Canceladas");
         inactivo.setClassName("ofertas-inactivas");
 
         /*Filtro por nombre de empresa*/

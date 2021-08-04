@@ -4,17 +4,22 @@ import com.proyecto.desarrollo.comunes.aplicacion.HabilidadesMapper;
 import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaHabilidades;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.PersistenciaOfertaLaboral;
+import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesAdaptadorSpring;
 import com.proyecto.desarrollo.comunes.infraestructura.persistencia.entrada.HabilidadesArchivoPersistencia;
 import com.proyecto.desarrollo.ofertaLaboral.aplicacion.OfertaLaboralMapper;
 import com.proyecto.desarrollo.ofertaLaboral.dominio.OfertaLaboral;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.entrada.OfertaLaboralDetalleDTO;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida.OfertaLaboralModificacion;
+import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertaLaboralAdaptadorSpring;
 import com.proyecto.desarrollo.ofertaLaboral.infraestructura.persistencia.OfertasLaboralArchivoPersistencia;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class ServicioDetalleOfertaLaboral {
 
@@ -26,29 +31,33 @@ public class ServicioDetalleOfertaLaboral {
         adaptador = new OfertasLaboralArchivoPersistencia();
     }
 
-    public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException {
+    public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException, IOException {
         OfertaLaboralMapper mapper = new OfertaLaboralMapper();
         this.oferta = mapper.jsonToDetalle(adaptador.obtenerDetalles(uuid));
         return this.oferta;
     }
 
     public HabilidadDTO[] obtenerHabilidades() throws ParseException{
-        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesArchivoPersistencia();
-        String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
-        HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
-        this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        PersistenciaHabilidades adaptadorHabilidades = new HabilidadesAdaptadorSpring();
+        try {
+            String json = adaptadorHabilidades.getHabilidadesOfertasLaborales();
+            HabilidadesMapper mapperHabilidades = new HabilidadesMapper();
+            this.habilidades = mapperHabilidades.jsonToHabilidadesDTO(json);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return this.habilidades;
     }
 
     public int getHabilidad(HabilidadDTO[] habilidades, String uuid) {
         for (int i = 0 ; i < habilidades.length; i++){
-            if (habilidades[i].getId().equals(uuid))
+            if (habilidades[i].getUuid().equals(uuid))
                 return i;
         }
         return 0;
     }
 
-    public boolean verificar(OfertaLaboral modificacion, String uuid){
+    public boolean verificar(OfertaLaboral modificacion, String uuid) throws IOException, ParseException {
         Dialog modal = new Dialog();
         if (modificacion.getTitulo().getTitulo().equals("invalido")){
             modal.add(new Div(new Text("El titulo debe contener de 4 a 80 caracteres")), new Button("Cerrar", event -> modal.close()));

@@ -20,6 +20,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+
 //@Route(value = "detalle-oferta", layout = MainLayout.class)
 @PageTitle("Detalles de Oferta Laboral")
 public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
@@ -78,7 +80,7 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         try {
             ofertaDetallada = controlador.obtenerOferta(event.getRouteParameters().get("ofertaID").get());
             rellenarInformacion();
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -154,7 +156,7 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
 
         /*Duracion Escala*/
         escala = new Select<>();
-        escala.setItems("hora","dia","mes","año");
+        escala.setItems("hora","dia","semana","mes");
         escala.setReadOnly(true);
 
         /*Turno Trabajo*/
@@ -320,14 +322,14 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         fechaPublicacion.setValue(this.ofertaDetallada.getFechaPublicacion());
         fechaModiciacion.setValue(this.ofertaDetallada.getFechaModificacion());
         habilidades1.setItems(habilidadesCompletas);
-        habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[0].getId())]);
+        habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[0].getUuid())]);
         habilidades2.setItems(habilidadesCompletas);
         if (habilidades.length >= 2){
-            habilidades2.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[1].getId())]);
+            habilidades2.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[1].getUuid())]);
         }
         habilidades3.setItems(habilidadesCompletas);
         if (habilidades.length >= 3){
-            habilidades3.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[2].getId())]);
+            habilidades3.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[2].getUuid())]);
         }
         requisitosEspeciales.setValue(this.ofertaDetallada.getRequerimientoEspecial());
     }
@@ -412,22 +414,27 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
                 null,
                 this.requisitosEspeciales.getValue(),
                 verificacion);
-        if (controlador.verificar(modificacion,uuid) && !prueba){
-            Notification notificacion = new Notification("Oferta modificada exitosamente");
-            notificacion.setPosition(Notification.Position.TOP_CENTER);
-            notificacion.setDuration(3000);
-            notificacion.open();
-            this.modificacionExitosa = true;
-            getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
-        }
-        else if(controlador.verificar(modificacion,uuid) && !prueba){
-            Notification notificacion = new Notification("Oferta no modificada");
-            notificacion.setPosition(Notification.Position.TOP_CENTER);
-            notificacion.setDuration(3000);
-            notificacion.open();
-        }
-        if (controlador.verificar(modificacion,uuid) && prueba){
-            this.modificacionExitosa = true;
+        try {
+            if (controlador.verificar(modificacion, uuid) && !prueba) {
+                Notification notificacion = new Notification("Oferta modificada exitosamente");
+                notificacion.setPosition(Notification.Position.TOP_CENTER);
+                notificacion.setDuration(3000);
+                notificacion.open();
+                this.modificacionExitosa = true;
+                getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+            } else if (controlador.verificar(modificacion, uuid) && !prueba) {
+                Notification notificacion = new Notification("Oferta no modificada");
+                notificacion.setPosition(Notification.Position.TOP_CENTER);
+                notificacion.setDuration(3000);
+                notificacion.open();
+            }
+            if (controlador.verificar(modificacion, uuid) && prueba) {
+                this.modificacionExitosa = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -435,9 +442,15 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         return ofertaDetallada;
     }
 
-    public void setOfertaDetallada(String uuid) throws ParseException {
-        this.ofertaDetallada = controlador.obtenerOferta(uuid);
-        rellenarInformacion();
+    public void setOfertaDetallada(String uuid) {
+        try {
+            this.ofertaDetallada = controlador.obtenerOferta(uuid);
+            rellenarInformacion();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getTitulo() {

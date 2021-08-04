@@ -64,11 +64,11 @@ public class OfertaLaboralConsultaDTO {
     }
 
     public String getDuracion() {
-        if (this.duracionEstimadaEscala.equals("mes") && this.duracionEstimadaValor > 1)
-            return Integer.toString(this.duracionEstimadaValor) + " " + this.duracionEstimadaEscala+"es";
-        else if(this.duracionEstimadaEscala.equals("dia") || this.duracionEstimadaEscala.equals("hora") || this.duracionEstimadaEscala.equals("año") ){
+        if (this.duracionEstimadaEscala.equals("MES") && this.duracionEstimadaValor > 1)
+            return Integer.toString(this.duracionEstimadaValor) + " " + this.duracionEstimadaEscala+"ES";
+        else if(this.duracionEstimadaEscala.equals("DIA") || this.duracionEstimadaEscala.equals("HORA") || this.duracionEstimadaEscala.equals("SEMANA") ){
             if (this.duracionEstimadaValor > 1)
-                return Integer.toString(this.duracionEstimadaValor) + " " + this.duracionEstimadaEscala+"s";
+                return Integer.toString(this.duracionEstimadaValor) + " " + this.duracionEstimadaEscala+"S";
         }
         return Integer.toString(this.duracionEstimadaValor) + " " + this.duracionEstimadaEscala;
     }

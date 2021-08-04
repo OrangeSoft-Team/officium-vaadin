@@ -58,12 +58,12 @@ public class CrearOfertaLaboral_vistaTest {
         Assert.assertEquals("edad",oferta.getRequisitosEspeciales().getValue());
         for (int i = 0; i < oferta.getHabilidades().length;i++){
             if (i == 0){
-                Assert.assertEquals("1",oferta.getHabilidades()[i].getId());
+                Assert.assertEquals("1",oferta.getHabilidades()[i].getUuid());
                 Assert.assertEquals("conserje",oferta.getHabilidades()[i].getNombre());
                 Assert.assertEquals("limpieza",oferta.getHabilidades()[i].getCategoria());
             }
             else {
-                Assert.assertEquals("2",oferta.getHabilidades()[i].getId());
+                Assert.assertEquals("2",oferta.getHabilidades()[i].getUuid());
                 Assert.assertEquals("administrado",oferta.getHabilidades()[i].getNombre());
                 Assert.assertEquals("recursos humanos",oferta.getHabilidades()[i].getCategoria());
             }

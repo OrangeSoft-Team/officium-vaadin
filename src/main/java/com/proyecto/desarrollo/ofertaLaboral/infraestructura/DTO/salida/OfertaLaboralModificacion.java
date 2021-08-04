@@ -2,6 +2,8 @@ package com.proyecto.desarrollo.ofertaLaboral.infraestructura.DTO.salida;
 
 import com.proyecto.desarrollo.comunes.infraestructura.DTOs.HabilidadDTO;
 
+import java.util.Locale;
+
 public class OfertaLaboralModificacion {
 
     private String titulo;
@@ -30,8 +32,8 @@ public class OfertaLaboralModificacion {
         this.cargo = cargo;
         this.sueldo = sueldo;
         this.duracionEstimadaValor = duracionEstimadaValor;
-        this.duracionEstimadaEscala = duracionEstimadaEscala;
-        this.turnoTrabajo = turnoTrabajo;
+        this.duracionEstimadaEscala = duracionEstimadaEscala.toUpperCase(Locale.ROOT);
+        this.turnoTrabajo = turnoTrabajo.toUpperCase(Locale.ROOT);
         this.numeroVacantes = numeroVacantes;
         this.requisitosEspeciales = requisitosEspeciales;
         this.habilidades = habilidades;

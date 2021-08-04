@@ -23,6 +23,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+
 
 //@Route(value = "crear-ofertas-laboral", layout = MainLayout.class)
 @PageTitle("Crear Ofertas Laboral")
@@ -159,7 +161,7 @@ public class CrearOfertaLaboral_vista extends Div{
                 submitt.setClassName("btonEnviar-active");
             }
         });
-        escala.setItems("hora","dia","mes","año");
+        escala.setItems("hora","dia","semana","mes");
         escala.setValue("hora");
 
         turno = new Select<>();
@@ -329,15 +331,21 @@ public class CrearOfertaLaboral_vista extends Div{
 
     /*Se atrapa el evento de creacion y se crea la nueva oferta*/
     private void crearOfertaPersistencia(CreacionOferta evento){
-        controlador.crearOferta(evento.getContenido());
-        /*Si la creación es exitosa se cambia de vista y se dispara el evento de creación fallida*/
-        if (controlador.isExito()){
-            this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
-            fireEvent(new CreacionExitosa(this));
-        }
-        /*Si la creacion es fallida se distapara el evento de creacion fallida*/
-        else{
-            fireEvent(new CreacionFallida(this));
+        try {
+            controlador.crearOferta(evento.getContenido());
+            /*Si la creación es exitosa se cambia de vista y se dispara el evento de creación fallida*/
+            if (controlador.isExito()) {
+                this.submitt.getUI().ifPresent(ui -> ui.navigate(OfertasTrabajo_vista.class));
+                fireEvent(new CreacionExitosa(this));
+            }
+            /*Si la creacion es fallida se distapara el evento de creacion fallida*/
+            else {
+                fireEvent(new CreacionFallida(this));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

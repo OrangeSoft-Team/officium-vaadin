@@ -26,7 +26,7 @@ public class OfertaLaboralMapper {
             habildades[i] = new HabilidadDTO(ofertaLaboral.getHabilidades()[i].getId(),ofertaLaboral.getHabilidades()[i].getNombre(),ofertaLaboral.getHabilidades()[i].getCategoria());
         }
         /*Como oferta laboral utiliza value objetcs, es inevitable el doble get*/
-        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),ofertaLaboral.getUuidEmpresa(),ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
+        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),"e15f8e84-fad6-41ab-83d9-0b8b24fb1a84",ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
         }
 
     /*Metodo utilizado para Parsear un Json y obtener un array de ofertasLaboralesGridVaadin*/
