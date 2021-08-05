@@ -21,12 +21,21 @@ public class OfertaLaboralMapper {
 
     /*Metodo utilizado para convertir una oferta laboral en un DTO para enviar a persistencia*/
     public OfertaLaboralCreacion ofertaLaboralToDTOCreacion(OfertaLaboral ofertaLaboral){
-        HabilidadDTO[] habildades = new HabilidadDTO[ofertaLaboral.getHabilidades().length];
-        for (int i = 0; i < ofertaLaboral.getHabilidades().length; i++){
-            habildades[i] = new HabilidadDTO(ofertaLaboral.getHabilidades()[i].getId(),ofertaLaboral.getHabilidades()[i].getNombre(),ofertaLaboral.getHabilidades()[i].getCategoria());
+        HabilidadDTO[] habildades;
+        if (ofertaLaboral.getHabilidades().length > 0) {
+            habildades = new HabilidadDTO[ofertaLaboral.getHabilidades().length];
+            for (int i = 0; i < ofertaLaboral.getHabilidades().length; i++) {
+                habildades[i] = new HabilidadDTO(ofertaLaboral.getHabilidades()[i].getId(), ofertaLaboral.getHabilidades()[i].getNombre(), ofertaLaboral.getHabilidades()[i].getCategoria());
+            }
         }
+        else{
+            habildades = new HabilidadDTO[1];
+            habildades[0] = new HabilidadDTO("76da530e-a50b-43d5-874a-f7d48d9d8ab4","Computadoras","Manteninimiento");
+        }
+        if (ofertaLaboral.getRequisitosEspeciales() == null)
+            return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),"1dd06e22-a107-47fd-8dfa-06df572df941","invalido", habildades);
         /*Como oferta laboral utiliza value objetcs, es inevitable el doble get*/
-        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),"e15f8e84-fad6-41ab-83d9-0b8b24fb1a84",ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
+        return new OfertaLaboralCreacion(ofertaLaboral.getTitulo().getTitulo(),ofertaLaboral.getDescripcion().getDescripcion(),ofertaLaboral.getCargo().getCargo(),ofertaLaboral.getSueldo().getSueldo(),ofertaLaboral.getDuracionEstimadaValor().getValor(),ofertaLaboral.getDuracionEstimadaEscala().getEscala(),ofertaLaboral.getTurnoTrabajo().getTurno(),ofertaLaboral.getNumeroVacantes().getVacantes(),"1dd06e22-a107-47fd-8dfa-06df572df941",ofertaLaboral.getRequisitosEspeciales().getRequisitosEspeciales(), habildades);
         }
 
     /*Metodo utilizado para Parsear un Json y obtener un array de ofertasLaboralesGridVaadin*/

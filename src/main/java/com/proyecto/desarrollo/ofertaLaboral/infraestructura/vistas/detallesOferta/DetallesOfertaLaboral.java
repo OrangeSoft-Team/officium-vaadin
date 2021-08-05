@@ -111,6 +111,7 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         Button editar = new Button("Editar", buttonClickEvent -> {
             convertirEditable();
         });
+        editar.setVisible(false);
         editar.setClassName("boton-editar");
         editarContenedor.setClassName("editar");
         editarContenedor.setWidth("100px");
@@ -142,7 +143,6 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
 
         /*Sueldo*/
         sueldo = new TextField();
-        sueldo.setPattern("^([0-9]*[.])?[0-9]{2}$");
         sueldo.setMaxLength(9);
         sueldo.setLabel("Sueldo($)");
         sueldo.setReadOnly(true);
@@ -156,12 +156,12 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
 
         /*Duracion Escala*/
         escala = new Select<>();
-        escala.setItems("hora","dia","semana","mes");
+        escala.setItems("HORA","DIA","SEMANADA","MES");
         escala.setReadOnly(true);
 
         /*Turno Trabajo*/
         turno = new Select<>();
-        turno.setItems("diurno","nocturno","mixto");
+        turno.setItems("DIURNO","NOCTUNO","MIXTO");
         turno.setLabel("Turno de trabajo");
         turno.setReadOnly(true);
 
@@ -277,9 +277,9 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         duracion = new TextField();
         duracion.setMaxLength(2);
         escala = new Select<>();
-        escala.setItems("hora","dia","mes","año");
+        escala.setItems("HORA","DIA","SEMANA","MES");
         turno = new Select<>();
-        turno.setItems("diurno","nocturno","mixto");
+        turno.setItems("DIURNO","NOCTURNO","MIXTO");
         vacantes = new TextField();
         vacantes.setMaxLength(2);
         empresasActual = new TextField();
@@ -314,15 +314,33 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         cargo.setValue(this.ofertaDetallada.getCargo());
         sueldo.setValue(Float.toString(this.ofertaDetallada.getSueldo()));
         duracion.setValue(Integer.toString(this.ofertaDetallada.getDuracionValor()));
-        escala.setValue(this.ofertaDetallada.getDuracionEscala());
+        System.out.println(this.ofertaDetallada.getDuracionEscala());
+        System.out.println(this.ofertaDetallada.getTurnoTrabajo());
+        if (this.ofertaDetallada.getDuracionEscala().equals("HORA"))
+            escala.setValue("HORA");
+        else if(this.ofertaDetallada.getDuracionEscala().equals("DIA"))
+            escala.setValue("DIA");
+        else if(this.ofertaDetallada.getDuracionEscala().equals("SEMANA"))
+            escala.setValue("SEMANA");
+        else if(this.ofertaDetallada.getDuracionEscala().equals("MES"))
+            escala.setValue("MES");
+
+        if (this.ofertaDetallada.getTurnoTrabajo().equals("DIURNO"))
+            turno.setValue("DIURNO");
+        else if (this.ofertaDetallada.getTurnoTrabajo().equals("NOCTURNO"))
+            turno.setValue("NOCTURNO");
+        else if (this.ofertaDetallada.getTurnoTrabajo().equals("MIXTO"))
+            turno.setValue("MIXTO");
         turno.setValue(this.ofertaDetallada.getTurnoTrabajo());
         vacantes.setValue(Integer.toString(this.ofertaDetallada.getNumeroVacantes()));
         empresasActual.setValue(this.ofertaDetallada.getNombreEmpresa());
         descripcion.setValue(this.ofertaDetallada.getDescripcion());
         fechaPublicacion.setValue(this.ofertaDetallada.getFechaPublicacion());
         fechaModiciacion.setValue(this.ofertaDetallada.getFechaModificacion());
-        habilidades1.setItems(habilidadesCompletas);
-        habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[0].getUuid())]);
+        if (ofertaDetallada.getHabilidades().length > 0) {
+            habilidades1.setItems(habilidadesCompletas);
+            habilidades1.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas, habilidades[0].getUuid())]);
+        }
         habilidades2.setItems(habilidadesCompletas);
         if (habilidades.length >= 2){
             habilidades2.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[1].getUuid())]);
@@ -331,7 +349,8 @@ public class DetallesOfertaLaboral extends Div implements BeforeEnterObserver {
         if (habilidades.length >= 3){
             habilidades3.setValue(habilidadesCompletas[controlador.getHabilidad(habilidadesCompletas,habilidades[2].getUuid())]);
         }
-        requisitosEspeciales.setValue(this.ofertaDetallada.getRequerimientoEspecial());
+        if (this.ofertaDetallada.getRequerimientoEspecial() != null)
+            requisitosEspeciales.setValue(this.ofertaDetallada.getRequerimientoEspecial());
     }
 
     private void convertirEditable(){

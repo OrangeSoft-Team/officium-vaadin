@@ -111,7 +111,6 @@ public class ServicioOfertaLaboral {
     }
 
     public Boolean duplicarOferta(String uuid) throws ParseException, IOException {
-        this.adaptador = new OfertasLaboralArchivoPersistencia();
         OfertaLaboralDetalleDTO detalle = mapper.jsonToDetalle(adaptador.obtenerDetalles(uuid));
         OfertaLaboral duplicado = new OfertaLaboral(detalle.getTitulo(),detalle.getDescripcion(),detalle.getCargo(),detalle.getSueldo(),detalle.getDuracionValor(), detalle.getDuracionEscala(), detalle.getTurnoTrabajo(),detalle.getNumeroVacantes(), detalle.getIdEmpresa(), detalle.getRequerimientoEspecial(),detalle.getHabilidades());
         if (adaptador.crearOferta(this.mapper.ofertaLaboralToDTOCreacion(duplicado))){

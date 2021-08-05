@@ -28,7 +28,7 @@ public class ServicioDetalleOfertaLaboral {
     PersistenciaOfertaLaboral adaptador;
 
     public ServicioDetalleOfertaLaboral(){
-        adaptador = new OfertasLaboralArchivoPersistencia();
+        adaptador = new OfertaLaboralAdaptadorSpring();
     }
 
     public OfertaLaboralDetalleDTO obtenerOferta(String uuid) throws ParseException, IOException {

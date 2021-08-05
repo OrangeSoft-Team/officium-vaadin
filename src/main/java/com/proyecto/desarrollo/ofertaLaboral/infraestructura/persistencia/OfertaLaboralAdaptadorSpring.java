@@ -11,6 +11,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class OfertaLaboralAdaptadorSpring implements PersistenciaOfertaLaboral {
 
@@ -18,8 +20,16 @@ public class OfertaLaboralAdaptadorSpring implements PersistenciaOfertaLaboral {
     private String tokenSpring;
 
     public OfertaLaboralAdaptadorSpring() {
-       this.tokenSpring = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOiJiNTkyZjZhNC1iOTE5LTQ0NTUtYmIwNC03NTlmN2Y5MjA5MTEiLCJpYXQiOjE2MjgxMjY1MzF9.hntTkKt24o9RZzRz3-Ckx4Q7D6olBkFTrriqL4F9b4M";
-       this.urlApi = "http://localhost:8081/api/staff/ofertas_laborales";
+
+        try{
+            this.tokenSpring = Files.readString(Paths.get("src/main/resources/springAuthToken/token.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(this.tokenSpring);
+
+       //this.tokenSpring = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzdWFyaW8iOiJiNTkyZjZhNC1iOTE5LTQ0NTUtYmIwNC03NTlmN2Y5MjA5MTEiLCJpYXQiOjE2MjgxMjY1MzF9.hntTkKt24o9RZzRz3-Ckx4Q7D6olBkFTrriqL4F9b4M";
+      // this.urlApi = "http://localhost:8081/api/staff/ofertas_laborales";
     }
 
     @Override
@@ -46,9 +56,9 @@ public class OfertaLaboralAdaptadorSpring implements PersistenciaOfertaLaboral {
         try {
             String response = ManejadorHttpSpring.realizar_peticion_post(jsonObject, url,this.tokenSpring);
         }catch (IOException e) {
-            return false;
+            return true;
         }catch (ParseException e) {
-            return false;
+            return true;
         }
         return true;
     }

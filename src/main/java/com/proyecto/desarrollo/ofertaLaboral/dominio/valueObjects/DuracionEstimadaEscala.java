@@ -1,5 +1,7 @@
 package com.proyecto.desarrollo.ofertaLaboral.dominio.valueObjects;
 
+import java.util.Locale;
+
 public class DuracionEstimadaEscala {
 
     private String escala;
@@ -11,7 +13,7 @@ public class DuracionEstimadaEscala {
     }
 
     public boolean esValido(String escala){
-        if (escala == "hora" || escala == "dia" || escala == "semana" || escala == "mes" || escala == "año" )
+        if (escala.toLowerCase(Locale.ROOT) == "hora" || escala.toLowerCase(Locale.ROOT) == "dia" || escala.toLowerCase(Locale.ROOT) == "semana" || escala.toLowerCase(Locale.ROOT) == "mes" )
             return true;
         return false;
     }

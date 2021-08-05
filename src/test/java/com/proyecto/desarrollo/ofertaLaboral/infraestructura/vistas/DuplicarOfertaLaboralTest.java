@@ -15,7 +15,7 @@ public class DuplicarOfertaLaboralTest {
 
     @Test
     public void pruebaDuplicado() throws ParseException, IOException {
-        if (!controlador.duplicarOferta("1")){
+        if (!controlador.duplicarOferta("b0255baf-dcc5-45a6-8140-b1bdb9d891c7")){
             fail("No se pudo duplicar, fallo el adaptador");
         }
         System.out.println("Duplicación exitosa");

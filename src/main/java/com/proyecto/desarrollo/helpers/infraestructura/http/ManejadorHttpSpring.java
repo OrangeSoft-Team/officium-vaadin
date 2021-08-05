@@ -19,6 +19,7 @@ public class ManejadorHttpSpring {
         conn.setDoOutput(true);
         conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         conn.setRequestProperty("Accept", "application/json");
+        conn.setRequestProperty("Authorization",token);
         // Set HTTP request method.
         conn.setRequestMethod("POST");
 
@@ -55,6 +56,7 @@ public class ManejadorHttpSpring {
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         // Set HTTP request method.
+        conn.setRequestProperty("Authorization",token);
         conn.setRequestMethod("PUT");
         /*Si no se tiene que enviar ningun dato, no se habilita la salida de datos*/
         if (datos_enviar !=null) {
@@ -97,7 +99,7 @@ public class ManejadorHttpSpring {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();;
         // Set HTTP request method.
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("Autorization",token);
+        conn.setRequestProperty("Authorization",token);
         BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         StringBuffer response = new StringBuffer();
         String line;
