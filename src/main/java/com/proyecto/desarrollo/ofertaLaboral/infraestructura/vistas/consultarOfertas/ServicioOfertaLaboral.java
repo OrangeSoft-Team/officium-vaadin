@@ -25,7 +25,7 @@ public class ServicioOfertaLaboral {
 
     public ServicioOfertaLaboral(){
         /*Se crear una instancia del adaptador*/
-        adaptador = new OfertasLaboralArchivoPersistencia();
+        adaptador = new OfertaLaboralAdaptadorSpring();
         this.mapper = new OfertaLaboralMapper();
     }
 
