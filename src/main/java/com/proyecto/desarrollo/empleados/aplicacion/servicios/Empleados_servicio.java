@@ -43,4 +43,14 @@ public class Empleados_servicio {
         }
     }
 
+    public ArrayList<EmpleadoEntradaDTO> filtrarEmpleadosPorCorreo(ArrayList<EmpleadoEntradaDTO> lista_empleados , String correo){
+        ArrayList<EmpleadoEntradaDTO> lista_empleados_filtrada = new ArrayList<EmpleadoEntradaDTO>();
+        lista_empleados.forEach(empleado -> {
+            if(empleado.getCorreo().contains(correo)){
+                lista_empleados_filtrada.add(empleado);
+            }
+        });
+        return lista_empleados_filtrada;
+    }
+
 }
