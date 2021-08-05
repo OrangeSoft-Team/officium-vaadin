@@ -1,12 +1,5 @@
 package com.proyecto.desarrollo.autenticacion.infraestructura.persistencia;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.common.collect.Lists;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
 import com.proyecto.desarrollo.autenticacion.aplicacion.persistencia.PersistenciaStaff;
 import com.proyecto.desarrollo.autenticacion.dominio.excepciones.AutenticacionInvalidaExcepcion;
 import com.proyecto.desarrollo.autenticacion.infraestructura.DTO.entrada.DatosBasicosUsuarioEntradaDTO;

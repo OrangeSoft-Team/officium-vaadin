@@ -82,10 +82,6 @@ public class ManejadorHttp {
 
             String res = response.toString();
 
-            FileWriter writerArchivo = new FileWriter("src/main/resources/springAuthToken/token.txt");
-            writerArchivo.write(conn.getHeaderField("Authorization"));
-            writerArchivo.close();
-
             return res;
 
         } else {
