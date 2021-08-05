@@ -10,6 +10,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -35,7 +36,7 @@ public class Login_vista extends Div {
 
         var imagen = new Image("images/logoNormal.png", "Desarrollo logo");
         imagen.setWidth("300px");
-        var titulo = new H1("¡Bienvenid@!");
+        var titulo = new H2("Staff Member");
         var correo = new TextField("Correo");
         var password = new PasswordField("Contraseña");
         var boton = new Button("Iniciar Sesión" , event -> {
