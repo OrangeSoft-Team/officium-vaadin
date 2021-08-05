@@ -4,6 +4,6 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfe
 
 public class EstadoActivo extends EventoAplicarFiltroEstado{
     public EstadoActivo(OfertasTrabajo_vista source) {
-        super(source, "activo");
+        super(source, "PUBLICADO");
     }
 }

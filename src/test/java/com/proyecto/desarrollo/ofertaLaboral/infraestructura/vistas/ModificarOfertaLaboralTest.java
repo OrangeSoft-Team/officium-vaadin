@@ -21,9 +21,8 @@ public class ModificarOfertaLaboralTest {
     @Before
     public void inicializarDatos() throws ParseException {
         /*Se crea un arrray con habilidades*/
-        HabilidadDTO[] habilidades = new HabilidadDTO[2];
-        habilidades[0] = new HabilidadDTO("1","conserje","limpieza");
-        habilidades[1] = new HabilidadDTO("2","administrado","recursos humanos");
+        HabilidadDTO[] habilidades = new HabilidadDTO[1];
+        habilidades[0] = new HabilidadDTO("76da530e-a50b-43d5-874a-f7d48d9d8ab4","Computadoras","Manteninimiento");
         /*Se crea una oferta laboral con la empresa 1*/
         datosParaModificar = new OfertaLaboral("Se busca Desarrollador Jr","Se busca un Desarrollador Jr para que labore en la empresa Orangesoft durante el dia y no salga de la oficina en todo el dia","Desarrollador",(float)70.15,4,"mes", "mixto",8,null,"Que no necesite descansos ni comer",habilidades);
         uuidOferta = "1";

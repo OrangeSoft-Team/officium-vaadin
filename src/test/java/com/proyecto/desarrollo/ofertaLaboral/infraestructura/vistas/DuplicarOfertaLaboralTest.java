@@ -4,6 +4,8 @@ import com.proyecto.desarrollo.ofertaLaboral.infraestructura.vistas.consultarOfe
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.fail;
 
 public class DuplicarOfertaLaboralTest {
@@ -12,7 +14,7 @@ public class DuplicarOfertaLaboralTest {
 
 
     @Test
-    public void pruebaDuplicado() throws ParseException {
+    public void pruebaDuplicado() throws ParseException, IOException {
         if (!controlador.duplicarOferta("1")){
             fail("No se pudo duplicar, fallo el adaptador");
         }

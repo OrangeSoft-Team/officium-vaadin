@@ -73,7 +73,7 @@ public class ConsultarSolicitudes_vista extends Div {
                 else {
                     fireEvent(new AprobadoFallido(this));
                 }
-            } catch (IOException ioException) {
+            } catch (IOException | ParseException ioException) {
                 ioException.printStackTrace();
             }
         });
@@ -177,6 +177,7 @@ public class ConsultarSolicitudes_vista extends Div {
     }
 
     private void agregarItemsAlGrid() throws IOException, ParseException {
-        grid.setItems(controlador.obtenerSolicitudes());
+        if (!(controlador.obtenerSolicitudes() == null))
+            grid.setItems(controlador.obtenerSolicitudes());
     }
 }

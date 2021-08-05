@@ -38,6 +38,7 @@ public class PersistenciaStaffNest implements PersistenciaStaff {
     }
 
     @Override
+
     public UsuarioAutenticadoFirebaseEntradaDTO obtener_token(UsuarioAutenticadoFirebaseSalidaDTO credenciales) throws AutenticacionInvalidaExcepcion, IOException, ParseException {
 
         URL url = new URL("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAlpmRnWovaKQHDx57oW62H5veuv-xCbvk");

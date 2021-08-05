@@ -42,7 +42,7 @@ public class OfertaLaboral {
         else this.requisitosEspeciales = new RequisitosEspeciales(requisitoEspecial);
         this.habilidades = new Habilidades[habilidadesObtenidas.length];
         for (int i = 0 ; i < habilidades.length; i++){
-            this.habilidades[i] = new Habilidades(habilidadesObtenidas[i].getId(),habilidadesObtenidas[i].getNombre(),habilidadesObtenidas[i].getCategoria());
+            this.habilidades[i] = new Habilidades(habilidadesObtenidas[i].getUuid(),habilidadesObtenidas[i].getNombre(),habilidadesObtenidas[i].getCategoria());
         }
     }
 
